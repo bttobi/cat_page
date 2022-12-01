@@ -16,12 +16,13 @@ const Home = () => {
     //console.log(howManyCats);
     setLoading(true);
 
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=${howManyCats}&has_breeds=1&api_key=live_fQWtdJC0pMGfAQHsJ8n4uI2yta341h2MTFvktobRWucrqIUz47V0zTjZkCJ2elNF`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=${howManyCats}&has_breeds=1&api_key=${process.env.REACT_APP_API_KEY}`;
 
     const request = await fetch(URL)
     .then((response) => response.json())
     .then((data) => data)
     .catch((err) => console.log(err));
+
 
     await setCats(request);
     await setLoading(false);
@@ -36,7 +37,9 @@ const Home = () => {
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-article text-white">Loading...</span>
         </div>
-        : Cats.map((el) => <CatCard img={el.url} name={el.breeds[0].name} key={el.id} favourite={false}/>)}
+        : Cats.map((el) => <CatCard cat={
+          {img: el.url, name: el.breeds[0].name
+          }} key={el.id}/>)}
       </div>
     </div>
   )

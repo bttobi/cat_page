@@ -9,8 +9,10 @@ module.exports = {
     './src/components/pages/About.jsx',
     './src/components/pages/Login.jsx',
     './src/components/pages/Favourites.jsx',
+    './src/components/pages/Profile.jsx',
     './src/components/assets/CatCard.jsx',
-    './src/components/functions/Search.jsx'
+    './src/components/functions/Search.jsx',
+    './src/components/assets/CatCardClicked.jsx'
   ],
   theme: 
   {
