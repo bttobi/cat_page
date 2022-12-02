@@ -12,7 +12,7 @@ const Search = (props) => {
   });
 
   const updateNumber = (number) => {
-    const nextSearchDetails = {... searchDetails, number}
+    const nextSearchDetails = {...searchDetails, number}
     setSearchDetails(nextSearchDetails);
   }
 

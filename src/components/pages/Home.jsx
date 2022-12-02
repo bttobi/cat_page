@@ -29,7 +29,7 @@ const Home = () => {
   }
 
   return (
-    <div className="w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
+    <div className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
       <Search getData={getSearchDetailsOfCats} fetch={fetchData}/>
       <div className="cat-cards-wrapper flex flex-row flex-wrap items-center justify-center">
         {loading ? 
@@ -37,9 +37,7 @@ const Home = () => {
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-article text-white">Loading...</span>
         </div>
-        : Cats.map((el) => <CatCard cat={
-          {img: el.url, name: el.breeds[0].name
-          }} key={el.id}/>)}
+        : Cats.map((el) => <CatCard cat={el} key={el.id}/>)}
       </div>
     </div>
   )
