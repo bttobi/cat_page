@@ -12,6 +12,13 @@ const Search = (props) => {
   });
 
   const updateNumber = (number) => {
+    if(number > 10){
+      number = 10;
+    }
+
+    else if(number < 1){
+      number = 1;
+    }
     const nextSearchDetails = {...searchDetails, number}
     setSearchDetails(nextSearchDetails);
   }

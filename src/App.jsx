@@ -35,7 +35,7 @@ const router = createReactRouter({ routeConfig });
 
 function App() {
   return (
-    <div className="App w-full h-full flex flex-col items-center ">
+    <div id="app" className="App w-full h-full flex flex-col items-center relative">
       <RouterProvider router={router}>
         <Navbar />
         <Outlet />

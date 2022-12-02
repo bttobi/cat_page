@@ -29,9 +29,9 @@ const Home = () => {
   }
 
   return (
-    <div className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
+    <div id="home" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
       <Search getData={getSearchDetailsOfCats} fetch={fetchData}/>
-      <div className="cat-cards-wrapper flex flex-row flex-wrap items-center justify-center">
+      <div className="cat-cards-wrapper h-full flex flex-row flex-wrap items-center justify-center">
         {loading ? 
         <div className="loading-wrapper m-16 flex flex-col items-center justify-center">
           <LoadingIcons.Hearts width="16rem" speed="3"/>
