@@ -1,9 +1,9 @@
 import { useRef, useEffect, useState } from 'react';
 
 const CatCardClicked = (props) => {
-  const [isClosed, setIsClosed] = useState("flex");
+  const [isClosed, setIsClosed] = useState();
   const closeCard = () => {
-    setIsClosed("hidden")
+    //setIsClosed("hidden")
   }
   return (
     <div className={isClosed + " cat-details w-96 h-min fixed flex flex-col bg-black border-8 border-secondary-white rounded-lg transition-all duration-300 opacity-100"}>
