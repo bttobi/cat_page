@@ -3,19 +3,22 @@ import { useRef, useEffect, useState } from 'react';
 const CatCardClicked = (props) => {
   const [isClosed, setIsClosed] = useState();
   const closeCard = () => {
-    //setIsClosed("hidden")
+    setIsClosed("hidden");
   }
+
   return (
-    <div className={isClosed + " cat-details w-96 h-min fixed flex flex-col bg-black border-8 border-secondary-white rounded-lg transition-all duration-300 opacity-100"}>
-      <button className="close-button absolute right-0" onClick={closeCard}>X</button>
-      <div className="cat-description-wrapper">
-        <div className="cat-name-details fon">{props.cat.breeds[0].name}</div>
-        <div className="cat-img-details"><img src={props.cat.url} alt="cat"/></div>
-        <div className="cat-weight-details">Weight: {props.cat.breeds[0].weight.metric}</div>
-        <div className="cat-origin-details">Origin: {props.cat.breeds[0].origin}</div>
-        <div className="cat-lifespan-details">Life Span: {props.cat.breeds[0].life_span}</div>
-        <div className="cat-temperament-details">Temperament: {props.cat.breeds[0].temperament}</div>
-        <div className="cat-wikipedia-details"><a href={props.cat.breeds[0].wikipedia_url} target="_blank">More details here</a></div>
+    <div className={isClosed + " cat-details w-min h-min fixed flex flex-col border-8 border-secondary-white rounded-lg transition-all duration-300 opacity-100"}>
+      <button className="close-button absolute right-0 m-1 transition-all duration-150 hover:scale-110" onClick={(e) => {props.func(e);}}><img src="/img/close.png" height="32px" width="32px" alt="Home"/></button>
+      <div className="cat-description-wrapper bg-black">
+        <div className="cat-name-details font-article text-center pt-8 pb-8 bg-primary text-4xl font-bold">{props.cat.breeds[0].name}</div>
+        <div className="cat-description flex flex-col p-2 bg-primary">
+        <div className="cat-img-details w-96 h-72 p-8 pt-0"><div className="cat-image w-80 h-64 rounded-lg" style={{backgroundImage: `url(${props.cat.url})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroudnPosition: 'center'}}></div></div>
+        <div className="cat-weight-details p-2 pl-8 font-bold">Weight: <span className="font-normal">{props.cat.breeds[0].weight.metric}</span></div>
+        <div className="cat-origin-details p-2 pl-8 font-bold">Origin: <span>{props.cat.breeds[0].origin}</span></div>
+        <div className="cat-lifespan-details p-2 pl-8 font-bold">Life Span:  <span>{props.cat.breeds[0].life_span}</span></div>
+        <div className="cat-temperament-details p-2 pl-8 font-bold">Temperament: <span>{props.cat.breeds[0].temperament}</span></div>
+        <div className="cat-wikipedia-details p-2 pt-8 font-bold text-center"><a href={props.cat.breeds[0].wikipedia_url} target="_blank" rel="noreferrer">More details here</a></div>
+      </div>
       </div>
     </div>
   )

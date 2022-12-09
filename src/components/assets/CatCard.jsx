@@ -3,19 +3,18 @@ import CatCardClicked from './CatCardClicked';
 
 const CatCard = (props) => {
   const catDetails = useRef();
-  const [isShown, setIsShown] = useState("hidden");
+  const [isShown, setIsShown] = useState(false);
 
-  useEffect(() => {
-    document.addEventListener("click", hideDetails, true);
-    return () => {
-      document.removeEventListener("click", hideDetails, true);
-    }
+ useEffect(() => {
+  document.addEventListener("click", hideDetails, true);
+  return () => {
+    document.removeEventListener("click", hideDetails, true);
+  }
   }, []);
 
   const hideDetails = (e) => {
     if(!catDetails.current.contains(e.target)){
-      setIsShown("hidden");
-      //document.getElementById("home").classList.remove("");
+      setIsShown(false);
     }
   }
 
@@ -24,26 +23,26 @@ const CatCard = (props) => {
   }
 
   const showDetails = () => {
-    if(isShown == "hidden"){
-      setIsShown("flex");
-     // document.getElementById("home").classList.add("");
-    } 
+      setIsShown(true);
+      console.log(isShown);
   }
 
   return (
     <>
-    <div className={isShown + " w-full h-full flex justify-center items-center z-10 fixed filter-blur-0"}>
+    {isShown && 
+    <div className={"flex w-full h-full flex justify-center items-center z-10 fixed filter-blur-0"}>
     <div className="cat-clicked-card-wrapper flex justify-center h-full" ref={catDetails}>
-      <CatCardClicked cat={props.cat}/>
+      <CatCardClicked cat={props.cat} func={hideDetails}/>
     </div>
     </div>
+    }
     <div className="cat-wrapper w-min h-min m-4 flex flex-col bg-primary border-8 border-secondary-white rounded-lg transition-all duration-300 hover:scale-110">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
-          <button className="align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={(e) => {e.preventDefault(); addToFavourites()}}>❤️</button>
+          <button className="align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={() => {addToFavourites()}}>❤️</button>
         </div>
         <div className="px-6 pb-6 flex flex-col justify-center items-center cursor-pointer" onClick={showDetails}>
           <div className="cat-img-wrapper w-64 flex flex-col items-center justify-center border-8 border-secondary-white rounded-lg">
-          <div className="w-min h-min m-0 border-8 border-t-0 border-secondary-white" style= {{width: '256px', height: '172px', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}} alt="cat"></div>
+          <div className="w-min h-min m-0 border-8 border-t-0 border-secondary-white" style= {{width: '256px', height: '172px', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroudnPosition: 'center'}} alt="cat"></div>
           <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
             <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-4xl">{props.cat.breeds[0].name}</p>
           </div>

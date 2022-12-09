@@ -12,20 +12,20 @@ const Home = () => {
     setHowManyCats(searchDetails.number);
   }
 
-  async function fetchData() {
-    //console.log(howManyCats);
+  const fetchData = async () => {
     setLoading(true);
 
     const URL = `https://api.thecatapi.com/v1/images/search?limit=${howManyCats}&has_breeds=1&api_key=${process.env.REACT_APP_API_KEY}`;
 
-    const request = await fetch(URL)
-    .then((response) => response.json())
-    .then((data) => data)
-    .catch((err) => console.log(err));
-
-
-    await setCats(request);
-    await setLoading(false);
+    try {
+      const request = await fetch(URL);
+      const response = await request.json();
+      await setCats(response);
+      await setLoading(false);
+    }
+    catch(error) {
+      console.error(error);
+    }
   }
 
   return (
