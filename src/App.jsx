@@ -1,9 +1,11 @@
+import { Outlet, RouterProvider, createReactRouter, createRouteConfig } from '@tanstack/react-router';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import Navbar from './components/navigation/Navbar';
-import { Outlet, RouterProvider, createReactRouter, createRouteConfig } from '@tanstack/react-router'
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Favourites from './components/pages/Favourites';
 import Login from './components/pages/Login';
+import Register from './components/pages/Register';
 import Profile from './components/pages/Profile';
 
 const routeConfig = createRouteConfig().createChildren((createRoute) => [
@@ -24,23 +26,28 @@ const routeConfig = createRouteConfig().createChildren((createRoute) => [
     component: Login,
   }),
   createRoute({
+    path: 'register',
+    component: Register,
+  }),
+  createRoute({
     path: 'profile',
     component: Profile,
-  }),
-
+  })
 ]);
 
 const router = createReactRouter({ routeConfig });
-
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App w-full h-full flex flex-col items-center relative">
+    <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}>
-        <Navbar />
-        <Outlet />
+        <div className="App w-full h-full flex flex-col items-center relative">
+          <Navbar />
+          <Outlet />
+        </div>
       </RouterProvider>
-    </div>
+    </QueryClientProvider>
   );
 }
 

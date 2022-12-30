@@ -24,16 +24,16 @@ const CatCard = (props) => {
 
   const showDetails = () => {
       setIsShown(true);
-      console.log(isShown);
+     // console.log(isShown);
   }
 
   return (
     <>
     {isShown && 
-    <div className={"flex w-full h-full flex justify-center items-center z-10 fixed filter-blur-0"}>
-    <div className="cat-clicked-card-wrapper flex justify-center h-full" ref={catDetails}>
-      <CatCardClicked cat={props.cat} func={hideDetails}/>
-    </div>
+    <div className={"flex w-full h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
+      <div className="cat-clicked-card-wrapper flex justify-center h-full" ref={catDetails}>
+        <CatCardClicked cat={props.cat} func={hideDetails}/>
+      </div>
     </div>
     }
     <div className="cat-wrapper w-min h-min m-4 flex flex-col bg-primary border-8 border-secondary-white rounded-lg transition-all duration-300 hover:scale-110">
