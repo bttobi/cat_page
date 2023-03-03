@@ -6,19 +6,20 @@ import Search from '../functions/Search';
 
 const Home = () => {
   const [howManyCats, setHowManyCats] = useState(1);
+  const [catBreedId, setCatBreedId] = useState("abys");
 
   const getSearchDetailsOfCats = (searchDetails) => {
     setHowManyCats(searchDetails.number);
+    setCatBreedId(searchDetails.breed);
   }
 
   const fetchData = async () => {
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=${howManyCats}&has_breeds=1&api_key=${process.env.REACT_APP_API_KEY}`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=${howManyCats}has_breeds=1&breed_id=${catBreedId}&api_key=${process.env.REACT_APP_API_KEY}`;
       const response = await fetch(URL);
       return response.json();
   }
 
   const query = useQuery('cats', fetchData, {manual: true, refetchOnWindowFocus: false, refetchOnMount: false, refetchOnReconnect: false});
-
   if(query.isError) console.error(query.error.message);
 
   return (
@@ -30,7 +31,7 @@ const Home = () => {
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-article text-white">Loading...</span>
         </div>
-        : query.data.map((el) => {console.log(el); return( <CatCard cat={el} key={el.id}/>)})}
+        : query.data.map((el) => {return( <CatCard cat={el} key={el.id}/>)})}
       </div>
     </div>
   )

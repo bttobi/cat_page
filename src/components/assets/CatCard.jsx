@@ -5,7 +5,7 @@ const CatCard = (props) => {
   const catDetails = useRef();
   const [isShown, setIsShown] = useState(false);
 
- useEffect(() => {
+useEffect(() => {
   document.addEventListener("click", hideDetails, true);
   return () => {
     document.removeEventListener("click", hideDetails, true);

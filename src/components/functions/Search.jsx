@@ -4,16 +4,16 @@ import { useQuery } from 'react-query';
 
 const Search = (props) => {
   const inputNumber = useRef(1);
-  const inputBreed = useRef("");
+  const inputBreed = useRef("abys");
 
   const [searchDetails, setSearchDetails] = useState(
   {
     number: 1,
-    breed: "",
+    breed: "abys",
     weight: 0
   });
 
-  const updateSearchDetails = (number, catBreed) => {
+  const updateSearchDetails = (number, breed) => {
     if(number > 10){
       number = 10;
     }
@@ -21,7 +21,8 @@ const Search = (props) => {
     else if(number < 1){
       number = 1;
     }
-    const nextSearchDetails = {...searchDetails, number, catBreed}
+    console.log(breed)
+    const nextSearchDetails = {...searchDetails, number, breed}
     setSearchDetails(nextSearchDetails);
   }
 
@@ -42,7 +43,6 @@ const Search = (props) => {
     refetchInterval: 86400000,
     refetchOnWindowFocus: false,
     staleTime: 86400000,});//24 hours in miliseconds
-  // console.log(breeds.data)
 
   return (
     <div className="search-wrapper w-1/2 flex flex-col flex-nowrap">
@@ -56,8 +56,7 @@ const Search = (props) => {
       <select className="bg-bg-primary border-2 border-secondary-white rounded-lg text-center" onChange={() => {updateSearchDetails(inputNumber.current.value, inputBreed.current.value)}} ref={inputBreed} value={searchDetails.breed} name="cat-breed">
       {breeds.isFetching ?  <option value="">{"Select"}</option>: 
         breeds.data.map((el, i) => {
-          console.log(el.name);
-        return <option key={i} value={el.name} className="w-6 h-6">{el.name}</option>
+        return <option key={i} value={el.id} className="w-6 h-6">{el.name}</option>
       })}
       </select>
       <button className="p-2 mt-12 mb-4 bg-secondary rounded random-cat" onClick={()=>{props.searchQuery.refetch();}}>Generate!</button>
