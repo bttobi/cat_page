@@ -35,15 +35,15 @@ const Search = (props) => {
   }
 
   const breeds = useQuery('catBreeds', fetchBreeds, {refetchOnWindowFocus: false,
-    refetchOnMount: false,
+    refetchOnMount: true,
     refetchOnReconnect: false,
     retry: false,
     refetchIntervalInBackground: false,
     refetchInterval: 86400000,
     refetchOnWindowFocus: false,
     staleTime: 86400000,});//24 hours in miliseconds
-  console.log(breeds.data)
-  
+  // console.log(breeds.data)
+
   return (
     <div className="search-wrapper w-1/2 flex flex-col flex-nowrap">
       <div className="search-settings flex flex-row flex-wrap justify-center items-center">
@@ -54,8 +54,11 @@ const Search = (props) => {
         <label className="mt-20 mb-4 font-article" htmlFor="cat-breed">What cat breed do you want to see?</label>
       </div>
       <select className="bg-bg-primary border-2 border-secondary-white rounded-lg text-center" onChange={() => {updateSearchDetails(inputNumber.current.value, inputBreed.current.value)}} ref={inputBreed} value={searchDetails.breed} name="cat-breed">
-      {breeds.isFetching ?  <option value={"Select"}>{"Select"}</option>: 
-        breeds.data.map((el, i) => {<option key={i} className="w-6 h-6">{el.name}</option>})}
+      {breeds.isFetching ?  <option value="">{"Select"}</option>: 
+        breeds.data.map((el, i) => {
+          console.log(el.name);
+        return <option key={i} value={el.name} className="w-6 h-6">{el.name}</option>
+      })}
       </select>
       <button className="p-2 mt-12 mb-4 bg-secondary rounded random-cat" onClick={()=>{props.searchQuery.refetch();}}>Generate!</button>
     </div>
