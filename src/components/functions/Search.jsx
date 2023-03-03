@@ -34,7 +34,14 @@ const Search = (props) => {
     return response.json();
   }
 
-  const breeds = useQuery('catBreeds', fetchBreeds, {manual: true, refetchOnWindowFocus: false, refetchOnMount: false, refetchOnReconnect: false});
+  const breeds = useQuery('catBreeds', fetchBreeds, {refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    retry: false,
+    refetchIntervalInBackground: false,
+    refetchInterval: 86400000,
+    refetchOnWindowFocus: false,
+    staleTime: 86400000,});//24 hours in miliseconds
   console.log(breeds.data)
   
   return (
