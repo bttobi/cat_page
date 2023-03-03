@@ -14,7 +14,7 @@ const Home = () => {
   }
 
   const fetchData = async () => {
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=${howManyCats}has_breeds=1&breed_id=${catBreedId}&api_key=${process.env.REACT_APP_API_KEY}`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=${howManyCats}&has_breeds=1&breed_id=${catBreedId}&api_key=${process.env.REACT_APP_API_KEY}`;
       const response = await fetch(URL);
       return response.json();
   }
