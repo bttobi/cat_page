@@ -7,10 +7,15 @@ import Favourites from './components/pages/Favourites';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Profile from './components/pages/Profile';
+import Random from './components/pages/Random';
 
 const routeConfig = createRouteConfig().createChildren((createRoute) => [
   createRoute({
     path: '/',
+    component: Random,
+  }),
+  createRoute({
+    path: 'cat_breeds',
     component: CatBreeds,
   }),
   createRoute({

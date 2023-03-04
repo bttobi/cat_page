@@ -9,10 +9,11 @@ const Navbar = () => {
       <ul className="w-full h-full flex flex-row justify-between items-center">
         <li className="flex flex-row p-3 rounded-md transition-all duration-300 hover:rotate-12">
           <Link to="/" className="flex flex-row justify-center items-center">
-            <img src="/img/paw.png" height="40px" width="40px" alt="Home"/>
+            <img src="/img/paw.png" height="40px" width="40px" alt="random"/>
           </Link>
         </li>
         <li className="w-full flex justify-center align-center">
+          <div className={buttonStyle + " mx-1"}><Link to="/cat_breeds">Cat Breeds</Link></div>
           <div className={buttonStyle + " mx-1"}><Link to="/favourites">Favourites</Link></div>
           <div className={buttonStyle + " mx-1"}><Link to="/about">About</Link></div>
         </li>
