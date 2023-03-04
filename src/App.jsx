@@ -1,7 +1,7 @@
 import { Outlet, RouterProvider, createReactRouter, createRouteConfig } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import Navbar from './components/navigation/Navbar';
-import Home from './components/pages/Home';
+import CatBreeds from './components/pages/CatBreeds';
 import About from './components/pages/About';
 import Favourites from './components/pages/Favourites';
 import Login from './components/pages/Login';
@@ -11,7 +11,7 @@ import Profile from './components/pages/Profile';
 const routeConfig = createRouteConfig().createChildren((createRoute) => [
   createRoute({
     path: '/',
-    component: Home,
+    component: CatBreeds,
   }),
   createRoute({
     path: 'favourites',
