@@ -12,11 +12,18 @@ useEffect(() => {
   }
   }, []);
 
-  const hideDetails = (e) => {
-    if(!catDetails.current.contains(e.target)){
-      setIsShown(false);
+  const hideDetails = (e, clicked) => {
+    if(catDetails.current != null){
+      if(!catDetails.current.contains(e.target)){
+        setIsShown(false);
+      }
+
+      if(clicked){
+        setIsShown(false);
+      }
     }
   }
+  
 
   const addToFavourites = () => {
     
