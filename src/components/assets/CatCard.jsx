@@ -13,14 +13,8 @@ useEffect(() => {
   }, []);
 
   const hideDetails = (e, clicked) => {
-    if(catDetails.current != null){
-      if(!catDetails.current.contains(e.target)){
-        setIsShown(false);
-      }
-
-      if(clicked){
-        setIsShown(false);
-      }
+    if(catDetails.current != null && (!catDetails.current.contains(e.target) || clicked)){
+      setIsShown(false);
     }
   }
   

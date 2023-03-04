@@ -28,7 +28,7 @@ const Search = (props) => {
 
   useEffect(()=>{
     props.getData(searchDetails);
-  }, [searchDetails])
+  }, [searchDetails]);
 
   const fetchBreeds = async () => {
     const response = await fetch('https://api.thecatapi.com/v1/breeds');
@@ -45,16 +45,16 @@ const Search = (props) => {
     staleTime: 86400000,});//24 hours in miliseconds
 
   return (
-    <div className="search-wrapper w-1/2 flex flex-col flex-nowrap">
+    <div className="search-wrapper w-1/2 flex flex-col flex-nowrap items-center">
       <div className="search-settings flex flex-row flex-wrap justify-center items-center">
         <label className="mt-20 mb-4 font-article" htmlFor="number-cats">How many cats do you want to generate? (1-10)</label>
       </div>
-      <input className="bg-bg-primary border-2 border-secondary-white rounded-lg text-center" onChange={() => {updateSearchDetails(inputNumber.current.value, inputBreed.current.value)}} ref={inputNumber} value={searchDetails.number} type="number" min="1" max="10" name="number-cats"/>
+      <input className="w-16 bg-bg-primary border-2 border-secondary-white rounded-lg text-center" onChange={() => {updateSearchDetails(inputNumber.current.value, inputBreed.current.value)}} ref={inputNumber} value={searchDetails.number} type="number" min="1" max="10" name="number-cats"/>
       <div className="search-settings flex flex-row flex-wrap justify-center items-center">
         <label className="mt-20 mb-4 font-article" htmlFor="cat-breed">What cat breed do you want to see?</label>
       </div>
-      <select className="bg-bg-primary border-2 border-secondary-white rounded-lg text-center" onChange={() => {updateSearchDetails(inputNumber.current.value, inputBreed.current.value)}} ref={inputBreed} value={searchDetails.breed} name="cat-breed">
-      {breeds.isFetching ?  <option value="">{"Select"}</option>: 
+      <select className=" w-48 bg-bg-primary border-2 border-secondary-white rounded-lg text-center" onChange={() => {updateSearchDetails(inputNumber.current.value, inputBreed.current.value)}} ref={inputBreed} value={searchDetails.breed} name="cat-breed">
+      {breeds.isFetching ?  <option value="">{"Select"}</option> : 
         breeds.data.map((el, i) => {
         return <option key={i} value={el.id} className="w-6 h-6">{el.name}</option>
       })}
