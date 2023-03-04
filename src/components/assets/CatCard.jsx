@@ -30,8 +30,8 @@ useEffect(() => {
   return (
     <>
     {isShown && 
-    <div className={"flex w-full h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
-      <div className="cat-clicked-card-wrapper flex justify-center h-full" ref={catDetails}>
+    <div className={"flex w-min h-min flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
+      <div className="cat-clicked-card-wrapper absolute flex justify-center w-full h-full" ref={catDetails}>
         <CatCardClicked cat={props.cat} func={hideDetails}/>
       </div>
     </div>

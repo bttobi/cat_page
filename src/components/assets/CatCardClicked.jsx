@@ -1,13 +1,13 @@
 import { useRef, useEffect, useState } from 'react';
 
 const CatCardClicked = (props) => {
-  const [isClosed, setIsClosed] = useState();
+  const [isClosed, setIsClosed] = useState(true);
   const closeCard = () => {
     setIsClosed("hidden");
   }
 
   return (
-    <div className={isClosed + " cat-details w-min h-min fixed flex flex-col border-8 border-secondary-white rounded-lg transition-all duration-300 opacity-100"}>
+    <div className={isClosed + " cat-details w-min h-min fixed flex self-start justify-self-start flex-col border-8 border-secondary-white rounded-lg transition-all duration-300 opacity-100"}>
       <button className="close-button absolute right-0 m-1 transition-all duration-150 hover:scale-110" onClick={(e) => {props.func(e);}}><img src="/img/close.png" height="32px" width="32px" alt="Home"/></button>
       <div className="cat-description-wrapper bg-black">
         <div className="cat-name-details font-article text-center pt-8 pb-8 bg-primary text-4xl font-bold">{props.cat.breeds[0].name}</div>

@@ -11,6 +11,7 @@ const Home = () => {
   const getSearchDetailsOfCats = (searchDetails) => {
     setHowManyCats(searchDetails.number);
     setCatBreedId(searchDetails.breed);
+   // console.log(catBreedId);
   }
 
   const fetchData = async () => {
@@ -25,13 +26,13 @@ const Home = () => {
   return (
     <div id="home" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
       <Search getData={getSearchDetailsOfCats} searchQuery={query}/>
-      <div className="cat-cards-wrapper h-full flex flex-row flex-wrap items-center justify-center">
+      <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-center justify-center">
         {query.isFetching ? 
         <div className="loading-wrapper m-16 flex flex-col items-center justify-center">
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-article text-white">Loading...</span>
         </div>
-        : query.data.map((el) => {return( <CatCard cat={el} key={el.id}/>)})}
+        : query.data.map((el) => { return( <CatCard cat={el} key={el.id}/>)})}
       </div>
     </div>
   )
