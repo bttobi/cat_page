@@ -12,7 +12,7 @@ const CatCardClicked = (props) => {
         : <div className="cat-name-details font-article text-center pt-8 pb-8 bg-primary text-4xl font-bold">{"Cute Cat"}</div>
         }
         <div className="cat-description flex flex-col p-2 bg-primary">
-        <div className="cat-img-details w-96 h-72 p-8 pt-0"><div className="cat-image w-80 h-64 rounded-lg" style={{backgroundImage: `url(${props.cat.url})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}></div></div>
+        <div className="cat-img-details w-96 h-72 pt-0"><div className="cat-image w-96 h-72 rounded-lg" style={{backgroundImage: `url(${props.cat.url})`,  backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}}></div></div>
       </div>
       </div>
     </div>

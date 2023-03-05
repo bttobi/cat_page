@@ -7,7 +7,7 @@ const Random = () => {
   const [dataToDisplay, setDataToDisplay] = useState([]);
 
   const fetchData = async () => {
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=10&api_key=${process.env.REACT_APP_API_KEY}`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=8&api_key=${process.env.REACT_APP_API_KEY}`;
       const response = await fetch(URL);
       return response.json();
   }
@@ -25,8 +25,7 @@ const Random = () => {
       const { scrollHeight, scrollTop, clientHeight } = e.target.scrollingElement;
       if(!query.isFetching && scrollHeight - scrollTop <= clientHeight * 1.75){
         let newCat = await query.refetch();
-        console.log(newCat.data)
-        setDataToDisplay([...dataToDisplay, newCat.data[0], newCat.data[1]]);
+        setDataToDisplay([...dataToDisplay, newCat.data[0], newCat.data[1], newCat.data[2], newCat.data[3]]);
       }
     }
     document.addEventListener('scroll', onScroll);
