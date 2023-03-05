@@ -38,11 +38,7 @@ const CatBreeds = () => {
       setBreedDescription(await setFetchedDesc());
     }
     onBreedChange();
-  }, [catBreedId]);
-
-
-//setBreedDescription(setFetchedDesc());
-if(!query.isFetching) console.log(breedDescription)
+  }, [catBreedId, numberOfCats]);
 
   useEffect(()=>{
     const onMount = async () => {
@@ -57,7 +53,7 @@ if(!query.isFetching) console.log(breedDescription)
     <div id="home" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
       <Search getData={getSearchDetailsOfCats} searchQuery={query}/>
       {(!query.isFetching && breedDescription!==undefined && breedDescription!==null) && 
-      <div className="breed-desc-wrapper text-center mt-8">
+      <div className="breed-desc-wrapper text-center mt-4">
         <div className="cat-weight-details p-2 font-bold">Weight: <span className="font-normal">{breedDescription.weight.metric}</span></div>
         <div className="cat-origin-details p-2 font-bold">Origin: <span>{breedDescription.origin}</span></div>
         <div className="cat-lifespan-details p-2 font-bold">Life Span:  <span>{breedDescription.life_span}</span></div>
@@ -65,15 +61,15 @@ if(!query.isFetching) console.log(breedDescription)
         <div className="cat-wikipedia-details p-2 pt-8 font-bold text-center"><a href={breedDescription.wikipedia_url} target="_blank" rel="noreferrer">More details here</a></div>
       </div>}
       <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-center justify-center">
-        {query.data.map( (el) => {
+        {(query.isFetching) ?
+        <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
+          <LoadingIcons.Hearts width="16rem" speed="3"/>
+          <span className="loading-text font-article text-white">Loading...</span>
+        </div>
+        : query.data.map((el) => {
           return <CatCard cat={el} key={el.id}/>
         })}
       </div>
-      {(query.isFetching) &&
-      <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
-        <LoadingIcons.Hearts width="16rem" speed="3"/>
-        <span className="loading-text font-article text-white">Loading...</span>
-      </div>}
     </div>
   )
 }
