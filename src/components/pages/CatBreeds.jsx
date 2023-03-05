@@ -65,7 +65,7 @@ if(!query.isFetching) console.log(breedDescription)
         <div className="cat-wikipedia-details p-2 pt-8 font-bold text-center"><a href={breedDescription.wikipedia_url} target="_blank" rel="noreferrer">More details here</a></div>
       </div>}
       <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-center justify-center">
-        {query.data.map((el) => {
+        {query.data.map( (el) => {
           return <CatCard cat={el} key={el.id}/>
         })}
       </div>
