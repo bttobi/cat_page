@@ -20,8 +20,8 @@ const CatBreeds = () => {
       return response.json();
   }
 
-  const setFetchedDesc = async () => {
-    const desc = await query.refetch();
+  const setFetchedDesc = async (q) => {
+    const desc = await q.refetch();
     return desc.data[0].breeds[0];
   }
 
@@ -35,14 +35,14 @@ const CatBreeds = () => {
 
   useEffect(()=>{
     const onBreedChange = async () =>{
-      setBreedDescription(await setFetchedDesc());
+      setBreedDescription(await setFetchedDesc(query));
     }
     onBreedChange();
   }, [catBreedId, numberOfCats]);
 
   useEffect(()=>{
     const onMount = async () => {
-      setBreedDescription(await setFetchedDesc());
+      setBreedDescription(await setFetchedDesc(query));
     }
     onMount();
   }, []);
