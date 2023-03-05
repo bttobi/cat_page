@@ -34,7 +34,7 @@ const Search = (props) => {
     refetchInterval: 86400000,
     refetchOnWindowFocus: false,
     staleTime: 86400000,});//24 hours in miliseconds
-    console.log(props.searchQuery);
+
   return (
     <div className="search-wrapper w-1/2 flex flex-col flex-nowrap items-center">
       <label className="mt-20 mb-4 font-article" htmlFor="cat-breed">How many cats do you want to generate?</label>
@@ -48,7 +48,7 @@ const Search = (props) => {
         return <option key={i} value={el.id} className="w-6 h-6">{el.name}</option>
       })}
       </select>
-      <button className="" onClick={()=>{props.searchQuery.refetch()}}>GENERATE</button>
+      <button className="" onClick={()=>{props.searchQuery.refetch();}}>GENERATE</button>
     </div>
   )
 }

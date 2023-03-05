@@ -4,7 +4,7 @@ import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
 import Search from '../functions/Search';
 
-const Home = () => {
+const CatBreeds = () => {
   const [numberOfCats, setNumberOfCats] = useState(1);
   const [catBreedId, setCatBreedId] = useState("abys");
   const [dataToDisplay, setDataToDisplay] = useState([]);
@@ -27,13 +27,15 @@ const Home = () => {
   refetchOnReconnect: false,
   });
 
-  // useEffect(()=>{
-  //   const onMount = async (e)=>{
-  //     let onMountCat = await query.refetch();
-  //     setDataToDisplay([...onMountCat.data]);
-  //   }
-  //   onMount();
-  // },[])
+  console.log(query.data)
+
+  useEffect(()=>{
+    const onMount = async (e)=>{
+      let onMountCat = await query.refetch();
+      setDataToDisplay([...onMountCat.data]);
+    }
+    onMount();
+  },[])
   
   if(query.isError) console.error(query.error.message);
 
@@ -54,4 +56,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default CatBreeds
