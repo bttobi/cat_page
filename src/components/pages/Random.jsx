@@ -53,13 +53,13 @@ const Random = () => {
       <p className="scroll-desc mt-16"> SCROLL DOWN TO LOAD CATS!</p>
       <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-center justify-center">
         {dataToDisplay.map(el => {return <CatCard cat={el} key={el.id}/>})}
-        {(query.isFetching) &&
+      </div>
+      {(query.isFetching) &&
         <div className="loading-wrapper m-16 flex flex-col items-center justify-center">
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-article text-white">Loading...</span>
         </div>
       }
-      </div>
     </div>
   )
 }
