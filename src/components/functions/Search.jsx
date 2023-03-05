@@ -37,7 +37,7 @@ const Search = (props) => {
 
   return (
     <div className="search-wrapper w-1/2 flex flex-col flex-nowrap items-center">
-      <label className="mt-20 mb-4 font-article" htmlFor="cat-breed">How many cats do you want to generate?</label>
+      <label className="mt-4 mb-4 font-article" htmlFor="cat-breed">How many cats do you want to generate?</label>
       <input className="w-48 bg-bg-primary border-2 border-secondary-white rounded-lg text-center" type="number" min="1" max="10" onChange={() => {updateSearchDetails(inputNumber.current.value, inputBreed.current.value)}} ref={inputNumber} value={searchDetails.number} name="cat-number"/>
       <div className="search-settings flex flex-row flex-wrap justify-center items-center">
         <label className="mt-10 mb-4 font-article" htmlFor="cat-breed">What cat breed do you want to see?</label>
@@ -48,7 +48,6 @@ const Search = (props) => {
         return <option key={i} value={el.id} className="w-6 h-6">{el.name}</option>
       })}
       </select>
-      <button className="search-button bg-secondary rounded-lg p-2 mt-10" onClick={()=>{props.searchQuery.refetch();}}>GENERATE</button>
     </div>
   )
 }

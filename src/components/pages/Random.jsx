@@ -7,7 +7,7 @@ const Random = () => {
   const [dataToDisplay, setDataToDisplay] = useState([]);
 
   const fetchData = async () => {
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=2&api_key=${process.env.REACT_APP_API_KEY}`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=10&api_key=${process.env.REACT_APP_API_KEY}`;
       const response = await fetch(URL);
       return response.json();
   }
@@ -23,7 +23,7 @@ const Random = () => {
   useEffect(()=>{
     const onScroll = async (e)=>{
       const { scrollHeight, scrollTop, clientHeight } = e.target.scrollingElement;
-      if(!query.isFetching && scrollHeight - scrollTop <= clientHeight * 1.5){
+      if(!query.isFetching && scrollHeight - scrollTop <= clientHeight * 1.75){
         let newCat = await query.refetch();
         console.log(newCat.data)
         setDataToDisplay([...dataToDisplay, newCat.data[0], newCat.data[1]]);
@@ -55,7 +55,7 @@ const Random = () => {
         {dataToDisplay.map(el => {return <CatCard cat={el} key={el.id}/>})}
       </div>
       {(query.isFetching) &&
-        <div className="loading-wrapper m-16 flex flex-col items-center justify-center">
+        <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-article text-white">Loading...</span>
         </div>
