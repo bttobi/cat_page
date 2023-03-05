@@ -49,7 +49,7 @@ useEffect(() => {
           </div>
           :
           <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
-            <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-4xl">{"Feral Cat"}</p>
+            <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-4xl">{"Cute Cat"}</p>
           </div>
           }
           </div>
