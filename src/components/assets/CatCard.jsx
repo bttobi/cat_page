@@ -1,16 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
 import CatCardClicked from './CatCardClicked';
-import { useSpring, animated } from 'react-spring';
 
 const CatCard = (props) => {
   const catDetails = useRef();
   const [isShown, setIsShown] = useState(false);
-  const fade = useSpring({
-    transform: isShown ? 'translate(0,-200px)' : 'translate(0,0)',
-    transform: isShown ? 'scale(1.2)' : 'scale(10)',
-    opacity: isShown ? 1 : 0,
-    display: isShown ? 'hidden' : 'fixed'
-  });
 
 useEffect(() => {
   document.addEventListener("click", hideDetails, true);
@@ -40,11 +33,11 @@ useEffect(() => {
   return (
     <>
       { isShown &&
-      <animated.div style={fade} className={"fixed mb-10 flex w-min h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
+      <div className={"fixed mb-10 flex w-min h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
         <div className="cat-clicked-card-wrapper fixed flex justify-center align-center items-center w-full h-full" ref={catDetails}>
           <CatCardClicked cat={props.cat} func={hideDetails}/>
         </div>
-      </animated.div>
+      </div>
       }
       <div className="cat-wrapper w-min h-min m-4 flex flex-col bg-primary border-8 border-secondary-white rounded-lg transition-all duration-300 hover:scale-110">
           <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">

@@ -45,15 +45,13 @@ function App() {
   const router = createReactRouter({ routeConfig });
   const queryClient = new QueryClient();
 
-  const fade = useSpring({from: {opacity: 0}, opacity: 1});
-
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}>
-        <animated.div style={fade} className="App w-full h-full flex flex-col items-center relative">
+        <div className="App w-full h-full flex flex-col items-center relative">
           <Navbar />
           <Outlet />
-        </animated.div>
+        </div>
       </RouterProvider>
     </QueryClientProvider>
   );
