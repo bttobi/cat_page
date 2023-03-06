@@ -17,7 +17,6 @@ useEffect(() => {
       setIsShown(false);
     }
   }
-  
 
   const addToFavourites = () => {
     
@@ -26,7 +25,6 @@ useEffect(() => {
   const showDetails = () => {
       setIsShown(true);
   }
-
 
   return (
     <>
