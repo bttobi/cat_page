@@ -8,6 +8,7 @@ const CatBreeds = () => {
   const [numberOfCats, setNumberOfCats] = useState(1);
   const [catBreedId, setCatBreedId] = useState("abys");
   const [breedDescription, setBreedDescription] = useState();
+  const [showDetails, setShowDetails] = useState(false);
 
   const getSearchDetailsOfCats = (searchDetails) => {
     setCatBreedId(searchDetails.breed);
@@ -47,12 +48,17 @@ const CatBreeds = () => {
     onMount();
   }, []);
   
+
+
   if(query.isError) console.error(query.error.message);
+
+  
 
   return (
     <div id="home" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
       <Search getData={getSearchDetailsOfCats} searchQuery={query}/>
-      {(!query.isFetching && breedDescription!==undefined && breedDescription!==null) && 
+      <button onClick={()=>{setShowDetails(true)}}>show details</button>
+      {(showDetails && !query.isFetching && breedDescription!==undefined && breedDescription!==null) && 
       <div className="breed-desc-wrapper text-center">
         <div className="cat-weight-details p-2 font-bold">Weight: <span className="font-normal">{breedDescription.weight.metric}</span></div>
         <div className="cat-origin-details p-2 font-bold">Origin: <span>{breedDescription.origin}</span></div>

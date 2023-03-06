@@ -1,6 +1,7 @@
 import { Outlet, RouterProvider, createReactRouter, createRouteConfig } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import Navbar from './components/navigation/Navbar';
 import CatBreeds from './components/pages/CatBreeds';
 import About from './components/pages/About';
@@ -9,7 +10,6 @@ import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Profile from './components/pages/Profile';
 import Random from './components/pages/Random';
-import CatCard from './components/assets/CatCard';
 
 function App() {
   const routeConfig = createRouteConfig().createChildren((createRoute) => [
@@ -51,10 +51,10 @@ function App() {
     
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}>
-        <div className="App w-full h-full flex flex-col items-center relative">
+        <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="App w-full h-full flex flex-col items-center relative">
           <Navbar />
           <Outlet />
-        </div>
+        </motion.div>
       </RouterProvider>
     </QueryClientProvider>
   );

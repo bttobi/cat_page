@@ -36,7 +36,7 @@ const Search = (props) => {
     staleTime: 86400000,});//24 hours in miliseconds
 
   return (
-    <div className="search-wrapper w-1/2 flex flex-col flex-nowrap items-center">
+    <div className="search-wrapper text-center w-1/2 flex flex-col flex-nowrap items-center">
       <label className="mt-4 mb-4 font-article" htmlFor="cat-breed">How many cats do you want to generate?</label>
       <input className="w-48 bg-bg-primary border-2 border-secondary-white rounded-lg text-center" type="number" min="1" max="10" onChange={() => {updateSearchDetails(inputNumber.current.value, inputBreed.current.value)}} ref={inputNumber} value={searchDetails.number} name="cat-number"/>
       <div className="search-settings flex flex-row flex-wrap justify-center items-center">
