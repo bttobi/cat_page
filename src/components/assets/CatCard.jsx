@@ -16,7 +16,6 @@ useEffect(() => {
     if(catDetails.current != null && (!catDetails.current.contains(e.target) || clicked)){
       setIsShown(false);
       const blur = [...document.getElementsByClassName('App')][0];
-      console.log(blur[0])
       blur.classList.remove('shadow');
     }
   }
@@ -28,9 +27,7 @@ useEffect(() => {
   const showDetails = () => {
       setIsShown(true);
       const blur = [...document.getElementsByClassName('App')][0];
-      console.log(blur[0])
       blur.classList.add('shadow');
-      console.log(blur)
   }
 
   return (
