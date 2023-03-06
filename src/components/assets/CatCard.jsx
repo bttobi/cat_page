@@ -8,7 +8,8 @@ const CatCard = (props) => {
   const fade = useSpring({
     transform: isShown ? 'translate(0,-200px)' : 'translate(0,0)',
     transform: isShown ? 'scale(1.2)' : 'scale(10)',
-    opacity: isShown ? 1 : 0
+    opacity: isShown ? 1 : 0,
+    display: isShown ? 'hidden' : 'fixed'
   });
 
 useEffect(() => {
@@ -38,7 +39,7 @@ useEffect(() => {
 
   return (
     <>
-      {isShown && 
+      { isShown &&
       <animated.div style={fade} className={"fixed mb-10 flex w-min h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
         <div className="cat-clicked-card-wrapper fixed flex justify-center align-center items-center w-full h-full" ref={catDetails}>
           <CatCardClicked cat={props.cat} func={hideDetails}/>
