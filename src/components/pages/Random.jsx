@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from 'react-query';
-import { useSpring, animated } from 'react-spring';
 import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
 
