@@ -16,6 +16,7 @@ useEffect(() => {
   const hideDetails = (e, clicked) => {
     if(catDetails.current != null && (!catDetails.current.contains(e.target) || clicked)){
       setIsShown(false);
+      props.showClicked(false);
     }
   }
 
@@ -25,18 +26,18 @@ useEffect(() => {
 
   const showDetails = () => {
     setIsShown(true);
+    props.showClicked(true);
   }
 
   return (
     <>
       <AnimatePresence>
       {isShown &&
-      <motion.div initial={{transform: 'scale(0)'}} animate={{transform: 'scale(1.2)'}} exit={{transform: 'scale(0)'}} className={"fixed mb-10 flex w-min h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
-        <div className="cat-clicked-card-wrapper fixed flex justify-center align-center items-center w-full h-full" ref={catDetails}>
-          <CatCardClicked cat={props.cat} func={hideDetails}/>
-        </div>
-      </motion.div>
-      }
+        <motion.div initial={{y: '-100px'}} animate={{y: '0px'}} exit={{opacity: 0}} className={"fixed mb-10 flex w-min h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
+          <div className="cat-clicked-card-wrapper fixed flex justify-center align-center items-center w-full h-full" ref={catDetails}>
+            <CatCardClicked cat={props.cat} func={hideDetails}/>
+          </div>
+        </motion.div>}
       </AnimatePresence>
       <div className="cat-wrapper w-min h-min m-4 flex flex-col bg-primary border-8 border-secondary-white rounded-lg transition-all duration-300 hover:scale-110">
           <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">

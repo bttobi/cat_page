@@ -10,6 +10,7 @@ const CatBreeds = () => {
   const [catBreedId, setCatBreedId] = useState("abys");
   const [breedDescription, setBreedDescription] = useState();
   const [showDetails, setShowDetails] = useState(false);
+  const [showClicked, setShowClicked] = useState(false);
 
   const getSearchDetailsOfCats = (searchDetails) => {
     setCatBreedId(searchDetails.breed);
@@ -35,6 +36,10 @@ const CatBreeds = () => {
     refetchOnReconnect: false,
   });
 
+  const getShowClicked = (isClicked)=>{
+    setShowClicked(isClicked);
+  }
+
   useEffect(()=>{
     const onBreedChange = async () =>{
       setBreedDescription(await setFetchedDesc(query));
@@ -58,7 +63,7 @@ const CatBreeds = () => {
   return (
       <div id="cat-breeds" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
         <AnimatePresence>
-          {showDetails && <motion.div initial={{transform: 'blur(0px)', opacity: 0}} animate={{transform: 'blur(16px)', opacity: 0.7}} exit={{transform: 'blur(0px)', opacity: 0}} className="backdrop w-full h-full absolute flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
+          {(showDetails || showClicked) && <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full absolute flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
         </AnimatePresence>
         <Search getData={getSearchDetailsOfCats} searchQuery={query}/>
         <button onClick={()=>{setShowDetails(!showDetails)}}>{showDetails ? "hide details" : "show details"}</button>
@@ -74,7 +79,7 @@ const CatBreeds = () => {
             </motion.div>}
         </AnimatePresence>
         <div className="cat-cards-wrapper relative w-full h-full flex flex-row flex-wrap items-center justify-center">
-          {(!query.isFetching) && query.data.map(el => {return <CatCard cat={el} key={el.id}/>})}
+          {(!query.isFetching) && query.data.map(el => {return <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>})}
           {(query.isFetching) &&
             <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
               <LoadingIcons.Hearts width="16rem" speed="3"/>
