@@ -63,7 +63,7 @@ const CatBreeds = () => {
   return (
       <div id="cat-breeds" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
         <AnimatePresence>
-          {(showDetails || showClicked) && <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full absolute flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
+          {(showDetails || showClicked) && <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
         </AnimatePresence>
         <Search getData={getSearchDetailsOfCats} searchQuery={query}/>
         <button onClick={()=>{setShowDetails(!showDetails)}}>{showDetails ? "hide details" : "show details"}</button>
