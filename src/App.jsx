@@ -1,7 +1,6 @@
 import { Outlet, RouterProvider, createReactRouter, createRouteConfig } from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/navigation/Navbar';
 import CatBreeds from './components/pages/CatBreeds';
 import About from './components/pages/About';
@@ -45,15 +44,15 @@ function App() {
 
   const router = createReactRouter({ routeConfig });
   const queryClient = new QueryClient();
-  const [showBackdrop, setShowBackDrop] = useState(false);
 
   return (
-    
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}>
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="App w-full h-full flex flex-col items-center relative">
           <Navbar />
-          <Outlet />
+          <AnimatePresence>
+              <Outlet />
+          </AnimatePresence>
         </motion.div>
       </RouterProvider>
     </QueryClientProvider>

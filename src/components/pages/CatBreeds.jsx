@@ -78,7 +78,7 @@ const CatBreeds = () => {
 
 
   return (
-      <div id="cat-breeds" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
+      <motion.div id="cat-breeds" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
         <AnimatePresence>
           {(showDetails || showClicked) && <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
         </AnimatePresence>
@@ -100,10 +100,10 @@ const CatBreeds = () => {
           {(query.isFetching) &&
             <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
               <LoadingIcons.Hearts width="16rem" speed="3"/>
-              <span className="loading-text font-article text-white">Loading...</span>
+              <span className="loading-text text-base font-bold font-article text-white">Loading...</span>
             </div>}
         </div>
-      </div>
+      </motion.div>
   )
 }
 

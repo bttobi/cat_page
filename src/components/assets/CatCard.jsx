@@ -39,7 +39,7 @@ useEffect(() => {
           </div>
         </motion.div>}
       </AnimatePresence>
-      <div className="cat-wrapper w-min h-min m-4 flex flex-col bg-primary border-4 border-secondary-white rounded-lg transition-all duration-300 hover:scale-110">
+      <div className="cat-wrapper w-min h-min m-4 flex flex-col bg-primary border-4 border-secondary-white rounded-lg transition-all duration-200 hover:scale-110">
       <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
         {(props.cat.breeds[0]!=null || props.cat.breeds[0]!=undefined) ?
           <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
