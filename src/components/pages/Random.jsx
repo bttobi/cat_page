@@ -14,7 +14,7 @@ const Random = () => {
       return response.json();
   }
 
-  const query = useQuery('cats', fetchData, 
+  const query = useQuery('cat-random', fetchData, 
   { 
     manual: true, 
     refetchOnWindowFocus: false, 
