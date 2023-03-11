@@ -44,6 +44,7 @@ const Random = () => {
   useEffect(()=>{
     window.scrollTo(0, 0); //setting scroll to Top
     const onMount = async (e)=>{
+      setDataToDisplay([]);
       let onMountCat = await query.refetch();
       setDataToDisplay([...onMountCat.data]);//adding data to existing data via fetching
     }
@@ -54,7 +55,7 @@ const Random = () => {
   if(query.isError) console.error(query.error.message);
 
   return (
-    <div id="home" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
+    <div id="home" className="home-page w-full h-full m-none mt-16  flex flex-col justify-center items-center font-article text-white">
       <AnimatePresence>
         {showClicked && <motion.div initial={{ opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
       </AnimatePresence>
@@ -63,7 +64,7 @@ const Random = () => {
         {dataToDisplay.map(el => {return <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>})}
       </div>
       {(query.isFetching) &&
-        <div className="static loading-wrapper self-end justify-end z-1 m-16 flex flex-col items-center justify-center">
+        <div className="fixed rounded-lg loading-wrapper m-16 flex flex-col self-center items-center justify-center">
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-article text-white">Loading...</span>
         </div>
