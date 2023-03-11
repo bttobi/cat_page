@@ -33,7 +33,7 @@ useEffect(() => {
     <>
       <AnimatePresence>
       {isShown &&
-        <motion.div initial={{y: '-100px', opacity: 0}} animate={{y: '0px', opacity: 1}} exit={{opacity: 0}} className={"fixed mb-10 flex w-min h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
+        <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className={"fixed top-28 flex w-min h-full flex-col justify-center align-start items-start z-10 fixed filter-blur-0"}>
           <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full" ref={catDetails}>
             <CatCardClicked cat={props.cat} func={hideDetails}/>
           </div>
@@ -43,7 +43,7 @@ useEffect(() => {
       <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
         {(props.cat.breeds[0]!=null || props.cat.breeds[0]!=undefined) &&
           <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
-            <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-2xl">{props.cat.breeds[0].name}</p>
+            <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">{props.cat.breeds[0].name}</p>
           </div>
         }
           <button className="align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={() => {addToFavourites()}}>❤️</button>
