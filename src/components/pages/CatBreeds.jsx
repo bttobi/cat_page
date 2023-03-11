@@ -1,4 +1,4 @@
-import { useState, useEffect, React } from 'react';
+import { useState, useEffect, useRef, React } from 'react';
 import { useQuery } from 'react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 import CatCard from '../assets/CatCard';
@@ -11,6 +11,7 @@ const CatBreeds = () => {
   const [breedDescription, setBreedDescription] = useState();
   const [showDetails, setShowDetails] = useState(false);
   const [showClicked, setShowClicked] = useState(false);
+  const clickedOutside = useRef(null);
 
   const getSearchDetailsOfCats = (searchDetails) => {
     setCatBreedId(searchDetails.breed);
@@ -48,17 +49,16 @@ const CatBreeds = () => {
   }, [catBreedId, numberOfCats]);
 
   useEffect(()=>{
+    query.data = [];
     const onMount = async () => {
       setBreedDescription(await setFetchedDesc(query));
     }
     onMount();
   }, []);
-  
 
 
   if(query.isError) console.error(query.error.message);
 
-  
 
   return (
       <div id="cat-breeds" className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
@@ -66,7 +66,7 @@ const CatBreeds = () => {
           {(showDetails || showClicked) && <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
         </AnimatePresence>
         <Search getData={getSearchDetailsOfCats} searchQuery={query}/>
-        <button onClick={()=>{setShowDetails(!showDetails)}}>{showDetails ? "hide details" : "show details"}</button>
+        <button className="btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={()=>{setShowDetails(!showDetails)}}>{showDetails ? "hide details" : "show details"}</button>
         <AnimatePresence>
           {(showDetails && !query.isFetching && breedDescription!==undefined && breedDescription!==null) && 
             <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="breed-desc-wrapper mt-10 z-20 rounded-lg border-4 absolute bg-primary text-center">
@@ -75,7 +75,7 @@ const CatBreeds = () => {
               <div className="cat-lifespan-details p-2 font-bold">Life Span:  <span>{breedDescription.life_span}</span></div>
               <div className="cat-temperament-details p-2 font-bold">Temperament: <span>{breedDescription.temperament}</span></div>
               <div className="cat-wikipedia-details p-2 font-bold text-center"><a href={breedDescription.wikipedia_url} target="_blank" rel="noreferrer">More details here</a></div>
-              <button onClick={()=>{setShowDetails(false)}}>hide details</button>
+              <button className="btn btn-sm text-article bg-primary text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mb-2" onClick={()=>{setShowDetails(false)}}>hide details</button>
             </motion.div>}
         </AnimatePresence>
         <div className="cat-cards-wrapper relative w-full h-full flex flex-row flex-wrap items-center justify-center">

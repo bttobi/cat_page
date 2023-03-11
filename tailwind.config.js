@@ -1,20 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  plugins: [require("daisyui")],
   content: 
-  [
-    './src/index.jsx',
-    './src/App.jsx',
-    './src/components/navigation/Navbar.jsx',
-    './src/components/pages/Home.jsx',
-    './src/components/pages/About.jsx',
-    './src/components/pages/Login.jsx',
-    './src/components/pages/Favourites.jsx',
-    './src/components/pages/Profile.jsx',
-    './src/components/assets/CatCard.jsx',
-    './src/components/functions/Search.jsx',
-    './src/components/assets/CatCardClicked.jsx'
-  ],
+  ["./src/**/*.{html,jsx}"],
   theme: 
   {
     extend: 
@@ -34,5 +21,5 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [require('daisyui')]
 }
