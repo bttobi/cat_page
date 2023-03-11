@@ -11,7 +11,7 @@ const CatBreeds = () => {
   const [breedDescription, setBreedDescription] = useState();
   const [showDetails, setShowDetails] = useState(false);
   const [showClicked, setShowClicked] = useState(false);
-  const clickedOutside = useRef(null);
+  const hide = useRef(null);
 
   const getSearchDetailsOfCats = (searchDetails) => {
     setCatBreedId(searchDetails.breed);
@@ -41,6 +41,13 @@ const CatBreeds = () => {
     setShowClicked(isClicked);
   }
 
+  const hideDetails = (e)=>{
+    e.preventDefault();
+    if(hide.current != null && !hide.current.contains(e.target)) {
+      setShowDetails(false);
+    }
+  }
+
   useEffect(()=>{
     const onBreedChange = async () =>{
       setBreedDescription(await setFetchedDesc(query));
@@ -56,6 +63,16 @@ const CatBreeds = () => {
     onMount();
   }, []);
 
+  useEffect(()=>{
+    if(document.getElementById('details')!=null)
+    document.addEventListener("mousedown", hideDetails);
+
+    return ()=>{
+      if(document.getElementById('details')!=null)
+      document.removeEventListener("mousedown", hideDetails);
+    }
+  }, [showDetails])
+
 
   if(query.isError) console.error(query.error.message);
 
@@ -67,9 +84,9 @@ const CatBreeds = () => {
         </AnimatePresence>
         <Search getData={getSearchDetailsOfCats} searchQuery={query}/>
         <button className="btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={()=>{setShowDetails(!showDetails)}}>{showDetails ? "hide details" : "show details"}</button>
-        <AnimatePresence>
+        <AnimatePresence >
           {(showDetails && !query.isFetching && breedDescription!==undefined && breedDescription!==null) && 
-            <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="breed-desc-wrapper mt-10 z-20 rounded-lg border-4 absolute bg-primary text-center">
+            <motion.div ref={hide} id="details" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="breed-desc-wrapper fixed mt-10 z-20 rounded-lg border-4 bg-primary text-center">
               <div className="cat-weight-details p-2 font-bold">Weight: <span className="font-normal">{breedDescription.weight.metric + " kg"}</span></div>
               <div className="cat-origin-details p-2 font-bold">Origin: <span>{breedDescription.origin}</span></div>
               <div className="cat-lifespan-details p-2 font-bold">Life Span:  <span>{breedDescription.life_span}</span></div>
