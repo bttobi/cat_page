@@ -34,7 +34,7 @@ useEffect(() => {
       <AnimatePresence>
       {isShown &&
         <motion.div initial={{y: '-100px', opacity: 0}} animate={{y: '0px', opacity: 1}} exit={{opacity: 0}} className={"fixed mb-10 flex w-min h-full flex-col justify-center align-center items-center z-10 fixed filter-blur-0"}>
-          <div className="cat-clicked-card-wrapper fixed flex justify-center align-center items-center w-full h-full" ref={catDetails}>
+          <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full" ref={catDetails}>
             <CatCardClicked cat={props.cat} func={hideDetails}/>
           </div>
         </motion.div>}
