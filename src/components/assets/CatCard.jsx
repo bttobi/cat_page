@@ -48,7 +48,7 @@ useEffect(() => {
         }
           <button className="align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={() => {addToFavourites()}}>❤️</button>
         </div>
-          <div className="px-6 pb-6 flex flex-col justify-center items-center cursor-pointer" onClick={showDetails}>
+          <div className="px-2 pb-2 flex flex-col justify-center items-center cursor-pointer" onClick={showDetails}>
             <div className="w-min h-min m-0 rounded-lg" style= {{width: '12rem', height: '10rem', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}} alt="cat"></div>           
           </div>
       </div>
