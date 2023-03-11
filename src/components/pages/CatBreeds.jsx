@@ -42,7 +42,6 @@ const CatBreeds = () => {
   }
 
   const hideDetails = (e)=>{
-    e.preventDefault();
     if(hide.current != null && !hide.current.contains(e.target)) {
       setShowDetails(false);
     }
@@ -56,7 +55,6 @@ const CatBreeds = () => {
   }, [catBreedId, numberOfCats]);
 
   useEffect(()=>{
-    query.data = [];
     const onMount = async () => {
       setBreedDescription(await setFetchedDesc(query));
     }
@@ -73,9 +71,7 @@ const CatBreeds = () => {
     }
   }, [showDetails])
 
-
   if(query.isError) console.error(query.error.message);
-
 
   return (
       <motion.div id="cat-breeds" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="home-page w-full h-full m-none mt-16  flex flex-col justify-start items-center font-article text-white">
@@ -83,7 +79,7 @@ const CatBreeds = () => {
           {(showDetails || showClicked) && <motion.div initial={{opacity: 0}} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
         </AnimatePresence>
         <Search getData={getSearchDetailsOfCats} searchQuery={query}/>
-        <button className="btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={()=>{setShowDetails(!showDetails)}}>{showDetails ? "hide details" : "show details"}</button>
+        <button className="btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={()=>{setShowDetails(true)}}>{"show details"}</button>
         <AnimatePresence >
           {(showDetails && !query.isFetching && breedDescription!==undefined && breedDescription!==null) && 
             <motion.div ref={hide} id="details" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="breed-desc-wrapper fixed mt-10 z-20 rounded-lg border-4 bg-primary text-center">
