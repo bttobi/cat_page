@@ -63,7 +63,7 @@ const Random = () => {
         {dataToDisplay.map(el => {return <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>})}
       </div>
       {(query.isFetching) &&
-        <div className="static loading-wrapper z-1 m-16 flex flex-col items-center justify-center">
+        <div className="static loading-wrapper self-end justify-end z-1 m-16 flex flex-col items-center justify-center">
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-article text-white">Loading...</span>
         </div>
