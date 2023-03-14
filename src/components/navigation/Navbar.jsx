@@ -5,7 +5,7 @@ export let loggedIn = true;
 
 const Navbar = () => {
   return (
-    <nav className="navbar w-full h-16 fixed z-20 flex justify-center items-center bg-primary text-secondary-white font-header text-xl">
+    <nav className="navbar w-full h-16 p-0 fixed z-20 flex justify-center items-center bg-primary text-secondary-white font-header text-xl">
       <ul className="w-full h-full flex flex-row justify-between items-center">
         <li className="flex flex-row p-3 rounded-md transition-all duration-300 hover:rotate-12">
           <Link to="/" className="flex flex-row justify-center items-center">
