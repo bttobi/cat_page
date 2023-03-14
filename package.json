@@ -13,7 +13,7 @@
     "@types/react-dom": "^18.0.9",
     "axios": "^1.2.0",
     "daisyui": "^2.51.3",
-    "firebase": "^9.15.0",
+    "firebase": "^9.17.2",
     "framer-motion": "^10.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
