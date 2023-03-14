@@ -60,7 +60,7 @@ const Random = () => {
         {showClicked && <motion.div initial={{ opacity: 0 }} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
       </AnimatePresence>
       <p className="scroll-desc mt-16"> SCROLL DOWN TO LOAD CATS!</p>
-      <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-center align-center justify-center">
+      <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-start align-start content-start justify-center">
         {dataToDisplay.map(el => {return <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>})}
       </div>
       {(query.isFetching) &&
