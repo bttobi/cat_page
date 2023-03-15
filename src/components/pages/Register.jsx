@@ -1,11 +1,19 @@
 import { motion } from 'framer-motion';
 import { Link } from '@tanstack/react-router'
 import { useRef, useState, useEffect } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase.js';
 
 const Register = () => {
 
   const register = async () => {
-
+    try {
+      const user = await createUserWithEmailAndPassword(auth, registerEmail, password);
+      console.log(user);
+    }
+    catch(error){
+      console.error(error); 
+    }
   };
 
   const emailRef = useRef(null);
@@ -34,7 +42,7 @@ const Register = () => {
           <label htmlFor="confirm-password">Confirm Password</label>
           <input ref={passConfRef} type="password" name="confirm-password" placeholder="Confirm Password" required onChange={()=>{setConfirmPassword(passConfRef.current.value)}}/>
         </div>
-        <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" type="submit">Register</button>
+        <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={register}>Register</button>
       </form>
       <div className="login-redirect text-center mt-10">Already have an account? Create one <button className="login-redirect-button underline text-center"><Link to="/login">here</Link></button></div>
     </motion.div>
