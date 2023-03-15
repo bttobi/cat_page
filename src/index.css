@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root, [data-theme] {
-  background-color: #2C3639;;
+  background-color: #048276;;
 }
 
 html {
@@ -24,7 +24,7 @@ body {
 }
 
 #root {
-  background-color: #2C3639;
+  background-color: #048276;
   width: 100%;
   height: 100%;
   margin: 0;

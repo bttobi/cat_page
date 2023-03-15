@@ -57,7 +57,7 @@ const Random = () => {
   return (
     <motion.div id="home" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="home-page w-full h-full m-none mt-16 flex flex-col justify-center items-center font-article text-white">
       <AnimatePresence>
-        {showClicked && <motion.div initial={{ opacity: 0 }} animate={{opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
+        {showClicked && <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
       </AnimatePresence>
       <p className="scroll-desc mt-16"> SCROLL DOWN TO LOAD CATS!</p>
       <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-start align-start content-start justify-center">
