@@ -12,7 +12,7 @@ import Random from './components/pages/Random';
 import { auth } from './firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
 
-export const user =  onAuthStateChanged(auth, (currentUser) =>{
+export let user =  onAuthStateChanged(auth, (currentUser) =>{
   user = currentUser;
 });
 
