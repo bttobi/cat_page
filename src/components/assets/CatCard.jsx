@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import CatCardClicked from './CatCardClicked';
 import { motion, AnimatePresence } from 'framer-motion';
+import { auth } from '../../firebase.js';
 
 const CatCard = (props) => {
   const catDetails = useRef();

@@ -3,15 +3,10 @@ import { useState } from 'react';
 import {motion} from 'framer-motion';
 import { auth } from '../../firebase.js';
 import { Link } from '@tanstack/react-router';
-import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
+import user from '../../App.jsx';
 
 const Profile = () => {
-  const [user, setUser] = useState({});
-  
-  onAuthStateChanged(auth, (currentUser) =>{
-    setUser(currentUser);
-  });
-
   const logOut = async () => {
     await signOut(auth);
   };

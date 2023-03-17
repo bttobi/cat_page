@@ -11,7 +11,10 @@ import Profile from './components/pages/Profile';
 import Random from './components/pages/Random';
 import { auth } from './firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
-import { useState } from 'react';
+
+export const user =  onAuthStateChanged(auth, (currentUser) =>{
+  user = currentUser;
+});
 
 function App() {
   const routeConfig = createRouteConfig().createChildren((createRoute) => [
