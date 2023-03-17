@@ -47,8 +47,7 @@ function App() {
 
   const router = createReactRouter({ routeConfig });
   const queryClient = new QueryClient();
-  const [user, setUser] = useState();
-
+  
   return (
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router}>
