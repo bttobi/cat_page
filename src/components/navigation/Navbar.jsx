@@ -25,7 +25,7 @@ const Navbar = () => {
           <button className={buttonStyle + " mx-1"}><Link to="/favourites">Favourites</Link></button>
           <button className={buttonStyle + " mx-1"}><Link to="/about">About</Link></button>
         </li>
-        {user.email ?  
+        {user?.email ?  
         <li className={buttonStyle + " flex justify-center items-center"} style={{padding: "3px", right:"0", marginRight: "6px"}}><Link to="/profile"><img src="/img/cat_profile.png" height="40px" width="40px" alt="profile"/></Link></li> 
         : <li className={buttonStyle + " flex justify-center items-center"} style={{width:"52px", height:"52px", right:"0", marginRight: "6px"}}><Link to="/login"><i className="gg-log-in"></i></Link></li>
         }
