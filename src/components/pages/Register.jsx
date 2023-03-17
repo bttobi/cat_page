@@ -5,13 +5,12 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase.js';
 
 const Register = () => {
-
   const register = async () => {
     try {
       await createUserWithEmailAndPassword(auth, registerEmail, password);
     }
     catch(error){
-      console.error(error); 
+      //console.log(error); 
     }
   };
 

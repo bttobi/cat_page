@@ -9,6 +9,9 @@ import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Profile from './components/pages/Profile';
 import Random from './components/pages/Random';
+import { auth } from './firebase.js';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useState } from 'react';
 
 function App() {
   const routeConfig = createRouteConfig().createChildren((createRoute) => [
@@ -44,6 +47,7 @@ function App() {
 
   const router = createReactRouter({ routeConfig });
   const queryClient = new QueryClient();
+  const [user, setUser] = useState();
 
   return (
     <QueryClientProvider client={queryClient}>
