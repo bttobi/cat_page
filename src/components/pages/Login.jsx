@@ -1,6 +1,4 @@
-import loggedIn from '../navigation/Navbar';
 import { Link } from '@tanstack/react-router';
-import { Register } from './Register';
 import { motion } from 'framer-motion';
 import { auth } from '../../firebase.js';
 import { useState, useRef } from 'react';

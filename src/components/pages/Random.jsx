@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, animate } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery } from 'react-query';
 import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const Random = () => {
   const [dataToDisplay, setDataToDisplay] = useState([]);
@@ -30,8 +32,9 @@ const Random = () => {
     const onScroll = async (e)=>{
       const { scrollHeight, scrollTop, clientHeight } = e.target.scrollingElement;
       if(!query.isFetching && scrollHeight - scrollTop <= clientHeight *1.25){
-        let newCat = await query.refetch();
-        setDataToDisplay([...dataToDisplay, newCat.data[0], newCat.data[1], newCat.data[2], newCat.data[3]]);
+        const newCat = await query.refetch();
+        const dataToAdd = [...newCat.data];
+        setDataToDisplay(dataToDisplay.concat(dataToAdd));
       }
     }
     document.addEventListener('scroll', onScroll);
@@ -74,4 +77,4 @@ const Random = () => {
   )
 }
 
-export default Random
+export default Random;

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
 import Search from '../functions/Search';
+import { v4 as uuidv4 } from 'uuid';
 
 const CatBreeds = () => {
   const [numberOfCats, setNumberOfCats] = useState(1);

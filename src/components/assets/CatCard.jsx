@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from 'react'
 import CatCardClicked from './CatCardClicked';
 import { motion, AnimatePresence } from 'framer-motion';
-import { auth } from '../../firebase.js';
-import user from '../../App.jsx';
+import { collection, doc, setDoc } from 'firebase/firestore';
+import db from '../../firebase';
+import { v4 as uuidv4 } from 'uuid';
 
 const CatCard = (props) => {
   const catDetails = useRef();
   const [isShown, setIsShown] = useState(false);
+  const collectionRef = collection(db, 'favourites');
+
 
 useEffect(() => {
   document.addEventListener("click", hideDetails, true);
@@ -22,8 +25,29 @@ useEffect(() => {
     }
   }
 
-  const addToFavourites = () => {
-    
+  const addToFavourites = async () => {
+    try{
+
+      const hasBreed = (props.cat.breeds[0]!==undefined ||  props.cat.breeds[0]!==null) ? props.cat.breeds[0] : "";
+      const newCat = 
+      {
+        id: uuidv4(),
+        breed: "a",
+        image: props.cat.url,
+        origin: "test",
+        temperament: "test",
+        user_email: "test@mail.com",
+        weight: "test",
+        life_span: "test",
+        wiki_link: "test"
+      };
+      const catRef = doc(collectionRef, newCat.id);
+      
+      await setDoc(catRef, newCat);
+    }
+    catch(error){
+      //console.log(error)
+    }
   }
 
   const showDetails = () => {
@@ -35,14 +59,14 @@ useEffect(() => {
     <>
       <AnimatePresence>
       {isShown &&
-        <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className={"fixed top-28 flex w-min h-full flex-col justify-center align-start items-start z-10 fixed filter-blur-0"}>
+        <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className={"fixed top-28 flex w-min h-full flex-col justify-center align-start items-start z-10 filter-blur-0"}>
           <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full" ref={catDetails}>
             <CatCardClicked cat={props.cat} func={hideDetails}/>
           </div>
         </motion.div>}
       </AnimatePresence>
       <AnimatePresence>
-        <motion.div initial={{transform: 'scale(0)'}} animate={{transform: 'scale(1)'}} exit={{transform: 'scale(0)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary border-4 border-secondary-white rounded-lg transition-all duration-200 hover:scale-110">
+        <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.25)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary border-4 border-secondary-white rounded-lg">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
           {(props.cat.breeds[0]!=null || props.cat.breeds[0]!=undefined) ?
             <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
