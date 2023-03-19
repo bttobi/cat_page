@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import {motion} from 'framer-motion';
 import { auth } from '../../firebase.js';
-import { Link } from '@tanstack/react-router';
+import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 

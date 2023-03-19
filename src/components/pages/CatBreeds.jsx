@@ -88,7 +88,7 @@ const CatBreeds = () => {
               <div className="cat-origin-details p-2 font-bold">Origin: <span>{breedDescription.origin}</span></div>
               <div className="cat-lifespan-details p-2 font-bold">Life Span:  <span>{breedDescription.life_span}</span></div>
               <div className="cat-temperament-details p-2 font-bold">Temperament: <span>{breedDescription.temperament}</span></div>
-              <div className="cat-wikipedia-details p-2 font-bold text-center"><a href={breedDescription.wikipedia_url} target="_blank" rel="noreferrer">More details here</a></div>
+              <div className="cat-wikipedia-details p-2 font-bold text-center underline"><a href={breedDescription.wikipedia_url} target="_blank" rel="noreferrer">More details here</a></div>
               <button className="btn btn-sm text-article bg-primary text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mb-2" onClick={()=>{setShowDetails(false)}}>hide details</button>
             </motion.div>}
         </AnimatePresence>

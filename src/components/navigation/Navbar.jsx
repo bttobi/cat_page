@@ -1,4 +1,4 @@
-import { Link } from '@tanstack/react-router';
+import { Link } from 'react-router-dom';
 import { auth } from '../../firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
 import { useState } from 'react';

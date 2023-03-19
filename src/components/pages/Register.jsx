@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Link } from '@tanstack/react-router'
+import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase.js';
