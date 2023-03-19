@@ -44,9 +44,10 @@ useEffect(() => {
       const catRef = doc(collectionRef, newCat.id);
       
       await setDoc(catRef, newCat);
+      console.log("added cat")
     }
     catch(error){
-      //console.log(error)
+      console.log(error)
     }
   }
 
