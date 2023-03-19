@@ -35,4 +35,8 @@ code {
     monospace;
 }
 
+.active {
+  color: #2a303c;
+}
+
 
