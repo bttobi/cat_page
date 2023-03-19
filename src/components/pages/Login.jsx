@@ -1,4 +1,4 @@
-import { router, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { auth } from '../../firebase.js';
 import { useState, useRef, useEffect } from 'react';
@@ -11,6 +11,7 @@ const Login = () => {
   const [success, setSuccess] = useState(false);
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
+  const navigate = useNavigate();
   
 
   const login = async() => {
@@ -18,7 +19,7 @@ const Login = () => {
       const user = await signInWithEmailAndPassword(auth, email, password);
       if(user!==null && user!==undefined){ 
         setSuccess(true);
-       // router.navigate({ to: '/register'});
+        setTimeout(()=>{navigate('/');}, 2000);
       }
 
     }
