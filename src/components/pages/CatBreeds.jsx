@@ -92,7 +92,7 @@ const CatBreeds = () => {
               <button className="btn btn-sm text-article bg-primary text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mb-2" onClick={()=>{setShowDetails(false)}}>hide details</button>
             </motion.div>}
         </AnimatePresence>
-        <div className="cat-cards-wrapper relative w-full h-full flex flex-row flex-wrap items-start justify-center">
+        <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-start content-start justify-center">
           {(!query.isFetching) && query.data.map(el => {return <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>})}
           {(query.isFetching) &&
             <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
