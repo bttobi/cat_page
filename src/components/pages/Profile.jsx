@@ -1,13 +1,14 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import {motion} from 'framer-motion';
-import { auth } from '../../firebase.js';
+import { UserContext } from '../../App';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
 import { onAuthStateChanged } from 'firebase/auth';
 
 const Profile = () => {
   const [user, setUser] = useState({});
+  const auth = useContext(UserContext);
 
   const logOut = async () => {
     await signOut(auth);
