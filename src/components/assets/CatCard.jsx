@@ -78,8 +78,6 @@ useEffect(() => {
           </div>
         </motion.div>
         </>}
-        </AnimatePresence>
-        <AnimatePresence>
         {successDb &&
         <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="absolute w-64 alert alert-success shadow-lg text-center z-30">
           <div>
@@ -87,14 +85,14 @@ useEffect(() => {
             <span>Added to favourites!</span>
           </div>
         </motion.div>}
-        </AnimatePresence>
-        <AnimatePresence>
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className={"fixed top-28 flex w-min h-full flex-col justify-center align-start items-start z-10 filter-blur-0"}>
           <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full" ref={catDetails}>
             <CatCardClicked cat={props.cat} func={hideDetails}/>
           </div>
         </motion.div>}
+        </AnimatePresence>
+        <AnimatePresence>
         <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.25)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary border-4 border-secondary-white rounded-lg">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
           {(props.cat.breeds[0]!=null || props.cat.breeds[0]!=undefined) ?
