@@ -1,4 +1,5 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useContext } from 'react'
+import { UserContext } from '../../App';
 import CatCardClicked from './CatCardClicked';
 import { motion, AnimatePresence } from 'framer-motion';
 import { collection, doc, setDoc } from 'firebase/firestore';
@@ -8,6 +9,9 @@ import { v4 as uuidv4 } from 'uuid';
 const CatCard = (props) => {
   const catDetails = useRef();
   const [isShown, setIsShown] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [successDb, setSuccessDb] = useState(false);
+  const auth = useContext(UserContext);
   const collectionRef = collection(db, 'favourites');
 
 
@@ -26,8 +30,12 @@ useEffect(() => {
   }
 
   const addToFavourites = async () => {
+    if(auth.currentUser.email === null || auth.currentUser.email === undefined){
+      setIsLoggedIn(false);
+      setTimeout(()=>{setIsLoggedIn(true)}, 2000);
+      return;
+    }
     try{
-
       const hasBreed = (props.cat.breeds[0]!==undefined ||  props.cat.breeds[0]!==null) ? props.cat.breeds[0] : "";
       const newCat = 
       {
@@ -44,7 +52,9 @@ useEffect(() => {
       const catRef = doc(collectionRef, newCat.id);
       
       await setDoc(catRef, newCat);
-      console.log("added cat")
+
+      setSuccessDb(true);
+      setTimeout(()=>{setSuccessDb(false)}, 2000);
     }
     catch(error){
       console.log(error)
@@ -59,14 +69,32 @@ useEffect(() => {
   return (
     <>
       <AnimatePresence>
+      {!isLoggedIn && <>
+        <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>
+        <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="absolute w-64 alert alert-warning shadow-lg z-30">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+            <span>You must log in in order to add cats to favourites!</span>
+          </div>
+        </motion.div>
+        </>}
+        </AnimatePresence>
+        <AnimatePresence>
+        {successDb &&
+        <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="absolute w-64 alert alert-success shadow-lg text-center z-30">
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span>Added to favourites!</span>
+          </div>
+        </motion.div>}
+        </AnimatePresence>
+        <AnimatePresence>
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className={"fixed top-28 flex w-min h-full flex-col justify-center align-start items-start z-10 filter-blur-0"}>
           <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full" ref={catDetails}>
             <CatCardClicked cat={props.cat} func={hideDetails}/>
           </div>
         </motion.div>}
-      </AnimatePresence>
-      <AnimatePresence>
         <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.25)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary border-4 border-secondary-white rounded-lg">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
           {(props.cat.breeds[0]!=null || props.cat.breeds[0]!=undefined) ?
