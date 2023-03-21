@@ -12,7 +12,6 @@ const CatCard = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [successDb, setSuccessDb] = useState(false);
   const auth = useContext(UserContext);
-  const collectionRef = collection(db, 'favourites');
 
   const hideDetails = (e, clicked) => {
     if(catDetails.current != null && (!catDetails.current.contains(e.target) || clicked)){
@@ -22,11 +21,12 @@ const CatCard = (props) => {
   }
 
   const addToFavourites = async () => {
-    if(auth.currentUser.email === null || auth.currentUser.email === undefined){
+    if(auth.currentUser?.email === null || auth.currentUser?.email === undefined){
       setIsLoggedIn(false);
       setTimeout(()=>{setIsLoggedIn(true)}, 2000);
       return;
     }
+    
     try{
       const hasBreed = (props.cat.breeds[0]!==undefined ||  props.cat.breeds[0]!==null) ? props.cat.breeds[0] : "";
       const newCat = 
@@ -41,9 +41,10 @@ const CatCard = (props) => {
         life_span: "test",
         wiki_link: "test"
       };
-      const catRef = doc(collectionRef, auth.currentUser.email);
-      
-      await setDoc(catRef, newCat);
+
+      const collectionRef = collection(db, auth.currentUser.email);
+      const documentRef = doc(collectionRef, uuidv4());
+      await setDoc(documentRef, newCat);
 
       setSuccessDb(true);
       setTimeout(()=>{setSuccessDb(false)}, 2000);
@@ -94,13 +95,13 @@ const CatCard = (props) => {
         <AnimatePresence>
         <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.25)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary border-4 border-secondary-white rounded-lg">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
-          {(props.cat.breeds[0]!==null || props.cat.breeds[0]!==undefined) ?
+          {(props.cat.breeds[0]!=null || props.cat.breeds[0]!=undefined) ?
             <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
               <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">{props.cat.breeds[0].name}</p>
             </div>
             :
             <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
-              <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">{"Cute Cat"}</p>
+              <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">Cute Cat</p>
             </div>
           }
             <button className="align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={() => {addToFavourites()}}>❤️</button>
