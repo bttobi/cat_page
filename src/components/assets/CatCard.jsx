@@ -14,14 +14,6 @@ const CatCard = (props) => {
   const auth = useContext(UserContext);
   const collectionRef = collection(db, 'favourites');
 
-
-useEffect(() => {
-  document.addEventListener("click", hideDetails, true);
-  return () => {
-    document.removeEventListener("click", hideDetails, true);
-  }
-  }, []);
-
   const hideDetails = (e, clicked) => {
     if(catDetails.current != null && (!catDetails.current.contains(e.target) || clicked)){
       setIsShown(false);
@@ -44,12 +36,12 @@ useEffect(() => {
         image: props.cat.url,
         origin: "test",
         temperament: "test",
-        user_email: "test@mail.com",
+        user_email: auth.currentUser.email,
         weight: "test",
         life_span: "test",
         wiki_link: "test"
       };
-      const catRef = doc(collectionRef, newCat.id);
+      const catRef = doc(collectionRef, auth.currentUser.email);
       
       await setDoc(catRef, newCat);
 
@@ -65,6 +57,13 @@ useEffect(() => {
     setIsShown(true);
     props.showClicked(true);
   }
+
+  useEffect(() => {
+    document.addEventListener("click", hideDetails, true);
+    return () => {
+      document.removeEventListener("click", hideDetails, true);
+    }
+  }, []);
 
   return (
     <>
@@ -95,7 +94,7 @@ useEffect(() => {
         <AnimatePresence>
         <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.25)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary border-4 border-secondary-white rounded-lg">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
-          {(props.cat.breeds[0]!=null || props.cat.breeds[0]!=undefined) ?
+          {(props.cat.breeds[0]!==null || props.cat.breeds[0]!==undefined) ?
             <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
               <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">{props.cat.breeds[0].name}</p>
             </div>
