@@ -31,12 +31,10 @@ const CatCard = (props) => {
       const hasBreed = (props.cat.breeds[0]!==undefined ||  props.cat.breeds[0]!==null) ? props.cat.breeds[0] : "";
       const newCat = 
       {
-        id: uuidv4(),
-        breed: "a",
+        breed: "kotek",
         image: props.cat.url,
         origin: "test",
         temperament: "test",
-        user_email: auth.currentUser.email,
         weight: "test",
         life_span: "test",
         wiki_link: "test"

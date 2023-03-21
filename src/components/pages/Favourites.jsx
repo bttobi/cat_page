@@ -20,7 +20,7 @@ const Favourites = () => {
   };
 
   const getFavs = async () =>{
-    if(auth.currentUser.email===null || auth.currentUser.email===undefined){
+    if(auth.currentUser?.email===null || auth.currentUser?.email===undefined){
       return;
     }
     try{

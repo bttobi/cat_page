@@ -93,7 +93,7 @@ const CatBreeds = () => {
             </motion.div>}
         </AnimatePresence>
         <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-start content-start justify-center">
-          {(!query.isFetching) && query.data.map(el => {return <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>})}
+          {(!query.isFetching) && query.data.map(el => {return <CatCard showClicked={getShowClicked} cat={el} key={uuidv4()}/>})}
           {(query.isFetching) &&
             <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
               <LoadingIcons.Hearts width="16rem" speed="3"/>
