@@ -1,15 +1,10 @@
 import { NavLink } from 'react-router-dom';
-import { onAuthStateChanged } from 'firebase/auth';
 import { useState, useContext } from 'react';
 import { UserContext } from '../../App';
 
 const Navbar = () => {
   const [user, setUser] = useState({});
   const auth = useContext(UserContext);
-  
-  onAuthStateChanged(auth, (currentUser) =>{
-    setUser(currentUser);
-  });
 
   return (
     <nav className="navbar w-full h-16 p-0 fixed z-20 flex justify-center items-center bg-primary text-secondary-white font-header text-xl">
