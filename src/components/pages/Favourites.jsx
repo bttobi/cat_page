@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import db from '../../firebase';
-import { collection, doc, getDocs } from 'firebase/firestore';
+import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../../App';
 import CatCard from '../assets/CatCard';
