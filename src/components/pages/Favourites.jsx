@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import db from '../../firebase';
-import { collection, doc, getDoc } from 'firebase/firestore';
+import { collection, doc, getDocs } from 'firebase/firestore';
 import { useEffect, useContext, useState } from 'react';
 import { UserContext } from '../../App';
 import CatCard from '../assets/CatCard';
@@ -8,11 +8,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 const Favourites = () => {
   const auth = useContext(UserContext);
-  const [cat, setCat] = useState({breeds: [{name: "Abyssian"}], 
-  id: 'Kq8__jmkT', 
-  url: 'https://cdn2.thecatapi.com/images/Kq8__jmkT.jpg', 
-  width: 1527, 
-  height: 1286});
+  const [cats, setCats] = useState([]); 
   const [showClicked, setShowClicked] = useState(false);
 
   const getShowClicked = (isClicked)=>{
@@ -23,19 +19,17 @@ const Favourites = () => {
     if(auth.currentUser?.email===null || auth.currentUser?.email===undefined){
       return;
     }
+    
     try{
 
-    const collectionRef = doc(db, 'favourites', auth.currentUser.email);
-    const docSnap = await getDoc(collectionRef);
-    console.log("Document data:", docSnap.data());
-    setCat({
-        breeds: [{name: "Abyssian"}], 
-        id: 'Kq8__jmkT', 
-        url: 'https://cdn2.thecatapi.com/images/Kq8__jmkT.jpg', 
-        width: 1527, 
-        height: 1286
-      });
+    const collectionRef =  collection(db, auth.currentUser.email);
+    const listOfCats = await getDocs(collectionRef);
+
+    const toAdd = [];
+    listOfCats.forEach(favCat => toAdd.push(favCat.data()));
+    setCats(toAdd);
     }
+
     catch(error){
       console.log(error)
     }
@@ -45,12 +39,17 @@ const Favourites = () => {
     getFavs();
   },[]);
 
+  console.log(cats)
 
   return (
-    <motion.div onClick={getFavs}initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="font-article text-white w-full h-full mt-16">
-      {auth?.currentUser?.email && <CatCard showClicked={getShowClicked} cat={cat} key={uuidv4()}/>}
+    <motion.div onClick={getFavs}initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="font-article flex flex-row text-white w-full h-full mt-16">
+      {auth?.currentUser?.email && 
+        cats.map(el => 
+          <CatCard showClicked={getShowClicked} cat={el} key={uuidv4()}/>
+        )
+      }
     </motion.div>
   )
 }
 
-export default Favourites
+export default Favourites;
