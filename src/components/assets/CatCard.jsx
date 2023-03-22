@@ -41,7 +41,7 @@ const CatCard = (props) => {
       };
 
       const collectionRef = collection(db, auth.currentUser.email);
-      const documentRef = doc(collectionRef, uuidv4());
+      const documentRef = doc(collectionRef, newCat.url.replace('https://cdn2.thecatapi.com/images/', ''));
       await setDoc(documentRef, newCat);
 
       setSuccessDb(true);
