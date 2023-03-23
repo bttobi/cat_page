@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
-import Search from '../functions/Search';
+import Search from '../interactive-elements/Search';
 
 const CatBreeds = () => {
   const [numberOfCats, setNumberOfCats] = useState(1);

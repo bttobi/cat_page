@@ -2,9 +2,7 @@ import { useState, useRef, useEffect, useContext } from 'react'
 import { UserContext } from '../../App';
 import CatCardClicked from './CatCardClicked';
 import { motion, AnimatePresence } from 'framer-motion';
-import { collection, doc, setDoc } from 'firebase/firestore';
-import db from '../../firebase';
-import { v4 as uuidv4 } from 'uuid';
+import addToFav from '../functions/addToFav';
 
 const CatCard = (props) => {
   const catDetails = useRef();
@@ -28,25 +26,11 @@ const CatCard = (props) => {
     }
     
     try{
-      const hasBreed = (props.cat.breeds[0]!==undefined ||  props.cat.breeds[0]!==null) ? false : true;
-      const newCat = 
-      {
-        breed_name: hasBreed ? props.cat.breeds[0].name : "Cute Cat",
-        url: props.cat.url,
-        origin: hasBreed ? props.cat.breeds[0].origin : "",
-        temperament: hasBreed ? props.cat.breeds[0].temperament : "",
-        weight: hasBreed ? props.cat.breeds[0].weight.metric : "",
-        life_span: hasBreed ? props.cat.breeds[0].life_span : "",
-        wikipedia_url: hasBreed ? props.cat.breeds[0].wikipedia_url : ""
-      };
-
-      const collectionRef = collection(db, auth.currentUser.email);
-      const documentRef = doc(collectionRef, newCat.url.replace('https://cdn2.thecatapi.com/images/', ''));
-      await setDoc(documentRef, newCat);
-
+      addToFav(props, auth);
       setSuccessDb(true);
       setTimeout(()=>{setSuccessDb(false)}, 2000);
     }
+    
     catch(error){
       console.log(error)
     }
@@ -63,8 +47,6 @@ const CatCard = (props) => {
       document.removeEventListener("click", hideDetails, true);
     }
   }, []);
-
-  console.log(props.cat)
 
   return (
     <>
@@ -87,7 +69,7 @@ const CatCard = (props) => {
         </motion.div>}
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className={"fixed top-28 flex w-min h-full flex-col justify-center align-start items-start z-10 filter-blur-0"}>
-          <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full" ref={catDetails}>
+          <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full z-" ref={catDetails}>
             <CatCardClicked cat={props.cat} func={hideDetails}/>
           </div>
         </motion.div>}
