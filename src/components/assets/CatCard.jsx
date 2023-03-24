@@ -44,7 +44,6 @@ const CatCard = (props) => {
   }
 
   useEffect(() => {
-    console.log(props.cat)
     document.addEventListener("click", hideDetails, true);
     return () => {
       document.removeEventListener("click", hideDetails, true);

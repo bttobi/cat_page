@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../../App';
 import CatCard from '../assets/CatCard';
 import useFavourites from '../hooks/useFavourites';
@@ -12,6 +12,10 @@ const Favourites = () => {
   const getShowClicked = (isClicked)=>{
     setShowClicked(isClicked);
   };
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[]);
 
   return (
     <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="favourites-wrapper w-full h-full m-none mt-16 flex flex-col justify-center items-center font-article text-white">
