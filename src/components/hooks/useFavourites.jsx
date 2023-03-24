@@ -33,4 +33,4 @@ const useFavourites = () => {
   return cats;
 }
 
-export default useFavourites
+export default useFavourites;

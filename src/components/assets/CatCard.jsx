@@ -4,6 +4,7 @@ import CatCardClicked from './CatCardClicked';
 import { motion, AnimatePresence } from 'framer-motion';
 import addToFav from '../functions/addToFav';
 import NotLoggedIn from '../alerts/NotLoggedIn';
+import SuccessFav from '../alerts/SuccessFav';
 
 const CatCard = (props) => {
   const catDetails = useRef();
@@ -43,6 +44,7 @@ const CatCard = (props) => {
   }
 
   useEffect(() => {
+    console.log(props.cat)
     document.addEventListener("click", hideDetails, true);
     return () => {
       document.removeEventListener("click", hideDetails, true);
@@ -65,7 +67,7 @@ const CatCard = (props) => {
         <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.25)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary border-4 border-secondary-white rounded-lg">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
             <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
-              <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">{props.cat.breed_name || "Cute Cat"}</p>
+              <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">{props.cat?.breeds[0]?.name || "Cute Cat"}</p>
             </div>
             <button className="align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={() => {addToFavourites()}}>❤️</button>
           </div>

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../../App';
 import CatCard from '../assets/CatCard';
 import useFavourites from '../hooks/useFavourites';
