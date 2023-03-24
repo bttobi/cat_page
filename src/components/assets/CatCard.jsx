@@ -1,8 +1,9 @@
-import { useState, useRef, useEffect, useContext } from 'react'
+import { useState, useRef, useEffect, useContext, useMemo } from 'react';
 import { UserContext } from '../../App';
 import CatCardClicked from './CatCardClicked';
 import { motion, AnimatePresence } from 'framer-motion';
 import addToFav from '../functions/addToFav';
+import NotLoggedIn from '../alerts/NotLoggedIn';
 
 const CatCard = (props) => {
   const catDetails = useRef();
@@ -10,13 +11,6 @@ const CatCard = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [successDb, setSuccessDb] = useState(false);
   const auth = useContext(UserContext);
-
-  const hideDetails = (e, clicked) => {
-    if(catDetails.current != null && (!catDetails.current.contains(e.target) || clicked)){
-      setIsShown(false);
-      props.showClicked(false);
-    }
-  }
 
   const addToFavourites = async () => {
     if(auth.currentUser?.email === null || auth.currentUser?.email === undefined){
@@ -41,7 +35,15 @@ const CatCard = (props) => {
     props.showClicked(true);
   }
 
+  const hideDetails = (e, clicked) => {
+    if(catDetails.current != null && (!catDetails.current.contains(e.target) || clicked)){
+      setIsShown(false);
+      props.showClicked(false);
+    }
+  }
+
   useEffect(() => {
+    console.log(isShown)
     document.addEventListener("click", hideDetails, true);
     return () => {
       document.removeEventListener("click", hideDetails, true);
@@ -51,22 +53,8 @@ const CatCard = (props) => {
   return (
     <>
       <AnimatePresence>
-      {!isLoggedIn && <>
-        <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>
-        <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="absolute w-64 alert alert-warning shadow-lg z-30">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
-            <span>You must log in in order to add cats to favourites!</span>
-          </div>
-        </motion.div>
-        </>}
-        {successDb &&
-        <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="absolute w-64 alert alert-success shadow-lg text-center z-30">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-            <span>Added to favourites!</span>
-          </div>
-        </motion.div>}
+      {!isLoggedIn && <NotLoggedIn/>}
+      {successDb && <SuccessFav/>}
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className={"fixed top-28 flex w-min h-full flex-col justify-center align-start items-start z-10 filter-blur-0"}>
           <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full z-" ref={catDetails}>

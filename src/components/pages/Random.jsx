@@ -64,8 +64,8 @@ const Random = () => {
       </AnimatePresence>
       <p className="scroll-desc mt-16"> SCROLL DOWN TO LOAD CATS!</p>
       <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-start align-start content-start justify-center">
-        {dataToDisplay.map(el => {
-          return <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>})}
+        {dataToDisplay.map(el => 
+          <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>)}
       </div>
       {(query.isFetching) &&
         <div className="fixed rounded-lg loading-wrapper m-16 flex flex-col self-center items-center justify-center">

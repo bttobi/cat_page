@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import db from '../../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { UserContext } from '../../App';
@@ -28,7 +28,7 @@ const useFavourites = () => {
   
   useEffect(()=>{
     getFavCats();
-  },[]);
+  }, []);
 
   return cats;
 }
