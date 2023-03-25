@@ -18,7 +18,7 @@ const useBreeds = (catBreedId) => {
 
   useEffect(()=>{
     query.refetch();
-  },[catBreedId])
+  },[catBreedId]);
 
   if(query.isError) console.error(query.error.message);
 

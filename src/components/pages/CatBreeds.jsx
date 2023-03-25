@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, React } from 'react';
+import { useState, useEffect, React } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
