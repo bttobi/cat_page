@@ -5,10 +5,11 @@ import { UserContext } from '../../App';
 
 const useFavourites = () => {
   const auth = useContext(UserContext);
+  const [isFetched, setIsFetched] = useState(false);
   const [cats, setCats] = useState([]);
 
   const getFavCats = async () => {
-    if(auth.currentUser?.email===null || auth.currentUser?.email===undefined){
+    if(auth.currentUser?.email==null || auth.currentUser?.email==undefined){
       return;
     }
     
@@ -19,6 +20,7 @@ const useFavourites = () => {
       const toAdd = [];
       listOfCats.forEach(favCat => toAdd.push(favCat.data()));
       setCats(toAdd);
+      setIsFetched(true);
     }
 
     catch(error){
@@ -30,7 +32,7 @@ const useFavourites = () => {
     getFavCats();
   }, []);
 
-  return cats;
+  return [cats, isFetched];
 }
 
 export default useFavourites;
