@@ -11,7 +11,7 @@ const Random = () => {
   const [showClicked, setShowClicked] = useState(false);
 
   const fetchData = async () => {
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=14&api_key=${process.env.REACT_APP_API_KEY}`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=14&api_key=${import.meta.env.VITE_API_KEY}`;
       const response = await fetch(URL);
       return response.json();
   }

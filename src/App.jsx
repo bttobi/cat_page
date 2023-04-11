@@ -1,3 +1,4 @@
+import './index.css'
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { createContext } from 'react';
 import { auth } from './firebase.js';

@@ -3,7 +3,7 @@ import { useQuery } from 'react-query';
 
 const useBreeds = (catBreedId) => {
   const fetchData = async () => {
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=20&has_breeds=1&breed_id=${catBreedId}&api_key=${process.env.REACT_APP_API_KEY}`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=20&has_breeds=1&breed_id=${catBreedId}&api_key=${import.meta.env.VITE_API_KEY}`;
       const response = await fetch(URL);
       return response.json();
   }
