@@ -16,7 +16,7 @@ const Navbar = () => {
       <ul className="w-full h-full flex flex-row justify-between items-center">
         <li className="flex flex-row p-3 rounded-md transition-all duration-300 hover:rotate-12">
           <NavLink to="/" className="flex flex-row justify-center items-center">
-            <img className="bg-primary" src="/img/paw.png" height="40px" width="40px" alt="home/random page icon with link"/>
+            <img className="bg-primary" src="./img/paw.png" height="40px" width="40px" alt="home/random page icon with link"/>
           </NavLink>
         </li>
         <li className="w-full flex justify-center align-center">
@@ -26,7 +26,7 @@ const Navbar = () => {
           <NavLink to="/about" className="about-link bg-primary p-2 transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none mx-1">About</NavLink>
         </li>
         {user?.email ?  
-        <NavLink to="/profile" className="profile-link bg-primary transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none"><li className={" flex justify-center items-center"} style={{padding: "3px"}}><img src="/img/cat_profile.png" height="40px" width="40px" alt="profile link/image"/></li></NavLink> 
+        <NavLink to="/profile" className="profile-link bg-primary transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none"><li className={" flex justify-center items-center"} style={{padding: "3px"}}><img src="./img/cat_profile.png" height="40px" width="40px" alt="profile link/image"/></li></NavLink> 
         : <NavLink to="/login" className="login-link bg-primary transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none"><li className={" flex justify-center items-center"} style={{width:"40px", height:"46px", marginRight: "6px"}}><i className="gg-log-in" alt="login picture"/></li></NavLink>
         }
       </ul>
