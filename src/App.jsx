@@ -20,7 +20,7 @@ function App() {
 
   return (
     <UserContext.Provider value={auth}>
-      <BrowserRouter>
+      <BrowserRouter basename='/cat_page'>
         <QueryClientProvider client={queryClient}>
             <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="App w-full h-full flex flex-col items-center relative">
               <Navbar />
