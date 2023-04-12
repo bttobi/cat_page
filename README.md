@@ -1,4 +1,5 @@
 
 To do:
 - Implement removing favourite cats,
-- UI Overhaul.
+- UI Overhaul,
+- Implement some sort of testing.
