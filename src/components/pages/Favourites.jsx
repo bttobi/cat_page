@@ -20,7 +20,7 @@ const Favourites = () => {
   },[]);
 
   return (
-    <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="favourites-wrapper w-full h-full m-none mt-16 flex flex-col justify-center items-center font-article text-white">
+    <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="favourites-wrapper w-full h-full m-none mt-16 flex flex-col justify-center items-center font-article text-white">
       {(auth.currentUser?.email!=null || auth.currentUser?.email!=undefined) ? 
       <>
       <AnimatePresence>

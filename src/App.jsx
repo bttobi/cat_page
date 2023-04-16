@@ -22,20 +22,22 @@ function App() {
     <UserContext.Provider value={auth}>
       <BrowserRouter basename='/cat_page'>
         <QueryClientProvider client={queryClient}>
+          <AnimatePresence mode="wait">
             <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="App w-full h-full flex flex-col items-center relative">
               <Navbar />
-              <AnimatePresence>
-                <Routes>
-                  <Route path='/' element={<Random/>}/>
-                  <Route path='cat_breeds' element={<CatBreeds/>}/>
-                  <Route path='favourites' element={<Favourites/>}/>
-                  <Route path='about' element={<About/>}/>
-                  <Route path='login' element={<Login/>}/>
-                  <Route path='register' element={<Register/>}/>
-                  <Route path='profile' element={<Profile/>}/>
-                </Routes>
+                <AnimatePresence mode="wait">
+                  <Routes>
+                    <Route path='/' element={<Random/>}/>
+                    <Route path='cat_breeds' element={<CatBreeds/>}/>
+                    <Route path='favourites' element={<Favourites/>}/>
+                    <Route path='about' element={<About/>}/>
+                    <Route path='login' element={<Login/>}/>
+                    <Route path='register' element={<Register/>}/>
+                    <Route path='profile' element={<Profile/>}/>
+                  </Routes>
               </AnimatePresence>
             </motion.div>
+          </AnimatePresence>
         </QueryClientProvider>
       </BrowserRouter>
     </UserContext.Provider>
