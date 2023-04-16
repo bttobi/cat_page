@@ -1,7 +1,7 @@
 const CatCardClicked = (props) => {
   return (
     <div className="cat-details z-20 m-0 fixed top-0 flex flex-col rounded-lg transition-all duration-300 opacity-100" style={{minWidth:"90vw", maxWidth: "90vw"}}>
-      <div className="flex flex-col flex-grow cat-description-wrapper p-2 bg-primary rounded-lg shadow-lg shadow-black justify-center align-center items-center"  style={{minHeight: "80vh", background: "rgba(0, 0, 0, .65) " + `url(${props.cat.url})`, backgroundSize: "cover", backgroundRepeat: "no-repeat", backgroundBlendMode: "darken"}}>
+      <div className="flex flex-col flex-grow cat-description-wrapper p-2 bg-primary rounded-lg shadow-lg shadow-black justify-center align-center items-center"  style={{minHeight: "80vh", background: "rgba(0, 0, 0, .65) " + `url(${props.cat.url})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundBlendMode: "darken"}}>
         <button className="close-button btn btn-sm btn-error btn-square bg-primary right-0 top-0 mt-1 mr-1 btn-outline absolute transition-all duration-150 hover:scale-110" onClick={(e, isShown) => {props.func(e, true);}}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
