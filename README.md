@@ -1,4 +1,4 @@
-DEMO LINK: https://bttobi.github.io/cat_page/
+DEMO LINK: https://bttobi.github.io/cat_page/ <br/>
 To do:
 - Implement removing favourite cats,
 - UI Overhaul,
