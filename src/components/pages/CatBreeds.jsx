@@ -30,7 +30,7 @@ const CatBreeds = () => {
         <Search getData={getSearchDetailsOfCats} searchQuery={cats}/>
         <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-start content-start justify-center">
           {(isFetching) ?
-            <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
+            <div className="fixed top-0 bottom-0 loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
               <LoadingIcons.Hearts width="16rem" speed="3"/>
               <span className="loading-text text-base font-bold font-article text-white">Loading...</span>
             </div>: 
