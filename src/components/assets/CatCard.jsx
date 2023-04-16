@@ -53,27 +53,28 @@ const CatCard = (props) => {
   return (
     <>
       <AnimatePresence>
-      {!isLoggedIn && <NotLoggedIn/>}
-      {successDb && <SuccessFav/>}
-      {isShown &&
-        <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className={"fixed top-28 flex w-min h-full flex-col justify-center align-start items-start z-10 filter-blur-0"}>
-          <div className="cat-clicked-card-wrapper fixed flex justify-center align-start items-start w-full h-full z-" ref={catDetails}>
-            <CatCardClicked cat={props.cat} func={hideDetails}/>
-          </div>
-        </motion.div>}
-        </AnimatePresence>
-        <AnimatePresence>
-        <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.25)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary border-4 border-secondary-white rounded-lg">
+        <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.15)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary rounded-lg shadow-lg shadow-black">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
             <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
               <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">{props.cat?.breeds[0]?.name || "Cute Cat"}</p>
             </div>
-            <button className="align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={() => {addToFavourites()}}>❤️</button>
+            <button className="align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={addToFavourites}>❤️</button>
           </div>
-            <div className="px-2 pb-2 flex flex-col justify-center items-center cursor-pointer" onClick={showDetails}>
-              <div className="w-min h-min m-0 rounded-lg" style= {{width: '12rem', height: '10rem', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}} alt="cat"></div>           
+            <div className="flex flex-col justify-center items-center cursor-pointer" onClick={showDetails}>
+              <div className="w-min h-min m-0 rounded-lg" style= {{minWidth: '12rem', minHeight: '12rem', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}} alt="cat"></div>           
             </div>
         </motion.div>
+        </AnimatePresence>
+      <AnimatePresence>
+      {/* DISPLAY NOTIFICATIONS */}
+      {isShown &&
+        <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className="fixed top-28 flex flex-col justify-center align-center items-center z-10 filter-blur-0" ref={catDetails}>
+            <CatCardClicked cat={props.cat} func={hideDetails} addToFavFunc={addToFavourites}/>
+        </motion.div>}
+      </AnimatePresence>
+      <AnimatePresence>
+        {!isLoggedIn && <NotLoggedIn/>}
+        {successDb && <SuccessFav/>}
       </AnimatePresence>
     </>
   )
