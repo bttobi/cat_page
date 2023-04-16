@@ -8,15 +8,15 @@ module.exports = {
     {
       colors: 
       {
-        'bg-primary': '#74bde0',
-        'primary': '#f8bc9a',
-        'secondary': '#f8d49a',
+        'bg-primary': '#159895',
+        'primary': '#1A5F7A',
+        'secondary': '#57C5B6',
         'secondary-white': '#fff',
-        'dark': '#fa9a9b'
+        'dark': '#002B5B'
       },
       fontFamily: 
       {
-        'header': ['"Patrick Hand"', 'cursive'],
+        'header': ['"Manrope"', 'sans-serif'],
         'article': ['"Roboto"', 'sans-serif']
       }
     },
