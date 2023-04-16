@@ -11,7 +11,7 @@
 <img align="top" padding="5px" width="80px" src="https://raw.githubusercontent.com/saadeghi/files/main/daisyui/logo-4.svg" /> <br/><br/>
 <img align="top" padding="5px" width="50px" src="https://reactrouter.com/_brand/react-router-stacked-color-inverted.png" /> React Router <br/><br/>
 <img align="top" padding="5px" width="30px" src="https://miro.medium.com/v2/resize:fit:1400/1*elhu-42TzQEdsFjKDbQhhA.png" /> React Query <br/><br/>
-<img align="top" padding="5px" width="30px" src="https://cdn.worldvectorlogo.com/logos/firebase-1.svg" /> Firebase <br/>
+<img align="top" padding="5px" width="20px" src="https://cdn.worldvectorlogo.com/logos/firebase-1.svg" /> Firebase <br/>
 
 #
 
