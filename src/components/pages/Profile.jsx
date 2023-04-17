@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import {motion} from 'framer-motion';
 import { UserContext } from '../../App';
 import { Link } from 'react-router-dom';
@@ -16,7 +16,11 @@ const Profile = () => {
 
   onAuthStateChanged(auth, (currentUser) =>{
   setUser(currentUser);
-});
+  });
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="font-article text-white w-full h-full mt-16">
