@@ -54,3 +54,10 @@ TO BE ADDED AFTER OVERHAUL AND TWEAKS
 - UI Overhaul,
 - Implement some sort of testing,
 - Moblie responsiveness (hamburger menu).
+
+#
+
+### 🐞 Known bugs:
+After page refresh on the custom front end route a 404 error appears.
+Need to change the hosting from Github Pages.
+
