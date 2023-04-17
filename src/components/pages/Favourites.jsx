@@ -5,11 +5,19 @@ import { UserContext } from '../../App';
 import CatCard from '../assets/CatCard';
 import useFavourites from '../hooks/useFavourites';
 import LoadingIcons from 'react-loading-icons';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Favourites = () => {
   const auth = useContext(UserContext);
   const [cats, isFetched] = useFavourites();
   const [showClicked, setShowClicked] = useState(false);
+  const [user, setUser] = useState({});
+  
+  if(!isFetched){ //if not yet fetched check if user is logged in
+    onAuthStateChanged(auth, (currentUser) =>{
+      setUser(currentUser);
+    });
+  }
 
   const getShowClicked = (isClicked)=>{
     setShowClicked(isClicked);
@@ -21,7 +29,7 @@ const Favourites = () => {
 
   return (
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="favourites-wrapper w-full h-full m-none mt-16 flex flex-col justify-center items-center font-article text-white">
-      {(auth.currentUser?.email!=null || auth.currentUser?.email!=undefined) ? 
+      {(user?.email!=null || user?.email!=undefined) ? 
       <>
       <AnimatePresence>
         {showClicked && <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
@@ -32,7 +40,9 @@ const Favourites = () => {
               <LoadingIcons.Hearts width="16rem" speed="3"/>
               <span className="loading-text text-base font-bold font-article text-white">Loading...</span>
             </div> : 
-            cats.map(el =>  <CatCard showClicked={getShowClicked} cat={el} key={el.url}/>)}
+              cats.length != 0 ? 
+              cats.map(el => <CatCard showClicked={getShowClicked} isFavourite={ true } cat={el} key={el.url}/>)
+              : <div className="not-loggedin-notification font-bold text-xl underline"><Link to="/">No favourite cats found... Add some to favourites!</Link></div>} 
         </div>
         </>
     :<div className="not-loggedin-notification font-bold text-xl underline"><Link to="/login">You need to log in to see the favourite cats!</Link></div>}
