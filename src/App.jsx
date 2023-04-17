@@ -20,14 +20,14 @@ function App() {
 
   return (
     <UserContext.Provider value={auth}>
-      <HashRouter basename="/cat_page">
+      <HashRouter>
         <QueryClientProvider client={queryClient}>
           <AnimatePresence mode="wait">
             <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="App w-full h-full flex flex-col items-center relative">
               <Navbar />
                 <AnimatePresence mode="wait">
                   <Routes>
-                    <Route path='/cat_page' element={<Random/>}/>
+                    <Route path='/' element={<Random/>}/>
                     <Route path='/cat_page/cat_breeds' element={<CatBreeds/>}/>
                     <Route path='/cat_page/favourites' element={<Favourites/>}/>
                     <Route path='/cat_page/about' element={<About/>}/>
