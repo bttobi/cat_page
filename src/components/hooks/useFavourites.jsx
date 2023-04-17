@@ -27,7 +27,11 @@ const useFavourites = () => {
       console.log(error)
     }
   }
-  
+
+  if(!isFetched){ //fetch until loaded
+    getFavCats();
+  }
+
   useEffect(()=>{
     getFavCats();
   }, []);
