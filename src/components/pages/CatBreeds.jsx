@@ -34,7 +34,7 @@ const CatBreeds = () => {
               <LoadingIcons.Hearts width="16rem" speed="3"/>
               <span className="loading-text text-base font-bold font-article text-white">Loading...</span>
             </div>: 
-            cats.map(el =>  <CatCard showClicked={getShowClicked} cat={el} key={el.url}/>)}
+            cats.map(el =>  <CatCard showClicked={getShowClicked} isFavourite={ false } cat={el} key={el.url}/>)}
         </div>
       </motion.div>
   )
