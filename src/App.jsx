@@ -4,7 +4,7 @@ import { createContext } from 'react';
 import { auth } from './firebase.js';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/navigation/Navbar';
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, HashRouter } from "react-router-dom";
 import CatBreeds from './components/pages/CatBreeds';
 import About from './components/pages/About';
 import Favourites from './components/pages/Favourites';
