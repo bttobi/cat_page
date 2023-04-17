@@ -68,7 +68,7 @@ const Register = () => {
         </div>
         <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={register}>Register</button>
       </div>
-      <div className="login-redirect text-center mt-10">Already have an account? <br/> Log in <button className="login-redirect-button underline text-center"><Link to="/login">here</Link></button></div>
+      <div className="login-redirect text-center mt-10">Already have an account? <br/> Log in <button className="login-redirect-button underline text-center"><Link to="/cat_page/login">here</Link></button></div>
     </motion.div>
   )
 }
