@@ -20,7 +20,7 @@ function App() {
 
   return (
     <UserContext.Provider value={auth}>
-      <BrowserRouter basename='/cat_page'>
+      <BrowserRouter basename='/'>
         <QueryClientProvider client={queryClient}>
           <AnimatePresence mode="wait">
             <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="App w-full h-full flex flex-col items-center relative">
@@ -34,6 +34,7 @@ function App() {
                     <Route path='login' element={<Login/>}/>
                     <Route path='register' element={<Register/>}/>
                     <Route path='profile' element={<Profile/>}/>
+                    <Route path={"*"} element={<Random />}/>
                   </Routes>
               </AnimatePresence>
             </motion.div>

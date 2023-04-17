@@ -7,4 +7,4 @@ const addTofav = async (props, auth) => {
       await setDoc(documentRef, props.cat);
 }
 
-export default addTofav
+export default addTofav;
