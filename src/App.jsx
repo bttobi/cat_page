@@ -20,7 +20,7 @@ function App() {
 
   return (
     <UserContext.Provider value={auth}>
-      <BrowserRouter basename="/cat_page">
+      <HashRouter>
         <QueryClientProvider client={queryClient}>
           <AnimatePresence mode="wait">
             <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="App w-full h-full flex flex-col items-center relative">
@@ -40,7 +40,7 @@ function App() {
             </motion.div>
           </AnimatePresence>
         </QueryClientProvider>
-      </BrowserRouter>
+      </HashRouter>
     </UserContext.Provider>
   );
 }
