@@ -4,7 +4,7 @@ import { createContext } from 'react';
 import { auth } from './firebase.js';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from './components/navigation/Navbar';
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, HashRouter } from "react-router-dom";
 import CatBreeds from './components/pages/CatBreeds';
 import About from './components/pages/About';
 import Favourites from './components/pages/Favourites';
@@ -20,7 +20,7 @@ function App() {
 
   return (
     <UserContext.Provider value={auth}>
-      <BrowserRouter basename='/'>
+      <HashRouter>
         <QueryClientProvider client={queryClient}>
           <AnimatePresence mode="wait">
             <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="App w-full h-full flex flex-col items-center relative">
@@ -40,7 +40,7 @@ function App() {
             </motion.div>
           </AnimatePresence>
         </QueryClientProvider>
-      </BrowserRouter>
+      </HashRouter>
     </UserContext.Provider>
   );
 }
