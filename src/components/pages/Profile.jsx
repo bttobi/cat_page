@@ -25,7 +25,7 @@ const Profile = () => {
   return (
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="font-article text-white w-full h-full mt-16">
       {user?.email}<br></br>
-      <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={logOut}><Link to="/cat_page/login">Sign out</Link></button>
+      <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={logOut}><Link to="/login">Sign out</Link></button>
     </motion.div>
   )
 }

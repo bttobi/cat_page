@@ -42,10 +42,10 @@ const Favourites = () => {
             </div> : 
               cats.length != 0 ? 
               cats.map(el => <CatCard showClicked={getShowClicked} isFavourite={ true } cat={el} key={el.url}/>)
-              : <div className="not-loggedin-notification font-bold text-xl underline"><Link to="/cat_page">No favourite cats found... Add some to favourites!</Link></div>} 
+              : <div className="not-loggedin-notification font-bold text-xl underline"><Link to="/">No favourite cats found... Add some to favourites!</Link></div>} 
         </div>
         </>
-    :<div className="not-loggedin-notification font-bold text-xl underline"><Link to="/cat_page/login">You need to log in to see the favourite cats!</Link></div>}
+    :<div className="not-loggedin-notification font-bold text-xl underline"><Link to="/login">You need to log in to see the favourite cats!</Link></div>}
     </motion.div>
   )
 }
