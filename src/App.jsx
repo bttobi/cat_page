@@ -27,7 +27,7 @@ function App() {
               <Navbar />
                 <AnimatePresence mode="wait">
                   <Routes>
-                    <Route path='/' element={<Random/>}/>
+                    <Route path='/cat_page' element={<Random/>}/>
                     <Route path='/cat_page/cat_breeds' element={<CatBreeds/>}/>
                     <Route path='/cat_page/favourites' element={<Favourites/>}/>
                     <Route path='/cat_page/about' element={<About/>}/>
