@@ -1,17 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-<<<<<<< Updated upstream
-=======
-import { NavLink } from 'react-router-dom';
->>>>>>> Stashed changes
 import { motion, AnimatePresence } from 'framer-motion';
 
 const HamburgerMenu = (props) => {
     const hamburgerRef = useRef(null);
     const [hamburgerIsActive, setHamburgerIsActive] = useState(true);
-<<<<<<< Updated upstream
-=======
-    console.log(props.children)
->>>>>>> Stashed changes
 
     return (
     <>

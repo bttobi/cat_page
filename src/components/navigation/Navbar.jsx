@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
-import { useState, useContext } from 'react';
-import { UserContext } from '../../App';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
+
+const buttonStyle = "btn bg-primary text-secondary-white text-lg border-0 p-3 rounded-md transition-all duration-300 hover:bg-bg-primary hover:bg-dark";
 
 const Navbar = () => {
   const [user, setUser] = useState({});
