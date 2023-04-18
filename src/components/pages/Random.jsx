@@ -11,7 +11,7 @@ const Random = () => {
   const [showClicked, setShowClicked] = useState(false);
 
   const fetchData = async () => {
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=14&api_key=${process.env.REACT_APP_API_KEY}`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=14&api_key=${import.meta.env.VITE_API_KEY}`;
       const response = await fetch(URL);
       return response.json();
   }
@@ -58,17 +58,17 @@ const Random = () => {
   if(query.isError) console.error(query.error.message);
 
   return (
-    <motion.div id="home" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="home-page w-full h-full m-none mt-16 flex flex-col justify-center items-center font-article text-white">
+    <motion.div id="home" initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="home-page w-full h-full m-none mt-16 flex flex-col justify-center items-center font-article text-white">
       <AnimatePresence>
         {showClicked && <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
       </AnimatePresence>
       <p className="scroll-desc mt-16"> SCROLL DOWN TO LOAD CATS!</p>
       <div className="cat-cards-wrapper w-full h-full flex flex-row flex-wrap items-start align-start content-start justify-center">
-        {dataToDisplay.map(el => {
-          return <CatCard showClicked={getShowClicked} cat={el} key={el.id}/>})}
+        {dataToDisplay.map((el, index) => 
+          <CatCard showClicked={getShowClicked} cat={el} isFavourite={ false } key={index}/>)}
       </div>
       {(query.isFetching) &&
-        <div className="fixed rounded-lg loading-wrapper m-16 flex flex-col self-center items-center justify-center">
+        <div className="fixed top-0 bottom-0 rounded-lg loading-wrapper m-16 flex flex-col self-center items-center justify-center">
           <LoadingIcons.Hearts width="16rem" speed="3"/>
           <span className="loading-text font-bold font-article text-white">Loading...</span>
         </div>

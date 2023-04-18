@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+# 🐱 Cat Page - https://bttobi.github.io/cat_page/
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 🧰 Technologies and tools used
+<img align="top" padding="5px" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" /> HTML5 <br/>         
+<img align="top" padding="5px" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" /> CSS3 <br/>  
+<img align="top" padding="5px" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" /> React.js <br/>  
+<img align="top" padding="5px" width="30px" src="https://camo.githubusercontent.com/61e102d7c605ff91efedb9d7e47c1c4a07cef59d3e1da202fd74f4772122ca4e/68747470733a2f2f766974656a732e6465762f6c6f676f2e737667" /> Vite <br/>
 
-## Available Scripts
+<img align="top" padding="5px" width="30px" src="https://pagepro.co/blog/wp-content/uploads/2020/03/framer-motion.png" /> Framer Motion <br/>  
+<img align="top" padding="5px" width="30px" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" /> Tailwind CSS <br/><br/>
+<img align="top" padding="5px" width="80px" src="https://raw.githubusercontent.com/saadeghi/files/main/daisyui/logo-4.svg" /> <br/><br/>
+<img align="top" padding="5px" width="50px" src="https://reactrouter.com/_brand/react-router-stacked-color-inverted.png" /> React Router <br/><br/>
+<img align="top" padding="5px" width="30px" src="https://miro.medium.com/v2/resize:fit:1400/1*elhu-42TzQEdsFjKDbQhhA.png" /> React Query <br/><br/>
+<img align="top" padding="5px" width="20px" src="https://cdn.worldvectorlogo.com/logos/firebase-1.svg" /> Firebase <br/>
 
-In the project directory, you can run:
+#
 
-### `npm start`
+### 🔧 Clone the repository
+In order to clone the project repository run: <br/>
+`git clone https://github.com/bttobi/cat_page.git`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 🔧 Install Node.js and npm
+Install from:
+`https://nodejs.org/en`
 
-### `npm test`
+#
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔧 How to install all dependencies and packages
+Run the following commands: <br/>
+`npm install`
 
-### `npm run build`
+#
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🔧In order to launch the project locally initialize project with Vite
+Run the following command:
+`npm run dev` for development environment. <br/>
+Application should be hosted in your local network automatically.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🎨 Desktop preview
+TO BE ADDED AFTER OVERHAUL AND TWEAKS
 
-### `npm run eject`
+### 🎨 Mobile preview
+TO BE ADDED AFTER OVERHAUL AND TWEAKS
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🎯 To do:
+- Implement removing favourite cats,
+- Style profile, login and register page,
+- UI Overhaul,
+- Implement some sort of testing,
+- Moblie responsiveness (hamburger menu).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

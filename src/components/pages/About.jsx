@@ -1,6 +1,11 @@
-import {motion} from 'framer-motion';
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 const About = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="flex flex-col font-article text-center text-white w-96 h-full mt-32">
       <article className="site-description">

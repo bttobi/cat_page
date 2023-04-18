@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase.js';
 import { onAuthStateChanged } from 'firebase/auth';
-import { useState, useContext } from 'react';
-import { UserContext } from '../../App';
+import { useState } from 'react';
+
+const buttonStyle= "btn bg-primary text-secondary-white text-lg border-0 p-3 rounded-md transition-all duration-300 hover:bg-bg-primary hover:bg-dark";
 
 const Navbar = () => {
   const [user, setUser] = useState({});
@@ -30,16 +31,6 @@ const Navbar = () => {
         : <NavLink to="/login" className="login-link bg-primary transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none"><li className={" flex justify-center items-center"} style={{width:"40px", height:"46px", marginRight: "6px"}}><i className="gg-log-in" alt="login picture"/></li></NavLink>
         }
       </ul>
-      <HamburgerMenu>
-        <NavLink to="/" className="home-link bg-primary p-2 transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none mx-1">Random Cats</NavLink>
-        <NavLink to="/cat_breeds" className="cat-breeds-link bg-primary p-2 transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none mx-1">Cat Breeds</NavLink>
-        <NavLink to="/favourites" className="favourites-link bg-primary p-2 transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none mx-1">Favourites</NavLink>
-        <NavLink to="/about" className="about-link bg-primary p-2 transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none mx-1">About</NavLink>
-        {user?.email ?  
-        <NavLink to="/profile" className="profile-link bg-primary transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none hidden lg:flex"><li className={" flex justify-center items-center"} style={{padding: "3px"}}><img src="./img/cat_profile.png" height="40px" width="40px" alt="profile link/image"/></li></NavLink> 
-        : <NavLink to="/login" className="login-link bg-primary transition-all duration-250 hover:bg-dark rounded-lg text-white outline-none hidden lg:flex"><li className={" flex justify-center items-center"} style={{width:"40px", height:"46px", marginRight: "6px"}}><i className="gg-log-in" alt="login picture"/></li></NavLink>
-        }
-      </HamburgerMenu>
     </nav>
   )
 }

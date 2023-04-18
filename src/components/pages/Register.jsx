@@ -1,28 +1,58 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom'
-import { useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link, useNavigate } from 'react-router-dom'
+import { useRef, useState, useContext, useEffect } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase.js';
+import { UserContext } from '../../App';
+import FailedNotification from '../alerts/FailedNotification';
+import SuccessNotification from '../alerts/SuccessNotification';
 
 const Register = () => {
   const emailRef = useRef(null);
   const passRef = useRef(null);
   const passConfRef = useRef(null);
   const [registerEmail, setRegisterEmail] = useState("");
+  const [success, setSuccess] = useState(false);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [dispError, setDispError] = useState(false);
+  const [err, setErr] = useState("");
+  const auth = useContext(UserContext);
+  const navigate = useNavigate();
 
   const register = async () => {
+    if(confirmPassword!==password){
+      setErr("Passwords do not match!");
+
+      setDispError(true);
+      setTimeout(()=>{setDispError(false)}, 2000);
+      return;
+    }
+    
     try {
       await createUserWithEmailAndPassword(auth, registerEmail, password);
+      
+      setSuccess(true);
+      setTimeout(()=>{navigate('/');}, 1000);
     }
     catch(error){
-      console.log(error); 
+      if(error.code === "auth/invalid-email") setErr("Please provide a valid email!"); 
+      else if(error.code === "auth/email-already-in-use") setErr("Email already in use!");
+      
+      setDispError(true);
+      setTimeout(()=>{setDispError(false)}, 2000);
     }
   };
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <motion.div initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} className="flex flex-col justify-center align-center items-center font-article text-white w-32 h-min mt-40">
+    <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="flex flex-col justify-center align-center items-center font-article text-white w-32 h-min mt-40">
+      <AnimatePresence>
+        {dispError && <FailedNotification notification={ err }/>}
+        {success && <SuccessNotification notification={ "Successfully registered!" } />}
+      </AnimatePresence>
       <div className="flex flex-col align-center items-center justify-center text-center" action="" method="post">
         <div className="username flex flex-col align-center justify-center w-max">
           <label className="font-bold" htmlFor="email">Email</label>
