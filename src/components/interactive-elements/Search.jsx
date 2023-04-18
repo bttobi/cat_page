@@ -24,7 +24,7 @@ const Search = (props) => {
     return response.json();
   }
 
-  const breeds = useQuery('catBreeds', fetchBreeds, {refetchOnWindowFocus: false,
+  const breeds = useQuery('catBreeds', fetchBreeds, {
     refetchOnMount: true,
     refetchOnReconnect: false,
     retry: false,
