@@ -52,5 +52,6 @@ TO BE ADDED AFTER OVERHAUL AND TWEAKS
 - Style profile, login and register page,
 - UI Overhaul,
 - Implement some sort of testing,
-- Moblie responsiveness mainly done.
+- Moblie responsiveness mainly done,
+- Currently looking for more ideas!
 
