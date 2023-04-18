@@ -35,10 +35,28 @@ const Register = () => {
       setTimeout(()=>{navigate('/');}, 1000);
     }
     catch(error){
-      if(error.code === "auth/invalid-email") setErr("Please provide a valid email!"); 
-      else if(error.code === "auth/email-already-in-use") setErr("Email already in use!");
+      switch(error.code){
+        case "auth/invalid-email":
+          setErr("Please provide a valid email!"); 
+          break;
+        
+        case "auth/email-already-in-use":
+          setErr("Email already in use!");
+          break;
+
+        case "auth/weak-password":
+          setErr("Password should be at least 6 characters in length!");
+          break;
+        
+        default:
+          setErr("Some errors happened");
+          break;
+      }
       
       setDispError(true);
+      emailRef.current.value = "";
+      passRef.current.value = "";
+      passConfRef.current.value = "";
       setTimeout(()=>{setDispError(false)}, 2000);
     }
   };
@@ -66,7 +84,7 @@ const Register = () => {
           <label className="font-bold" htmlFor="confirm-password">Confirm Password</label>
           <input className="input-password-confirm input w-full max-w-xs" ref={passConfRef} type="password" name="confirm-password" placeholder="Confirm Password" required onChange={()=>{setConfirmPassword(passConfRef.current.value)}}/>
         </div>
-        <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={register}>Register</button>
+        <button className="register-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={register}>Register</button>
       </div>
       <div className="login-redirect text-center mt-10">Already have an account? <br/> Log in <button className="login-redirect-button underline text-center"><Link to="/login">here</Link></button></div>
     </motion.div>

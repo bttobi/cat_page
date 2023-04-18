@@ -13,7 +13,7 @@ const Login = () => {
   const [err, setErr] = useState("");
   const [dispError, setDispError] = useState(false);
   const emailRef = useRef(null);
-  const passwordRef = useRef(null);
+  const passRef = useRef(null);
   const navigate = useNavigate();
   const auth = useContext(UserContext);
   
@@ -40,9 +40,15 @@ const Login = () => {
         case "auth/user-not-found":
           setErr("User not found!");
           break;
+
+        default: 
+          setErr("Some errors happened");
+          break;
       }
 
       setDispError(true);
+      emailRef.current.value = "";
+      passRef.current.value = "";
       setTimeout(()=>{setDispError(false)}, 2000);
     }
   };
@@ -64,9 +70,9 @@ const Login = () => {
         </div>
         <div className="password flex flex-col align-center justify-center w-max mt-8 font-bold">
           <label htmlFor="password">Password</label>
-          <input className="input-email input w-full max-w-xs" ref={passwordRef} type="password" name="password" required placeholder='Password' onChange={()=>{setPassword(passwordRef.current.value)}}/>
+          <input className="input-email input w-full max-w-xs" ref={passRef} type="password" name="password" required placeholder='Password' onChange={()=>{setPassword(passRef.current.value)}}/>
         </div>
-        <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-sm border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-bg-primary mt-4" onClick={login}>Log in</button>
+        <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={login}>Log in</button>
       </div>
       <div className="register-redirect text-center mt-10">Do not have an account? <br/> Register <button className="login-redirect-button underline text-center"><Link to="/register">here</Link></button></div>
     </motion.div>
