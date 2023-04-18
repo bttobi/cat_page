@@ -86,7 +86,7 @@ const CatCard = (props) => {
         </motion.div>}
       </AnimatePresence>
       <AnimatePresence>
-        {!isLoggedIn && <FailedNotification notification={'You must log in to see the favourites!'} />}
+        {!isLoggedIn && <FailedNotification notification={'You must log in to add a cat to favourites!'} />}
         {showSuccessNotification && <SuccessNotification notification={ notificationMessage } />}
       </AnimatePresence>
     </>
