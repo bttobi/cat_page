@@ -4,6 +4,9 @@
 
 :root, [data-theme] {
   background-color: #159895;
+  --bar-width: 30px;
+  --bar-height: 6px;
+  --hamburger-gap: 6px;
 }
 
 html {
@@ -59,4 +62,57 @@ code {
 
 ::-webkit-scrollbar-thumb:hover{
   background-color: rgb(221, 221, 221);
+}
+
+.hamburger-btn {
+  width: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  transition: all 100ms ease-in-out;
+}
+
+.hamburger-btn:hover {
+  background-color: #002B5B;
+}
+
+.hamburger-btn:active {
+  transform: scale(0.92);
+}
+
+.hamburger-btn::before, .hamburger-btn::after, .hamburger-btn input {
+  content: '';
+  outline: none;
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: #fff;
+  border-radius: 100px;
+  transition: all 150ms ease-in-out;
+}
+
+.hamburger-btn input   {
+  appearance: none;
+  transition: opacity 150ms ease-in-out;
+}
+
+.hamburger-btn input:checked   {
+  width: 0;
+  opacity: 0;
+}
+
+.hamburger-btn:has(input:checked)::before {
+  width: calc(var(--bar-width)*1.2);
+  transform-origin: top left;
+  rotate: 45deg;
+  margin-inline: auto;
+  translate: 7px;
+}
+
+.hamburger-btn:has(input:checked)::after {
+  width: calc(var(--bar-width)*1.2);
+  transform-origin: bottom left;
+  rotate: -45deg;
+  translate: 7px;
 }

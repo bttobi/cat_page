@@ -15,13 +15,11 @@ const Navbar = () => {
   });
 
   return (
-    <nav className="navbar w-full h-16 p-0 fixed z-20 flex justify-center items-center bg-primary text-secondary-white font-header text-xl">
-      <ul className="w-full h-full flex flex-row justify-between items-center">
-        <li className="flex flex-row p-3 rounded-md transition-all duration-300 hover:rotate-12">
-          <Link to="/" className="flex flex-row justify-center items-center">
-            <img src="/img/paw.png" height="40px" width="40px" alt="random"/>
-          </Link>
-        </li>
+    <nav className="navbar w-full h-16 p-0 fixed z-20 flex justify-between items-center bg-primary text-secondary-white font-header text-xl">
+      <Link to="/" className="flex flex-row justify-center items-center p-3 rounded-md transition-all duration-300 hover:rotate-12">
+        <img src="/img/paw.png" height="40px" width="40px" alt="random"/>
+      </Link>
+      <ul className="w-full h-full lg:flex hidden flex-row justify-center items-center">
         <li className="w-full flex justify-center align-center">
           <button className={buttonStyle + " mx-1"}><Link to="/cat_breeds">Cat Breeds</Link></button>
           <button className={buttonStyle + " mx-1"}><Link to="/favourites">Favourites</Link></button>

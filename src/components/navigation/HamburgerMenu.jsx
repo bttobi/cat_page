@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const HamburgerMenu = (props) => {
     const hamburgerRef = useRef(null);
-    const [hamburgerIsActive, setHamburgerIsActive] = useState(true);
+    const [hamburgerIsActive, setHamburgerIsActive] = useState(false);
 
     return (
     <>
