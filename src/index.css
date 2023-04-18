@@ -116,3 +116,16 @@ code {
   rotate: -45deg;
   translate: 7px;
 }
+
+.menu-item {
+  transition: all 150ms ease-in-out;
+}
+
+.menu-item:hover {
+  background-color: #61748e;
+}
+
+.menu-item:active {
+  transform: scale(0.96);
+  background-color: #3282b8;
+}
