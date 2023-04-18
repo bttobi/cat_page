@@ -5,7 +5,6 @@ import { useState, useContext } from 'react';
 import { UserContext } from '../../App';
 import { NavLink } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
-import { useState } from 'react';
 
 const Navbar = () => {
   const [user, setUser] = useState({});
