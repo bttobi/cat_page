@@ -27,7 +27,8 @@ const useProfilePic = () => {
     }
 
     catch(error){
-      console.log(error.code)
+      setProfilePic("NOT FOUND");
+      setIsFetched(true);
     }
   }
 

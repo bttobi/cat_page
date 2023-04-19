@@ -35,14 +35,14 @@ const Favourites = () => {
         {showClicked && <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
       </AnimatePresence>
       <div className="cat-cards-wrapper w-full h-full flex flex-wrap items-start align-start content-start justify-center">
-      {(!isFetched) ?
+      {(!isFetched) &&  cats.length != [] ?
             <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
               <LoadingIcons.Hearts width="16rem" speed="3"/>
               <span className="loading-text text-base font-bold font-article text-white">Loading...</span>
             </div> : 
               cats.length != 0 ? 
               cats.map(el => <CatCard showClicked={getShowClicked} isFavourite={ true } cat={el} key={el.url}/>)
-              : <div className="not-loggedin-notification font-bold text-xl underline"><Link to="/">No favourite cats found... Add some to favourites!</Link></div>} 
+              : <div className="not-loggedin-notification font-bold text-xl underline"><Link to="/random">No favourite cats found... Add some to favourites!</Link></div>} 
         </div>
         </>
     :<div className="not-loggedin-notification font-bold text-xl flex flex-col justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black">

@@ -1,11 +1,14 @@
-import { collection, doc, deleteDoc } from 'firebase/firestore';
+import { collection, arrayRemove, doc, getDoc, updateDoc } from 'firebase/firestore';
 import db from '../../firebase';
 
 const removeFromFav = async (props, auth) => {
-    const toDelete = props.cat.url.replace('https://cdn2.thecatapi.com/images/', '');
     const collectionRef = collection(db, auth.currentUser.email);
-    const documentRef = doc(collectionRef, toDelete);
-    await deleteDoc(documentRef, toDelete);
+    const documentRef = doc(collectionRef, "favourites");
+    const documentSnap = await getDoc(documentRef);
+    if(documentSnap.exists()){
+        const toDelete = documentSnap.data().favourites.find(cat => cat.id == props.cat.id);
+        await updateDoc(documentRef, {favourites: arrayRemove(toDelete)});
+    }
 }
 
 export default removeFromFav

@@ -17,6 +17,11 @@ const useFavourites = () => {
       const collectionRef =  collection(db, auth.currentUser.email);
       const documentRef = doc(collectionRef, "favourites");
       const listOfCats = await getDoc(documentRef);
+      
+      if(!listOfCats.exists() || listOfCats.data().favourites == []){
+        const listOfCats = [];
+        return;
+      }
 
       const toAdd = [];
       listOfCats.data().favourites.forEach(favCat => toAdd.push(favCat));
