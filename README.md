@@ -40,11 +40,25 @@ Application should be hosted in your local network automatically.
 
 #
 
-### 🎨 Desktop preview
-TO BE ADDED AFTER OVERHAUL AND TWEAKS
+### 🎨 Desktop preview - current stage (UI Overhaul coming)
+![image](https://user-images.githubusercontent.com/76923032/233100063-3b6975a4-5a38-41c6-adfb-01f2046fd9c1.png)
+![image](https://user-images.githubusercontent.com/76923032/233112565-7e6d8a07-8383-494e-9694-e5c27c3a2efb.png)
+![image](https://user-images.githubusercontent.com/76923032/233100170-0ec1329f-824a-4257-8264-821c950a1682.png)
+![image](https://user-images.githubusercontent.com/76923032/233110992-5b1258f1-6aa2-4ab2-b3e0-22952d8aeb9b.png)
+![image](https://user-images.githubusercontent.com/76923032/233111097-76ac286f-f32b-45d4-a9fd-2fcdc1ba8afe.png)
+![image](https://user-images.githubusercontent.com/76923032/233111179-cc4f8dc8-ee37-4d5a-8aff-3384d4b246c4.png)
+![image](https://user-images.githubusercontent.com/76923032/233112252-7d3775c0-cfa7-4289-982c-97995bb6a1d8.png)
+![image](https://user-images.githubusercontent.com/76923032/233112386-a53ae144-bfc7-4662-80c3-bf1f74942c43.png)
 
-### 🎨 Mobile preview
-TO BE ADDED AFTER OVERHAUL AND TWEAKS
+
+### 🎨 Mobile preview - current stage (UI Overhaul coming)
+![image](https://user-images.githubusercontent.com/76923032/233112660-fe8d39b9-8921-4236-98b0-d7babaa9612b.png)
+![image](https://user-images.githubusercontent.com/76923032/233112688-71b32d01-a2d7-4263-ab23-a867cda2172f.png)
+![image](https://user-images.githubusercontent.com/76923032/233112807-9ea4d37e-455c-4fa6-a7db-3002ccefa281.png)
+![image](https://user-images.githubusercontent.com/76923032/233112851-5d41d93f-c88d-41a2-9083-a26c36ae4ec2.png)
+![image](https://user-images.githubusercontent.com/76923032/233113195-a6414fc4-d160-415f-9cc2-eac666a5cd7c.png)
+![image](https://user-images.githubusercontent.com/76923032/233113220-51869a0e-16ae-40b2-85de-210071f83b90.png)
+![image](https://user-images.githubusercontent.com/76923032/233113251-bfc9bb34-9a5c-4d8e-8646-3b0503beebfc.png)
 
 #
 
