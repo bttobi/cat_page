@@ -47,7 +47,7 @@ const Favourites = () => {
         </>
     :<div className="not-loggedin-notification font-bold text-xl flex flex-col justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black">
       <p>You need to log in to see the favourite cats!</p>
-      <Link className="underline" to="/login">Log in here</Link>
+      <Link className="underline" to="/">Log in here</Link>
     </div>}
     </motion.div>
   )

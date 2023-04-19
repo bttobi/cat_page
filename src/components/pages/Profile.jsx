@@ -36,7 +36,7 @@ const Profile = () => {
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="font-article text-white mt-32 flex flex-col text-lg font-bold justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black">
       <span>You need to log in to view the profile! </span>
       <p>{user?.email}</p>
-      <Link className="underline" to="/login">Log in here</Link>
+      <Link className="underline" to="/">Log in here</Link>
     </motion.div>
     }
     </>
