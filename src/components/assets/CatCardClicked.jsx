@@ -1,6 +1,43 @@
+import setProfilePic from "../functions/setProfilePic";
+import { useState, useContext } from "react";
+import { UserContext } from '../../App';
+import { motion, AnimatePresence } from "framer-motion";
+import FailedNotification from "../alerts/FailedNotification";
+import SuccessNotification from "../alerts/SuccessNotification";
+
 const CatCardClicked = (props) => {
-  return (
-    <div className="cat-details z-20 m-0 fixed top-0 flex flex-col rounded-lg transition-all duration-300 opacity-100" style={{minWidth:"90vw", maxWidth: "90vw"}}>
+  const auth = useContext(UserContext);
+  const [errorHappened, setErrorHappened] = useState(false);
+  const [isProfilePicSet, setIsProfilePicSet] = useState(false);
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [warningNotificationMessage, setWarningNotificationMessage] = useState("");
+
+  const handleProfilePic = () => {
+    if(auth.currentUser?.email === null || auth.currentUser?.email === undefined){
+      setErrorHappened(true);
+      setWarningNotificationMessage("You must log in to set a profile picture!");
+      setTimeout(() => { setErrorHappened(false) }, 2000);
+      return;
+    }
+
+    try {
+      setProfilePic(auth, props.cat.url);
+      setIsProfilePicSet(true);
+      setNotificationMessage("Set successfully as profile picture!");
+      setShowSuccessNotification(true);
+      setTimeout(() => { setShowSuccessNotification(false) }, 2000);
+    }
+    
+    catch(error){
+      setErrorHappened(true);
+      setWarningNotificationMessage("Some errors happened");
+      setTimeout(() => { setErrorHappened(false) }, 2000);
+    }
+  }
+
+  return (<>
+    <div className="cat-details z-20 m-0 top-0 flex flex-col rounded-lg transition-all duration-300 opacity-100" style={{minWidth:"90vw", maxWidth: "90vw"}}>
       <div className="flex flex-col flex-grow cat-clicked-wrapper p-2 bg-primary rounded-lg shadow-lg shadow-black justify-center align-center items-center"  style={{minHeight: "80vh", background: "rgba(0, 0, 0, .65) " + `url(${props.cat.url})`, backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundBlendMode: "darken"}}>
         <button className="close-button btn btn-sm btn-error btn-square bg-primary right-0 top-0 mt-1 mr-1 btn-outline absolute transition-all duration-150 hover:scale-110" onClick={(e, isShown) => {props.showFunc(e, true);}}>
           <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
@@ -16,10 +53,16 @@ const CatCardClicked = (props) => {
           <div className="button-wrapper lg:mt-8 mt-0 self-end wrapper flex flex-col justify-center align-center items-center">
             <button className="btn align-end p-2 h-full transition-all duration-200 hover:scale-110 bg-dark border-none rounded-lg mt-4" style={{fontSize: "clamp(0.9rem, 1.5vw, 3rem)"}} onClick={props.handleFavFunc}>{props.isFavourite ? "🗑️ REMOVE FROM FAVOURITES" : "❤️ ADD TO FAVOURITES"}</button>
             <a className="btn align-end p-2 h-full transition-all duration-200 hover:scale-110 bg-dark border-none rounded-lg mt-4" href={props.cat.url} target="_blank" style={{fontSize: "clamp(0.9rem, 1.5vw, 3rem)"}}>See picture in full screen</a>
+            <button className="btn align-end p-2 h-full transition-all duration-200 hover:scale-110 bg-dark border-none rounded-lg mt-4" style={{fontSize: "clamp(0.9rem, 1.5vw, 3rem)"}} onClick={handleProfilePic}>SET AS PROFILE PICTURE</button>
           </div>
         </div>
       </div>
     </div>
+    <AnimatePresence>
+      {errorHappened && <FailedNotification notification={ warningNotificationMessage } />}
+      {showSuccessNotification && <SuccessNotification notification={ notificationMessage } />}
+    </AnimatePresence>
+    </>
   )
 }
 
