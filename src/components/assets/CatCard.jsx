@@ -10,16 +10,18 @@ import FailedNotification from '../alerts/FailedNotification';
 const CatCard = (props) => {
   const catDetails = useRef();
   const [isShown, setIsShown] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [errorHappened, setErrorHappened] = useState(false);
   const [isFavourite, setIsFavourite] = useState(props?.isFavourite | false);
   const [showSuccessNotification, setShowSuccessNotification] = useState(false);
-  const [notificationMessage, setNotoficationMessage] = useState("");
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [warningNotificationMessage, setWarningNotificationMessage] = useState("");
   const auth = useContext(UserContext);
 
   const handleFavourites = async () => {
     if(auth.currentUser?.email === null || auth.currentUser?.email === undefined){
-      setIsLoggedIn(false);
-      setTimeout(() => { setIsLoggedIn(true) }, 2000);
+      setErrorHappened(true);
+      setWarningNotificationMessage("You must log in to add a cat to favourites!");
+      setTimeout(() => { setErrorHappened(false) }, 2000);
       return;
     }
     
@@ -27,20 +29,22 @@ const CatCard = (props) => {
       if (!isFavourite) { //you can only add if not favourite
         addToFav(props, auth); //passing all cat info
         setIsFavourite(true);
-        setNotoficationMessage("Added to favourites!");
+        setNotificationMessage("Added to favourites!");
         setShowSuccessNotification(true);
         setTimeout(() => { setShowSuccessNotification(false) }, 2000);
         return;
       }
       removeFromFav(props, auth); //passing all cat info
       setIsFavourite(false);
-      setNotoficationMessage("Removed from favourites!");
+      setNotificationMessage("Removed from favourites!");
       setShowSuccessNotification(true);
       setTimeout(() => { setShowSuccessNotification(false) }, 2000);
     }
     
     catch(error){
-      console.log(error)
+      setErrorHappened(true);
+      setWarningNotificationMessage("Some errors happened");
+      setTimeout(() => { setErrorHappened(false) }, 2000);
     }
   }
 
@@ -86,7 +90,7 @@ const CatCard = (props) => {
         </motion.div>}
       </AnimatePresence>
       <AnimatePresence>
-        {!isLoggedIn && <FailedNotification notification={'You must log in to add a cat to favourites!'} />}
+        {errorHappened && <FailedNotification notification={ warningNotificationMessage } />}
         {showSuccessNotification && <SuccessNotification notification={ notificationMessage } />}
       </AnimatePresence>
     </>

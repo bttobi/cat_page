@@ -28,7 +28,7 @@ const Favourites = () => {
   },[]);
 
   return (
-    <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="favourites-wrapper w-full h-full m-none my-16 flex flex-col justify-center items-center font-article text-white">
+    <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="favourites-wrapper w-full h-full m-none my-32 flex flex-col justify-center items-center font-article text-white">
       {(user?.email!=null || user?.email!=undefined) ? 
       <>
       <AnimatePresence>
@@ -45,7 +45,10 @@ const Favourites = () => {
               : <div className="not-loggedin-notification font-bold text-xl underline"><Link to="/">No favourite cats found... Add some to favourites!</Link></div>} 
         </div>
         </>
-    :<div className="not-loggedin-notification font-bold text-xl underline"><Link to="/login">You need to log in to see the favourite cats!</Link></div>}
+    :<div className="not-loggedin-notification font-bold text-xl flex flex-col justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black">
+      <p>You need to log in to see the favourite cats!</p>
+      <Link className="underline" to="/login">Log in here</Link>
+    </div>}
     </motion.div>
   )
 }
