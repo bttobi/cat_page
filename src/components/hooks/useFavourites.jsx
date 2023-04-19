@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import db from '../../firebase';
-import { collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDoc } from 'firebase/firestore';
 import { UserContext } from '../../App';
 
 const useFavourites = () => {
@@ -15,10 +15,11 @@ const useFavourites = () => {
     
     try{
       const collectionRef =  collection(db, auth.currentUser.email);
-      const listOfCats = await getDocs(collectionRef);
+      const documentRef = doc(collectionRef, "favourites");
+      const listOfCats = await getDoc(documentRef);
 
       const toAdd = [];
-      listOfCats.forEach(favCat => toAdd.push(favCat.data()));
+      listOfCats.data().favourites.forEach(favCat => toAdd.push(favCat));
       setCats(toAdd);
       setIsFetched(true);
     }
