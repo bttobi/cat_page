@@ -32,7 +32,7 @@ const Register = () => {
       await createUserWithEmailAndPassword(auth, registerEmail, password);
       
       setSuccess(true);
-      setTimeout(()=>{navigate('/');}, 1000);
+      setTimeout(()=>{navigate('/random');}, 1000);
     }
     catch(error){
       switch(error.code){
@@ -86,7 +86,7 @@ const Register = () => {
         </div>
         <button className="register-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={register}>Register</button>
       </div>
-      <div className="login-redirect text-center mt-10">Already have an account? <br/> Log in <button className="login-redirect-button underline text-center"><Link to="/login">here</Link></button></div>
+      <div className="login-redirect text-center mt-10">Already have an account?<button className="login-redirect-button underline text-center"><Link to="/">Log in here</Link></button></div>
     </motion.div>
   )
 }
