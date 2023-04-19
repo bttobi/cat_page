@@ -23,7 +23,7 @@ const Login = () => {
       const user = await signInWithEmailAndPassword(auth, email, password);
       if(user!==null && user!==undefined){ 
         setSuccess(true);
-        setTimeout(()=>{navigate('/');}, 1000);
+        setTimeout(()=>{navigate('/random');}, 1000);
       }
     }
     
@@ -53,6 +53,22 @@ const Login = () => {
     }
   };
 
+  const loginTest = async() => {
+    try {
+      const user = await signInWithEmailAndPassword(auth, "test@account.com", "test123");
+      if(user!==null && user!==undefined){ 
+        setSuccess(true);
+        setTimeout(()=>{navigate('/random');}, 1000);
+      }
+    }
+    
+    catch (error) { 
+      setErr("Some errors happened");
+      setDispError(true);
+      setTimeout(()=>{setDispError(false)}, 2000);
+    }
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -73,8 +89,9 @@ const Login = () => {
           <input className="input-email input w-full max-w-xs" ref={passRef} type="password" name="password" required placeholder='Password' onChange={()=>{setPassword(passRef.current.value)}}/>
         </div>
         <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={login}>Log in</button>
+        <button className="login-button btn h-min bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={loginTest}>Log in via test account</button>
       </div>
-      <div className="register-redirect text-center mt-10">Do not have an account? <br/> Register <button className="login-redirect-button underline text-center"><Link to="/register">here</Link></button></div>
+      <div className="register-redirect text-center mt-10">Do not have an account?<button className="login-redirect-button underline text-center"><Link to="/register">Register here</Link></button></div>
     </motion.div>
   )
 }
