@@ -29,7 +29,8 @@ const Profile = () => {
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="font-article text-white w-auto h-auto mt-32 flex flex-col text-lg font-bold justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black">
       <p>Welcome! </p>
       <p>{user?.email}</p>
-      {profilePicUrl != "NOT FOUND" ? <div className="w-36 h-36 rounded-lg mt-4 border-white border-2" style={{backgroundImage: `url(${profilePicUrl})`, backgroundSize: "cover", backgroundPosition: "center"}}></div>
+      {profilePicUrl != "NOT FOUND" ? 
+      <div className="w-36 h-36 rounded-lg mt-4 border-white border-2" style={{backgroundImage: `url(${profilePicUrl})`, backgroundSize: "cover", backgroundPosition: "center"}} />
       : <div className="w-36 h-36 rounded-lg border-white border-2 p-3 flex justify-center align-center items-center text-center mt-4">No profile picture found!</div>}
       <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={logOut}><Link to="/login">Sign out</Link></button>
     </motion.div>  : 
