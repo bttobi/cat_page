@@ -10,7 +10,6 @@ const Profile = () => {
   const auth = useContext(UserContext);
   const [profilePicUrl, isFetched] = useProfilePic();
   const newPasswordRef = useRef();
-  const [pass, setPass] = useState(0);
 
   const logOut = async () => {
     await signOut(auth);
