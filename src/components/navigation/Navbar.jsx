@@ -1,16 +1,18 @@
 import { Link } from 'react-router-dom';
 import { auth } from '../../firebase.js';
-import { onAuthStateChanged } from 'firebase/auth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const Navbar = () => {
   const [user, setUser] = useState({});
   
-  onAuthStateChanged(auth, (currentUser) =>{
-    setUser(currentUser);
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (currentUser) =>{
+      setUser(currentUser);
+    });
+  }, [auth?.currentUser]);
 
   return (
     <nav className="navbar w-full h-16 p-0 fixed z-20 flex justify-between items-center bg-primary text-secondary-white font-header text-xl">

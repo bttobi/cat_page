@@ -20,7 +20,7 @@ const Register = () => {
   const navigate = useNavigate();
 
   const register = async () => {
-    if(confirmPassword!==password){
+    if(confirmPassword != password){
       setErr("Passwords do not match!");
 
       setDispError(true);
