@@ -1,26 +1,34 @@
-import React from 'react';
-import { useState, useContext, useEffect } from 'react';
-import {motion} from 'framer-motion';
+import { useState, useContext, useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 import { UserContext } from '../../App';
 import { Link } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { onAuthStateChanged } from 'firebase/auth';
 import useProfilePic from '../hooks/useProfilePic';
 
 const Profile = () => {
   const [user, setUser] = useState({});
   const auth = useContext(UserContext);
   const [profilePicUrl, isFetched] = useProfilePic();
+  const newPasswordRef = useRef();
+  const [pass, setPass] = useState(0);
 
   const logOut = async () => {
     await signOut(auth);
   };
 
-  onAuthStateChanged(auth, (currentUser) =>{
-  setUser(currentUser);
-  });
+  const deleteAccount = () => {
+  // TO DO - delete all favs and profile picture too
+  };
+
+  const changePassword = () => {
+  };
+
+  const changeEmail = async () => {
+    // TO DO
+  }
   
   useEffect(() => {
+    setUser(auth?.currentUser);
     window.scrollTo(0, 0);
   }, []);
 
@@ -32,7 +40,13 @@ const Profile = () => {
       {profilePicUrl != "NOT FOUND" ? 
       <div className="w-36 h-36 rounded-lg mt-4 border-white border-2" style={{backgroundImage: `url(${profilePicUrl})`, backgroundSize: "cover", backgroundPosition: "center"}} />
       : <div className="w-36 h-36 rounded-lg border-white border-2 p-3 flex justify-center align-center items-center text-center mt-4">No profile picture found!</div>}
-      <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={logOut}><Link to="/login">Sign out</Link></button>
+      <button className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={logOut}><Link to="/">Sign out</Link></button>
+      {user?.email != "test@account.com" &&
+      <>
+        <button className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={deleteAccount}>Delete Account</button>
+        <div className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={()=>{}}>Change Password</div>
+      </>
+      }
     </motion.div>  : 
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="font-article text-white mt-32 flex flex-col text-lg font-bold justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black">
       <span>You need to log in to view the profile! </span>
