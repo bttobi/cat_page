@@ -45,7 +45,7 @@ const Favourites = () => {
               : <div className="not-loggedin-notification font-bold text-xl underline"><Link to="/random">No favourite cats found... Add some to favourites!</Link></div>} 
         </div>
         </>
-    :<div className="not-loggedin-notification font-bold text-xl flex flex-col justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black">
+    :<div className="not-loggedin-notification font-bold text-xl flex flex-col justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black text-center mx-4">
       <p>You need to log in to see the favourite cats!</p>
       <Link className="underline" to="/">Log in here</Link>
     </div>}
