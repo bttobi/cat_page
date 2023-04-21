@@ -58,7 +58,7 @@ const Login = () => {
       const user = await signInWithEmailAndPassword(auth, "test@account.com", "test123");
       if(user!==null && user!==undefined){ 
         setSuccess(true);
-        setTimeout(()=>{navigate('/random');}, 1000);
+        setTimeout(()=>{navigate('/random');}, 2000);
       }
     }
     
