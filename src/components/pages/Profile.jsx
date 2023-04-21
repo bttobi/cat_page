@@ -7,6 +7,7 @@ import useProfilePic from '../hooks/useProfilePic';
 import SuccessNotification from '../alerts/SuccessNotification';
 import FailedNotification from '../alerts/FailedNotification';
 import { onAuthStateChanged } from 'firebase/auth';
+import ConfirmAction from '../alerts/ConfirmAction';
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -14,6 +15,7 @@ const Profile = () => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
+  const [showDeleteAccout, setShowDeleteAccount] = useState(false);
   const navigate = useNavigate();
   const auth = useContext(UserContext);
   const newPasswordRef = useRef();
@@ -39,6 +41,7 @@ const Profile = () => {
   };
 
   const deleteAccount = () => {
+    setShowDeleteAccount(true);
   // TO DO - delete all favs and profile picture too
   };
 
@@ -82,6 +85,7 @@ const Profile = () => {
       {isNotificationShown && <SuccessNotification notification={ notificationMessage }/>}
       {errorHappened && <FailedNotification notification={ notificationMessage }/>}
     </AnimatePresence>
+    <ConfirmAction show={showDeleteAccout}/>
     </>
   )
 }
