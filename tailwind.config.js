@@ -4,6 +4,11 @@ module.exports = {
   ["./index.html", "./src/**/*.{html,jsx,js}"],
   theme: 
   {
+    fontFamily: 
+      {
+        'header': ['"Manrope"', 'sans-serif'],
+        'article': ['Lato', 'sans-serif']
+      },
     extend: 
     {
       colors: 
@@ -17,7 +22,7 @@ module.exports = {
       fontFamily: 
       {
         'header': ['"Manrope"', 'sans-serif'],
-        'article': ['"Roboto"', 'sans-serif']
+        'article': ['Lato', 'sans-serif']
       }
     },
   },
