@@ -5,6 +5,7 @@ import { UserContext } from '../../App';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import FailedNotification from '../alerts/FailedNotification';
 import SuccessNotification from '../alerts/SuccessNotification';
+import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -23,7 +24,7 @@ const Login = () => {
       const user = await signInWithEmailAndPassword(auth, email, password);
       if(user!==null && user!==undefined){ 
         setSuccess(true);
-        setTimeout(()=>{navigate('/random');}, 1000);
+        setTimeout(()=>{navigate('/');}, 1000);
       }
     }
     
@@ -77,15 +78,13 @@ const Login = () => {
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="flex flex-col justify-center align-center items-center font-article text-white w-32 h-min mt-40">
       <AnimatePresence>
       {dispError && <FailedNotification notification={err}/>}
-      {success && <SuccessNotification notification={ "Successfully logged in!" } />}
+      {success && <SuccessNotification notification={ "Successfully logged in!" } icon={ <TailSpin stroke={"#000"}/> }/>}
       </AnimatePresence>
       <div className="flex flex-col align-center items-center justify-center text-center" action="" method="post">
         <div className="username flex flex-col align-center justify-center w-max font-bold">
-          <label htmlFor="email">Email</label>
           <input className="input-email input w-full max-w-xs" ref={emailRef} type="email" name="email" required placeholder='Email' onChange={()=>{setEmail(emailRef.current.value)}}/>
         </div>
         <div className="password flex flex-col align-center justify-center w-max mt-8 font-bold">
-          <label htmlFor="password">Password</label>
           <input className="input-email input w-full max-w-xs" ref={passRef} type="password" name="password" required placeholder='Password' onChange={()=>{setPassword(passRef.current.value)}}/>
         </div>
         <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={login}>Log in</button>
