@@ -27,11 +27,11 @@ function App() {
               <Navbar />
                 <AnimatePresence mode="wait">
                   <Routes>
-                    <Route path='/random' element={<Random/>}/>
+                    <Route path='/' element={<Random/>}/>
                     <Route path='/cat_breeds' element={<CatBreeds/>}/>
                     <Route path='/favourites' element={<Favourites/>}/>
                     <Route path='/about' element={<About/>}/>
-                    <Route path='/' element={<Login/>}/>
+                    <Route path='/login' element={<Login/>}/>
                     <Route path='/register' element={<Register/>}/>
                     <Route path='/profile' element={<Profile/>}/>
                     <Route path={"*"} element={<Random />}/>

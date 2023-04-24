@@ -36,12 +36,12 @@ const Search = (props) => {
   return (
     <div className="search-wrapper text-center w-1/2 flex flex-col flex-nowrap items-center">
       <div className="search-settings flex flex-row flex-wrap justify-center items-center">
-        <label className="mt-10 mb-4 font-article" htmlFor="cat-breed">What cat breed do you want to see?</label>
+        <label className="mt-10 mb-4 font-article text-lg" htmlFor="cat-breed">What cat breed do you want to see?</label>
       </div>
-      <select className=" w-48 bg-bg-primary border-2 border-secondary-white rounded-lg text-center" onChange={() => {updateSearchDetails(inputBreed.current.value)}} ref={inputBreed} value={searchDetails.breed} name="cat-breed">
+      <select className="select w-48 bg-dark border-2 border-secondary-white rounded-lg text-center" onChange={() => {updateSearchDetails(inputBreed.current.value)}} ref={inputBreed} value={searchDetails.breed} name="cat-breed">
       {breeds.isFetching ?  <option value="">{"Select"}</option> : 
         breeds.data.map((el, i) => {
-        return <option key={i} value={el.id} className="w-6 h-6">{el.name}</option>
+        return <option key={i} value={el.id} className="w-6 h-6 text-left">{el.name}</option>
       })}
       </select>
     </div>
