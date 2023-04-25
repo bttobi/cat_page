@@ -31,6 +31,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html:before {
+  content: "";
+  display: block;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  background: url("/img/bbburst.svg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 #root {
   min-height: 110vh;
   margin: 0;
