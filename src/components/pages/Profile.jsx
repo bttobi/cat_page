@@ -16,7 +16,6 @@ const Profile = () => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
-  const [showDeleteAccout, setShowDeleteAccount] = useState(false);
   const navigate = useNavigate();
   const auth = useContext(UserContext);
   const newPasswordRef = useRef();
@@ -40,31 +39,6 @@ const Profile = () => {
         setErrorHappened(false);
       }, 2000)
     })
-  };
-
-  const deleteAccount = () => {
-    user?.delete()
-    .then(()=> {
-      setShowDeleteAccount(true);
-      setNotificationMessage("Deleted user successfully!");
-      setNotificationIcon(<TailSpin stroke={"#000"}/>);
-      setIsNotificationShown(true);
-      setTimeout(()=>{
-        setIsNotificationShown(false);
-        navigate("/login");
-      }, 2000)
-    })
-  
-    .catch(error => {
-      setNotificationMessage("Some errors happened!");
-      setErrorHappened(true);
-      setTimeout(()=>{
-        setErrorHappened(false);
-      }, 2000)
-    });
-
-    //TO DO need to remove all documents from user
-    //TO DO ADD MODAL TO BE SURE
   };
 
   const changePassword = () => {
@@ -109,8 +83,8 @@ const Profile = () => {
       <button className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={logOut}>Sign out</button>
       {user?.email != "test@account.com" &&
       <>
-        <button className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={deleteAccount}>Delete Account</button>
-        <div className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={changePassword}>Change Password</div>
+        <label htmlFor="del-acc" className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4">Delete Account</label>
+        <button className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={changePassword}>Change Password</button>
       </>
       }
     </motion.div>  : 
@@ -124,7 +98,7 @@ const Profile = () => {
       {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
       {errorHappened && <FailedNotification notification={ notificationMessage }/>}
     </AnimatePresence>
-    <ConfirmAction show={showDeleteAccout}/>
+    <ConfirmAction userToDelete={user}/>
     </>
   )
 }
