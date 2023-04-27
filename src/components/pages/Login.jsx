@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import FailedNotification from '../alerts/FailedNotification';
 import SuccessNotification from '../alerts/SuccessNotification';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
+import { ResetPasswordModal } from '../alerts/ResetPasswordModal';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -76,10 +77,6 @@ const Login = () => {
 
   return (
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="flex flex-col justify-center align-center items-center font-article text-white w-32 h-min mt-40">
-      <AnimatePresence>
-      {dispError && <FailedNotification notification={err}/>}
-      {success && <SuccessNotification notification={ "Successfully logged in!" } icon={ <TailSpin stroke={"#000"}/> }/>}
-      </AnimatePresence>
       <div className="flex flex-col align-center items-center justify-center text-center" action="" method="post">
         <div className="username flex flex-col align-center justify-center w-max font-bold">
           <input className="input-email input w-full max-w-xs" ref={emailRef} type="email" name="email" required placeholder='Email' onChange={()=>{setEmail(emailRef.current.value)}}/>
@@ -90,7 +87,13 @@ const Login = () => {
         <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={login}>Log in</button>
         <button className="login-button btn h-min bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={loginTest}>Log in via test account</button>
       </div>
-      <div className="register-redirect text-center mt-10">Do not have an account?<button className="login-redirect-button underline text-center"><Link to="/register">Register here</Link></button></div>
+      <div className="register-redirect text-center mt-10">Do not have an account?<Link to="/register"><p className="underline">Register here</p></Link></div>
+      <div className="register-redirect text-center mt-10">Forgot password?<label htmlFor="reset-pass"><p className="underline cursor-pointer">Send reset email here</p></label></div>
+      <AnimatePresence>
+        {dispError && <FailedNotification notification={err}/>}
+        {success && <SuccessNotification notification={ "Successfully logged in!" } icon={ <TailSpin stroke={"#000"}/> }/>}
+      </AnimatePresence>
+      <ResetPasswordModal />
     </motion.div>
   )
 }
