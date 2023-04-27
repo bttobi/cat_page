@@ -7,7 +7,7 @@ import useProfilePic from '../hooks/useProfilePic';
 import SuccessNotification from '../alerts/SuccessNotification';
 import FailedNotification from '../alerts/FailedNotification';
 import { onAuthStateChanged } from 'firebase/auth';
-import ConfirmAction from '../alerts/ConfirmAction';
+import DeleteAccountModal from '../alerts/DeleteAccountModal';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 
 const Profile = () => {
@@ -98,7 +98,7 @@ const Profile = () => {
       {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
       {errorHappened && <FailedNotification notification={ notificationMessage }/>}
     </AnimatePresence>
-    <ConfirmAction userToDelete={user}/>
+    <DeleteAccountModal userToDelete={user}/>
     </>
   )
 }
