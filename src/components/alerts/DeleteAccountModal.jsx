@@ -54,7 +54,7 @@ const DeleteAccountModal = ({ userToDelete }) => {
             <svg xmlns="http://www.w3.org/2000/svg" className="w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
           </label>
           <div className="wrapper flex flex-col justify-center align-center items-center">
-            <h3 className="text-3xl font-bold mt-8 text-center">Are you sure to delete your account?</h3>
+            <p className="text-3xl font-bold mt-8 text-center">Are you sure to delete your account?</p>
             <button className="btn w-min text-center mt-8 text-white bg-red-500 hover:bg-red-700 border-0" onClick={deleteAccount}>DELETE ACCOUNT</button>
           </div>
         </label>
