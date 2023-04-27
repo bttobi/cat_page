@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import SuccessNotification from '../alerts/SuccessNotification';
-import FailedNotification from '../alerts/FailedNotification';
+import React, { useState } from 'react';
+import SuccessNotification from './SuccessNotification';
+import FailedNotification from './FailedNotification';
 import { AnimatePresence } from 'framer-motion';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { useNavigate } from 'react-router-dom';
+import { collection, doc, deleteDoc } from 'firebase/firestore';
+import db from '../../firebase';
 
-const ConfirmAction = ({ userToDelete }) => {
+const DeleteAccountModal = ({ userToDelete }) => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
   const [notificationIcon, setNotificationIcon] = useState(null);
   const navigate = useNavigate();
 
-  const deleteAccount = () => {
-    userToDelete?.delete()
-    .then(()=> {
+  const deleteAccount = async () => {
+    await userToDelete?.delete()
+    .then(async ()=> {
+
+      const collectionRef = collection(db, userToDelete?.email);
+      const documentRefs = [doc(collectionRef, "favourites"), doc(collectionRef, "profile-picture")];
+      documentRefs.forEach(async document => {
+        await deleteDoc(document);
+      });
+
       setNotificationMessage("Deleted user successfully!");
       setNotificationIcon(<TailSpin stroke={"#000"}/>);
       setIsNotificationShown(true);
@@ -58,4 +67,4 @@ const ConfirmAction = ({ userToDelete }) => {
   )
 }
 
-export default ConfirmAction
+export default DeleteAccountModal
