@@ -8,6 +8,7 @@ import SuccessNotification from '../alerts/SuccessNotification';
 import FailedNotification from '../alerts/FailedNotification';
 import { onAuthStateChanged } from 'firebase/auth';
 import DeleteAccountModal from '../alerts/DeleteAccountModal';
+import ChangeEmailModal from '../alerts/ChangeEmailModal';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 
 const Profile = () => {
@@ -81,12 +82,13 @@ const Profile = () => {
       <div className="w-36 h-36 rounded-lg mt-4 border-white border-2" style={{backgroundImage: `url(${profilePicUrl})`, backgroundSize: "cover", backgroundPosition: "center"}} />
       : <div className="w-36 h-36 rounded-lg border-white border-2 p-3 flex justify-center align-center items-center text-center mt-4">No profile picture found!</div>}
       <button className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={logOut}>Sign out</button>
-      {user?.email != "test@account.com" &&
-      <>
-        <label htmlFor="del-acc" className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4">Delete Account</label>
-        <button className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={changePassword}>Change Password</button>
-      </>
-      }
+        {user?.email != "test@account.com" && !errorHappened && !isNotificationShown &&
+        <>
+          <label htmlFor="del-acc" className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4">Delete Account</label>
+          <button className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={changePassword}>Change Password</button>
+          <label htmlFor="change-email" className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4">Change Email</label>
+        </>
+        }
     </motion.div>  : 
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="font-article text-white mt-32 flex flex-col text-lg font-bold justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black">
       <span>You need to log in to view the profile! </span>
@@ -99,6 +101,7 @@ const Profile = () => {
       {errorHappened && <FailedNotification notification={ notificationMessage }/>}
     </AnimatePresence>
     <DeleteAccountModal userToDelete={user}/>
+    <ChangeEmailModal userToChange={user}/>
     </>
   )
 }
