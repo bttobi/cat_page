@@ -76,7 +76,7 @@ const Login = () => {
   }, []);
 
   return (
-    <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="flex flex-col justify-center align-center items-center font-article text-white w-32 h-min mt-40">
+    <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="flex flex-col justify-center align-center items-center font-article text-white w-32 h-min mb-0 mt-40">
       <div className="flex flex-col align-center items-center justify-center text-center" action="" method="post">
         <div className="username flex flex-col align-center justify-center w-max font-bold">
           <input className="input-email input w-full max-w-xs" ref={emailRef} type="email" name="email" required placeholder='Email' onChange={()=>{setEmail(emailRef.current.value)}}/>
@@ -84,8 +84,8 @@ const Login = () => {
         <div className="password flex flex-col align-center justify-center w-max mt-8 font-bold">
           <input className="input-email input w-full max-w-xs" ref={passRef} type="password" name="password" required placeholder='Password' onChange={()=>{setPassword(passRef.current.value)}}/>
         </div>
-        <button className="login-button btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={login}>Log in</button>
-        <button className="login-button btn h-min bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={loginTest}>Log in via test account</button>
+        <button className="login-button btn bg-primary text-article text-secondary-white text-2xl w-full border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={login}>Log in</button>
+        <button className="login-button btn btn-sm h-min bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={loginTest}>TEST ACCOUNT</button>
       </div>
       <div className="register-redirect text-center mt-10">Do not have an account?<Link to="/register"><p className="underline">Register here</p></Link></div>
       <div className="register-redirect text-center mt-10">Forgot password?<label htmlFor="reset-pass"><p className="underline cursor-pointer">Send reset email here</p></label></div>
