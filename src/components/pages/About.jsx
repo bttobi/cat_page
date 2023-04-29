@@ -13,10 +13,10 @@ const About = () => {
         <p>You can search for cats using different search filters - from breeds to weight of the cat. It is fetching the cats via usage of the Cat API.</p>
         <p>In order to use the site please create an account - it will unlock the option to add cats to favourites.</p>
         <p>Project is built in technologies like: ReactJS, ReactQuery, React Router, Tailwind CSS, daisyUI and Firebase.</p>
+        <div className="button-wrapper flex justify-center">
+          <a href="https://www.tobinski.pl" target="_blank" aria-label="Go to my portfolio website" className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark" >Portfolio Website</a>
+        </div>
       </article>
-      <div className="button-wrapper flex justify-center">
-        <a href="https://www.tobinski.pl" target="_blank" aria-label="Go to my portfolio website" className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark" >Portfolio Website</a>
-      </div>
     </motion.div>
   )
 }
