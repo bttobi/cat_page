@@ -7,6 +7,7 @@ const useFavourites = () => {
   const auth = useContext(UserContext);
   const [isFetched, setIsFetched] = useState(false);
   const [cats, setCats] = useState([]);
+  const [error, setError] = useState("");
 
   const getFavCats = async () => {
     if(auth.currentUser?.email==null || auth.currentUser?.email==undefined){
@@ -29,8 +30,9 @@ const useFavourites = () => {
       setIsFetched(true);
     }
 
-    catch(error){
-      console.log(error)
+    catch(err){
+      setError(err.code);
+      //ERROR HAPPENED WHILE FETCHING
     }
   }
 
@@ -42,7 +44,7 @@ const useFavourites = () => {
     getFavCats();
   }, []);
 
-  return [cats, isFetched];
+  return [cats, isFetched, error];
 }
 
 export default useFavourites;
