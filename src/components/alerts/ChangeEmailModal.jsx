@@ -17,36 +17,38 @@ export const ChangeEmailModal = ({userToChange}) => {
   const auth = useContext(UserContext);
 
   const resetPassword = async () => {
-    //TO DO copy current user collection with new email, remove the old one
-
     //get the current data
     const collectionRef = collection(db, auth.currentUser.email);
     const favDocumentRef = doc(collectionRef, "favourites");
     const profDocumentRef = doc(collectionRef, "profile-picture");
-
     const favDocumentSnap = await getDoc(favDocumentRef);
     const profDocumentSnap = await getDoc(profDocumentRef);
 
+    await updateEmail(userToChange, email).then(async ()=>{ 
+      if(favDocumentSnap.data() == null && profDocumentSnap.data() == null){
+        setNotificationMessage("Email updated!");
+        setNotificationIcon(null);
+        setIsNotificationShown(true);
 
-    //TO DO BETTER ERROR HANDLING
-    await updateEmail(userToChange, email)
-    .then(async () => {
-      console.log(auth.currentUser.email);
-      //setting the new data
+        setTimeout(()=>{
+          setIsNotificationShown(false);
+          window.location.reload();
+        }, 2000);
+        return;
+      }
+
+      //try to copy the database if the database exists
       const newCollectionRef = collection(db, auth.currentUser.email);
       const newFavDocumentRef = doc(newCollectionRef, "favourites");
       const newProfDocumentRef = doc(newCollectionRef, "profile-picture");
-      console.log(favDocumentSnap.data())
-      await setDoc(newFavDocumentRef, favDocumentSnap.data());
-      await setDoc(newProfDocumentRef, profDocumentSnap.data());
+      favDocumentSnap.data() != null && await setDoc(newFavDocumentRef, favDocumentSnap.data());
+      profDocumentSnap.data() != null && await setDoc(newProfDocumentRef, profDocumentSnap.data());
 
-
-      //deleting the old data
+      //and remove the old data
       const favDocumentRef = doc(collectionRef, "favourites");
       const profDocumentRef = doc(collectionRef, "profile-picture");
       await deleteDoc(favDocumentRef);
       await deleteDoc(profDocumentRef);
-
 
       setNotificationMessage("Email updated!");
       setNotificationIcon(null);
@@ -56,16 +58,18 @@ export const ChangeEmailModal = ({userToChange}) => {
         setIsNotificationShown(false);
         window.location.reload();
       }, 2000);
-    })
-    .catch((error) => {
-      console.log(error)
-      setNotificationMessage("Provide a valid email!");
-      setErrorHappened(true);
-      setTimeout(()=>{
-        setErrorHappened(false);
-      }, 2000)
-    });
-  };
+      })
+
+      .catch(error => {
+        console.log(error)
+        setNotificationMessage("Errors happened while changing the email!");
+        setErrorHappened(true);
+        setTimeout(()=>{
+          setErrorHappened(false);
+        }, 2000);
+        return;
+      })
+    };
 
   return (
     <>
