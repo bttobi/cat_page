@@ -55,7 +55,7 @@ const DeleteAccountModal = ({ userToDelete }) => {
           </label>
           <div className="wrapper flex flex-col justify-center align-center items-center">
             <p className="text-3xl font-bold mt-8 text-center">Are you sure to delete your account?</p>
-            <button className="btn w-min text-center mt-8 text-white bg-red-500 hover:bg-red-700 border-0" onClick={deleteAccount}>DELETE ACCOUNT</button>
+            <button className="btn text-center mt-8 text-white bg-red-500 hover:bg-red-700 border-0" onClick={deleteAccount}>DELETE ACCOUNT</button>
           </div>
         </label>
       <AnimatePresence>
