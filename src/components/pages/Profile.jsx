@@ -61,10 +61,6 @@ const Profile = () => {
       }, 2000)
     });
   };
-
-  const changeEmail = async () => {
-    // TO DO
-  }
   
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) =>{
