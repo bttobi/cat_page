@@ -9,15 +9,15 @@
   --hamburger-gap: 6px;
 }
 
+#root {
+  min-height: 100vh;
+  margin: 0;
+}
+
 html {
   min-height: 100vh;
   margin: 0;
   padding: 0;
-  background-image: url("/img/bbburst.svg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: repeat-y;
-  background-attachment: fixed;
 }
 
 body {
@@ -45,16 +45,6 @@ html:before {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-}
-
-#root {
-  min-height: 100vh;
-  margin: 0;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 
 .active {
