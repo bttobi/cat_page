@@ -12,6 +12,7 @@ const DeleteAccountModal = ({ userToDelete }) => {
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
   const [notificationIcon, setNotificationIcon] = useState(null);
+  const [errorIcon, setErrorIcon] = useState(null);
   const navigate = useNavigate();
 
   const deleteAccount = async () => {
@@ -34,16 +35,22 @@ const DeleteAccountModal = ({ userToDelete }) => {
     })
   
     .catch(error => {
-      console.log(error)
+      if(error.code == "auth/requires-recent-login"){
+        setErrorIcon(<TailSpin stroke={"#000"}/>);
+        setNotificationMessage("You need to relogin to change email!");
+        setErrorHappened(true);
+        setTimeout(()=>{
+          setErrorHappened(false);
+          navigate("/login");
+        }, 2000);
+        return;
+      } 
       setNotificationMessage("Some errors happened!");
       setErrorHappened(true);
       setTimeout(()=>{
         setErrorHappened(false);
       }, 2000)
     });
-
-    //TO DO need to remove all documents from user
-    //TO DO ADD MODAL TO BE SURE
   };
 
   return (<>
@@ -60,7 +67,7 @@ const DeleteAccountModal = ({ userToDelete }) => {
         </label>
       <AnimatePresence>
         {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
-        {errorHappened && <FailedNotification notification={ notificationMessage }/>}
+        {errorHappened && <FailedNotification notification={ notificationMessage } icon={ errorIcon }/>}
       </AnimatePresence>
       </label>
     </>
