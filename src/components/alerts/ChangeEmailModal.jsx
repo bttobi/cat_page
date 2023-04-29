@@ -18,7 +18,7 @@ export const ChangeEmailModal = ({userToChange}) => {
   const [email, setEmail] = useState("");
   const emailRef = useRef(null);
   const auth = useContext(UserContext);
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const resetPassword = async () => {
     //get the current data
