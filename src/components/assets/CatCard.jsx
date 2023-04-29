@@ -83,12 +83,12 @@ const CatCard = (props) => {
         </motion.div>
         </AnimatePresence>
       <AnimatePresence>
-      {/* DISPLAY NOTIFICATIONS */}
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className="fixed top-28 flex flex-col justify-center align-center items-center z-10 filter-blur-0" ref={catDetails}>
-            <CatCardClicked cat={props.cat} isFavourite={ isFavourite } showFunc={hideDetails} handleFavFunc={handleFavourites}/>
+            <CatCardClicked cat={props.cat} isFavourite={isFavourite} showFunc={hideDetails} handleFavFunc={handleFavourites}/>
         </motion.div>}
       </AnimatePresence>
+      {/* DISPLAY NOTIFICATIONS */}
       <AnimatePresence>
         {errorHappened && <FailedNotification notification={ warningNotificationMessage } />}
         {showSuccessNotification && <SuccessNotification notification={ notificationMessage } />}
