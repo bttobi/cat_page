@@ -5,16 +5,20 @@ import { AnimatePresence } from 'framer-motion';
 import { updateEmail } from 'firebase/auth';
 import { UserContext } from '../../App';
 import { collection, doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
+import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import db from '../../firebase';
+import { useNavigate } from 'react-router-dom';
 
 export const ChangeEmailModal = ({userToChange}) => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
   const [notificationIcon, setNotificationIcon] = useState(null);
+  const [errorIcon, setErrorIcon] = useState(null);
   const [email, setEmail] = useState("");
   const emailRef = useRef(null);
   const auth = useContext(UserContext);
+  const navigation = useNavigate();
 
   const resetPassword = async () => {
     //get the current data
@@ -23,6 +27,15 @@ export const ChangeEmailModal = ({userToChange}) => {
     const profDocumentRef = doc(collectionRef, "profile-picture");
     const favDocumentSnap = await getDoc(favDocumentRef);
     const profDocumentSnap = await getDoc(profDocumentRef);
+
+    if(email == auth.currentUser.email){
+      setNotificationMessage("You are already using that email!");
+        setErrorHappened(true);
+        setTimeout(()=>{
+          setErrorHappened(false);
+        }, 2000);
+        return;
+    };
 
     await updateEmail(userToChange, email).then(async ()=>{ 
       if(favDocumentSnap.data() == null && profDocumentSnap.data() == null){
@@ -61,7 +74,16 @@ export const ChangeEmailModal = ({userToChange}) => {
       })
 
       .catch(error => {
-        console.log(error)
+        if(error.code == "auth/requires-recent-login"){
+          setErrorIcon(<TailSpin stroke={"#000"}/>);
+          setNotificationMessage("You need to relogin to change email!");
+          setErrorHappened(true);
+          setTimeout(()=>{
+            setErrorHappened(false);
+            navigate("/login");
+          }, 2000);
+          return;
+        } 
         setNotificationMessage("Errors happened while changing the email!");
         setErrorHappened(true);
         setTimeout(()=>{
@@ -87,7 +109,7 @@ export const ChangeEmailModal = ({userToChange}) => {
         </label>
       <AnimatePresence>
         {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
-        {errorHappened && <FailedNotification notification={ notificationMessage }/>}
+        {errorHappened && <FailedNotification notification={ notificationMessage } icon={ errorIcon }/>}
       </AnimatePresence>
       </label>
     </>
