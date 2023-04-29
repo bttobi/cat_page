@@ -65,6 +65,7 @@ Application should be hosted in your local network automatically.
 ### 🎯 To do:
 - Style profile, login and register page,
 - UI Overhaul,
+- Refactor the code for more readability,
 - Implement some sort of testing,
 - Moblie responsiveness mainly done,
 - Currently looking for more ideas!
