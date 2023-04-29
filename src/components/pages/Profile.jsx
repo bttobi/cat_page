@@ -79,7 +79,7 @@ const Profile = () => {
       : <div className="w-36 h-36 rounded-lg border-white border-2 p-3 flex justify-center align-center items-center text-center mt-4">No profile picture found!</div>}
 
       <button className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={logOut}>Sign out</button>
-        {user?.email != "test@account.com" || user?.email == "null" &&
+        {(user?.email != "test@account.com" || user?.email != null) &&
         <>
           <label htmlFor="del-acc" className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4">Delete Account</label>
           <button className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={changePassword}>Change Password</button>
