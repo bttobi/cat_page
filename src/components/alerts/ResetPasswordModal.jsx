@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import { useState, useRef, useContext } from 'react';
 import SuccessNotification from './SuccessNotification';
 import FailedNotification from './FailedNotification';
 import { AnimatePresence } from 'framer-motion';

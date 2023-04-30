@@ -1,7 +1,7 @@
 import setProfilePic from "../functions/setProfilePic";
 import { useState, useContext } from "react";
 import { UserContext } from '../../App';
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import FailedNotification from "../alerts/FailedNotification";
 import SuccessNotification from "../alerts/SuccessNotification";
 

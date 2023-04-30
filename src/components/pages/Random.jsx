@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery } from 'react-query';
 import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
-import { v4 as uuidv4 } from 'uuid';
-
 
 const Random = () => {
   const [dataToDisplay, setDataToDisplay] = useState([]);
