@@ -6,12 +6,14 @@ import CatCard from '../assets/CatCard';
 import useFavourites from '../hooks/useFavourites';
 import LoadingIcons from 'react-loading-icons';
 import { onAuthStateChanged } from 'firebase/auth';
+import FailedNotification from '../alerts/FailedNotification';
 
 const Favourites = () => {
   const auth = useContext(UserContext);
-  const [cats, isFetched] = useFavourites();
+  const [cats, isFetched, error] = useFavourites();
   const [showClicked, setShowClicked] = useState(false);
   const [user, setUser] = useState({});
+  const [errorHappened, setErrorHappened] = useState(false);
   
   if(!isFetched){ //if not yet fetched check if user is logged in
     onAuthStateChanged(auth, (currentUser) =>{
@@ -27,7 +29,16 @@ const Favourites = () => {
     window.scrollTo(0, 0);
   },[]);
 
-  return (
+  useEffect(()=> { //check for errors while fetching
+    if(error){
+      setErrorHappened(true);
+      setTimeout(()=>{
+        setErrorHappened(false);
+      }, 2000);
+    } 
+  },)
+
+  return (<>
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="favourites-wrapper w-full h-full m-none my-32 flex flex-col justify-center items-center font-article text-white">
       {(user?.email!=null || user?.email!=undefined) ? 
       <>
@@ -49,7 +60,9 @@ const Favourites = () => {
       <p>You need to log in to see the favourite cats!</p>
       <Link className="underline" to="/">Log in here</Link>
     </div>}
+    {errorHappened && <FailedNotification notification={"Error has happened while fetching!"}/>}
     </motion.div>
+    </>
   )
 }
 
