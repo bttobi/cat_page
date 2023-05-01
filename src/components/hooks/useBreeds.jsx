@@ -20,9 +20,7 @@ const useBreeds = (catBreedId) => {
     query.refetch();
   },[catBreedId]);
 
-  if(query.isError) console.error(query.error.message);
-
-  return [query.data, query.isFetching]
+  return [query.data, query.isFetching, query.isError]
 }
 
 export default useBreeds
