@@ -13,13 +13,12 @@ import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 
 const Profile = () => {
   const [user, setUser] = useState({});
-  const [profilePicUrl, isFetched] = useProfilePic();
+  const [profilePicUrl,, isError] = useProfilePic();
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
   const navigate = useNavigate();
   const auth = useContext(UserContext);
-  const newPasswordRef = useRef();
   const [notificationIcon, setNotificationIcon] = useState(null);
 
   const logOut = () => {
@@ -78,12 +77,12 @@ const Profile = () => {
       <div className="w-36 h-36 rounded-lg mt-4 border-white border-2" style={{backgroundImage: `url(${profilePicUrl})`, backgroundSize: "cover", backgroundPosition: "center"}} />
       : <div className="w-36 h-36 rounded-lg border-white border-2 p-3 flex justify-center align-center items-center text-center mt-4">No profile picture found!</div>}
 
-      <button className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={logOut}>Sign out</button>
+      <button className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active mt-4" onClick={logOut}>Sign out</button>
         {(user?.email != "test@account.com" || user?.email != null) &&
         <>
-          <label htmlFor="del-acc" className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4">Delete Account</label>
-          <button className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={changePassword}>Change Password</button>
-          <label htmlFor="change-email" className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4">Change Email</label>
+          <label htmlFor="del-acc" className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active mt-4">Delete Account</label>
+          <button className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active mt-4" onClick={changePassword}>Change Password</button>
+          <label htmlFor="change-email" className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active mt-4">Change Email</label>
         </>
         }
     </motion.div>  : 
@@ -94,6 +93,7 @@ const Profile = () => {
     </motion.div>
     }
     <AnimatePresence>
+      {isError && <FailedNotification notification={ "Failed fetching profile picture!" }/>}
       {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
       {errorHappened && <FailedNotification notification={ notificationMessage }/>}
     </AnimatePresence>

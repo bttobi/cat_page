@@ -40,7 +40,7 @@ const useProfilePic = () => {
     getProfilePicture();
   }, []);
 
-  return [profilePic, isFetched];
+  return [profilePic, isFetched, isError];
 }
 
 export default useProfilePic
