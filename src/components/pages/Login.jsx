@@ -84,8 +84,8 @@ const Login = () => {
         <div className="password flex flex-col align-center justify-center w-max mt-8 font-bold">
           <input className="input-email input w-full max-w-xs" ref={passRef} type="password" name="password" required placeholder='Password' onChange={()=>{setPassword(passRef.current.value)}}/>
         </div>
-        <button className="login-button btn bg-primary text-article text-secondary-white text-2xl w-full border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={login}>Log in</button>
-        <button className="login-button btn btn-sm h-min bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={loginTest}>TEST ACCOUNT</button>
+        <button className="login-button btn bg-primary text-article text-secondary-white text-2xl w-full border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active mt-4" onClick={login}>Log in</button>
+        <button className="login-button btn btn-sm h-min bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active mt-4" onClick={loginTest}>TEST ACCOUNT</button>
       </div>
       <div className="register-redirect text-center mt-10">Do not have an account?<Link to="/register"><p className="underline">Register here</p></Link></div>
       <div className="register-redirect text-center mt-10">Forgot password?<label htmlFor="reset-pass"><p className="underline cursor-pointer">Send reset email here</p></label></div>

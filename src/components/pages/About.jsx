@@ -14,7 +14,7 @@ const About = () => {
         <p>In order to use the site please create an account - it will unlock the option to add cats to favourites.</p>
         <p>Project is built in technologies like: ReactJS, ReactQuery, React Router, Tailwind CSS, daisyUI and Firebase.</p>
         <div className="button-wrapper flex justify-center">
-          <a href="https://www.tobinski.pl" target="_blank" aria-label="Go to my portfolio website" className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark" >Portfolio Website</a>
+          <a href="https://www.tobinski.pl" target="_blank" aria-label="Go to my portfolio website" className="btn btn-sm bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active" >Portfolio Website</a>
         </div>
       </article>
     </motion.div>

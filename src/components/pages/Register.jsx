@@ -82,7 +82,7 @@ const Register = () => {
         <div className="confirm-password flex flex-col align-center justify-center w-max mt-8">
           <input className="input-password-confirm input w-full max-w-xs" ref={passConfRef} type="password" name="confirm-password" placeholder="Confirm Password" required onChange={()=>{setConfirmPassword(passConfRef.current.value)}}/>
         </div>
-        <button className="register-button btn w-full bg-primary text-article text-secondary-white text-2xl border-2 border-secondary-white rounded-md transition-all duration-300 hover:border-secondary-white hover:bg-dark mt-4" onClick={register}>Register</button>
+        <button className="register-button btn w-full bg-primary text-article text-secondary-white text-2xl border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active mt-4" onClick={register}>Register</button>
       </div>
       <div className="login-redirect text-center mt-10">Already have an account?<button className="login-redirect-button underline text-center"><Link to="/login">Log in here</Link></button></div>
     </motion.div>
