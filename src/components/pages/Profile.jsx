@@ -13,7 +13,7 @@ import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 
 const Profile = () => {
   const [user, setUser] = useState({});
-  const [profilePicUrl,, isError] = useProfilePic();
+  const [profilePicUrl, isFetched] = useProfilePic();
   const [notificationMessage, setNotificationMessage] = useState("");
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
@@ -93,7 +93,6 @@ const Profile = () => {
     </motion.div>
     }
     <AnimatePresence>
-      {isError && <FailedNotification notification={ "Failed fetching profile picture!" }/>}
       {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
       {errorHappened && <FailedNotification notification={ notificationMessage }/>}
     </AnimatePresence>
