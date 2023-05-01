@@ -102,7 +102,7 @@ export const ChangeEmailModal = ({userToChange}) => {
             <svg xmlns="http://www.w3.org/2000/svg" className="w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
           </label>
           <div className="wrapper flex flex-col justify-center align-center items-center">
-            <p className="text-3xl font-bold mt-8 text-center">Do you want to change your email?</p>
+            <p className="text-3xl font-bold mt-8 text-center">What email do you want to change to?</p>
             <input className="input-email input w-full max-w-xs mt-8" ref={emailRef} type="email" name="email" required placeholder='Email' onChange={()=>{setEmail(emailRef.current.value)}}/>
             <button className="btn h-min text-center mt-8 text-white bg-green-500 hover:bg-green-700 border-0" onClick={resetPassword}>CHANGE EMAIL</button>
           </div>
