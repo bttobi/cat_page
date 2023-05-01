@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery } from 'react-query';
 import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
+import FailedNotification from '../alerts/FailedNotification';
 
 const Random = () => {
   const [dataToDisplay, setDataToDisplay] = useState([]);
@@ -52,10 +53,8 @@ const Random = () => {
     onMount();
   },[])
 
-  
-  if(query.isError) console.error(query.error.message);
 
-  return (
+  return (<>
     <motion.div id="home" initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="home-page w-full m-none my-16 flex flex-col justify-center items-center font-article text-white" style={{height: "110vh"}}>
       <AnimatePresence>
         {showClicked && <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
@@ -72,6 +71,10 @@ const Random = () => {
         </div>
       }
     </motion.div>
+    <AnimatePresence>
+      {query.isError && <FailedNotification notification={ "Failed while fetching normal cats!" }/>}
+    </AnimatePresence>
+    </>
   )
 }
 
