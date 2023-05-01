@@ -25,8 +25,8 @@ const Search = (props) => {
 
   const breeds = useQuery('catBreeds', fetchBreeds, {
     refetchOnMount: true,
-    refetchOnReconnect: false,
-    retry: false,
+    refetchOnReconnect: true,
+    retry: true,
     refetchIntervalInBackground: false,
     refetchInterval: 86400000,
     refetchOnWindowFocus: false,
