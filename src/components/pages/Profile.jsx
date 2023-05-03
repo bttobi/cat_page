@@ -4,12 +4,12 @@ import { UserContext } from '../../App';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut, sendPasswordResetEmail } from 'firebase/auth';
 import useProfilePic from '../hooks/useProfilePic';
-import SuccessNotification from '../alerts/SuccessNotification';
-import FailedNotification from '../alerts/FailedNotification';
+import Notification from '../alerts/Notification';
 import { onAuthStateChanged } from 'firebase/auth';
 import DeleteAccountModal from '../alerts/DeleteAccountModal';
 import ChangeEmailModal from '../alerts/ChangeEmailModal';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
+import ProfilePictureModal from '../alerts/ProfilePictureModal';
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -25,6 +25,7 @@ const Profile = () => {
     signOut(auth)
     .then(()=> {
       setNotificationMessage("Signed out successfully!");
+      setErrorHappened(false);
       setNotificationIcon(<TailSpin stroke={"#000"}/>);
       setIsNotificationShown(true);
       setTimeout(()=>{
@@ -47,12 +48,14 @@ const Profile = () => {
       setNotificationMessage("Email with password reset instructions sent!");
       setNotificationIcon(null);
       setIsNotificationShown(true);
+      setErrorHappened(false);
 
       setTimeout(()=>{
         setIsNotificationShown(false);
       }, 2000);
     })
     .catch((error) => {
+      setIsNotificationShown(true);
       setNotificationMessage("Some errors happened!");
       setErrorHappened(true);
       setTimeout(()=>{
@@ -74,9 +77,8 @@ const Profile = () => {
       <p>Welcome!</p>
       <p>{user?.email != undefined || user?.email != null ? user?.email : "Signed out!"}</p>
       {profilePicUrl != "NOT FOUND" ? 
-      <div className="w-36 h-36 rounded-lg mt-4 border-white border-2" style={{backgroundImage: `url(${profilePicUrl})`, backgroundSize: "cover", backgroundPosition: "center"}} />
+      <label htmlFor="prof-pic" className="w-36 h-36 rounded-lg mt-4 border-white border-2 transition-all duration-150 cursor-pointer hover:scale-105" style={{backgroundImage: `url(${profilePicUrl})`, backgroundSize: "cover", backgroundPosition: "center"}} />
       : <div className="w-36 h-36 rounded-lg border-white border-2 p-3 flex justify-center align-center items-center text-center mt-4">No profile picture found!</div>}
-
       <button className="btn btn-sm w-full bg-primary text-article text-secondary-white text-xl border-2 border-secondary-white rounded-md transition-all duration-150 hover:border-secondary-white hover:bg-gray-active mt-4" onClick={logOut}>Sign out</button>
         {(user?.email != "test@account.com" && user?.email != null) &&
         <>
@@ -93,9 +95,9 @@ const Profile = () => {
     </motion.div>
     }
     <AnimatePresence>
-      {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
-      {errorHappened && <FailedNotification notification={ notificationMessage }/>}
+      {isNotificationShown && <Notification notification={ notificationMessage } errorHappened={errorHappened} icon={notificationIcon}/>}
     </AnimatePresence>
+    <ProfilePictureModal profilePicture={profilePicUrl} userToChange={user}/>
     <DeleteAccountModal userToDelete={user}/>
     <ChangeEmailModal userToChange={user}/>
     </>
