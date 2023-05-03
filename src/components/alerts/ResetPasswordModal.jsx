@@ -1,6 +1,5 @@
 import { useState, useRef, useContext } from 'react';
-import SuccessNotification from './SuccessNotification';
-import FailedNotification from './FailedNotification';
+import Notification from './Notification';
 import { AnimatePresence } from 'framer-motion';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { UserContext } from '../../App';
@@ -20,6 +19,7 @@ export const ResetPasswordModal = () => {
       setNotificationMessage("Email with password reset instructions sent!");
       setNotificationIcon(null);
       setIsNotificationShown(true);
+      setErrorHappened(false);
 
       setTimeout(()=>{
         setIsNotificationShown(false);
@@ -49,8 +49,7 @@ export const ResetPasswordModal = () => {
           </div>
         </label>
       <AnimatePresence>
-        {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
-        {errorHappened && <FailedNotification notification={ notificationMessage }/>}
+        {isNotificationShown && <Notification notification={ notificationMessage } errorHappened={errorHappened} icon={notificationIcon}/>}
       </AnimatePresence>
       </label>
     </>

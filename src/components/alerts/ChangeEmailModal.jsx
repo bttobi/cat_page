@@ -1,6 +1,5 @@
 import { useState, useRef, useContext } from 'react';
-import SuccessNotification from './SuccessNotification';
-import FailedNotification from './FailedNotification';
+import Notification from './Notification';
 import { AnimatePresence } from 'framer-motion';
 import { updateEmail } from 'firebase/auth';
 import { UserContext } from '../../App';
@@ -14,7 +13,6 @@ export const ChangeEmailModal = ({userToChange}) => {
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
   const [notificationIcon, setNotificationIcon] = useState(null);
-  const [errorIcon, setErrorIcon] = useState(null);
   const [email, setEmail] = useState("");
   const emailRef = useRef(null);
   const auth = useContext(UserContext);
@@ -29,18 +27,18 @@ export const ChangeEmailModal = ({userToChange}) => {
     const profDocumentSnap = await getDoc(profDocumentRef);
 
     if(email == auth.currentUser.email){
+      setIsNotificationShown(true);
       setNotificationMessage("You are already using that email!");
-        setErrorHappened(true);
-        setTimeout(()=>{
-          setErrorHappened(false);
-        }, 2000);
-        return;
+      setErrorHappened(true);
+      setTimeout(()=>{
+        setIsNotificationShown(false);
+      }, 2000);
+      return;
     };
 
     await updateEmail(userToChange, email).then(async ()=>{ 
       if(favDocumentSnap.data() == null && profDocumentSnap.data() == null){
         setNotificationMessage("Email updated!");
-        setNotificationIcon(null);
         setIsNotificationShown(true);
 
         setTimeout(()=>{
@@ -64,8 +62,8 @@ export const ChangeEmailModal = ({userToChange}) => {
       await deleteDoc(profDocumentRef);
 
       setNotificationMessage("Email updated!");
-      setNotificationIcon(null);
       setIsNotificationShown(true);
+      setErrorHappened(false);
 
       setTimeout(()=>{
         setIsNotificationShown(false);
@@ -75,19 +73,21 @@ export const ChangeEmailModal = ({userToChange}) => {
 
       .catch(error => {
         if(error.code == "auth/requires-recent-login"){
-          setErrorIcon(<TailSpin stroke={"#000"}/>);
+          setNotificationIcon(<TailSpin stroke={"#000"}/>);
+          setIsNotificationShown(true);
           setNotificationMessage("You need to relogin to change email!");
           setErrorHappened(true);
           setTimeout(()=>{
-            setErrorHappened(false);
+            setIsNotificationShown(false);
             navigate("/login");
           }, 2000);
           return;
         } 
+        setIsNotificationShown(true);
         setNotificationMessage("Errors happened while changing the email!");
         setErrorHappened(true);
         setTimeout(()=>{
-          setErrorHappened(false);
+          setIsNotificationShown(false);
         }, 2000);
         return;
       })
@@ -108,8 +108,7 @@ export const ChangeEmailModal = ({userToChange}) => {
           </div>
         </label>
       <AnimatePresence>
-        {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
-        {errorHappened && <FailedNotification notification={ notificationMessage } icon={ errorIcon }/>}
+        {isNotificationShown && <Notification key={errorHappened} notification={ notificationMessage } errorHappened={errorHappened} icon={ notificationIcon }/>}
       </AnimatePresence>
       </label>
     </>

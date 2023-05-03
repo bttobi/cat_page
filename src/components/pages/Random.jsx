@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useQuery } from 'react-query';
 import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
-import FailedNotification from '../alerts/FailedNotification';
+import Notification from '../alerts/Notification';
 
 const Random = () => {
   const [dataToDisplay, setDataToDisplay] = useState([]);
@@ -72,7 +72,7 @@ const Random = () => {
       }
     </motion.div>
     <AnimatePresence>
-      {query.isError && <FailedNotification notification={ "Failed while fetching normal cats!" }/>}
+      {query.isError && <Notification notification={ "Failed while fetching normal cats!" } errorHappened={query.isError}/>}
     </AnimatePresence>
     </>
   )

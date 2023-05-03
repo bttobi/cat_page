@@ -4,12 +4,12 @@ import CatCard from '../assets/CatCard';
 import LoadingIcons from 'react-loading-icons';
 import Search from '../interactive-elements/Search';
 import useBreeds from '../hooks/useBreeds';
-import FailedNotification from '../alerts/FailedNotification';
+import Notification from '../alerts/Notification';
 
 const CatBreeds = () => {
   const [catBreedId, setCatBreedId] = useState("beng");
   const [showClicked, setShowClicked] = useState(false);
-  const [cats, isFetching, isError] = useBreeds(catBreedId);
+  const [cats, isFetching, errorHappened] = useBreeds(catBreedId);
 
   const getSearchDetailsOfCats = (searchDetails) => {
     setCatBreedId(searchDetails.breed);
@@ -39,7 +39,7 @@ const CatBreeds = () => {
         </div>
       </motion.div>
       <AnimatePresence>
-        {isError &&<FailedNotification notification={"Fetching cat breeds failed!"}/>}
+        {errorHappened && <Notification notification={"Fetching cat breeds failed!"} errorHappened={errorHappened}/>}
       </AnimatePresence>
       </>
   )

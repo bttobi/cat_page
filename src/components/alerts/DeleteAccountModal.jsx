@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import SuccessNotification from './SuccessNotification';
-import FailedNotification from './FailedNotification';
+import Notification from './Notification';
 import { AnimatePresence } from 'framer-motion';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +11,6 @@ const DeleteAccountModal = ({ userToDelete }) => {
   const [isNotificationShown, setIsNotificationShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
   const [notificationIcon, setNotificationIcon] = useState(null);
-  const [errorIcon, setErrorIcon] = useState(null);
   const navigate = useNavigate();
 
   const deleteAccount = async () => {
@@ -26,6 +24,7 @@ const DeleteAccountModal = ({ userToDelete }) => {
       });
 
       setNotificationMessage("Deleted user successfully!");
+      setErrorHappened(false);
       setNotificationIcon(<TailSpin stroke={"#000"}/>);
       setIsNotificationShown(true);
       setTimeout(()=>{
@@ -37,18 +36,20 @@ const DeleteAccountModal = ({ userToDelete }) => {
     .catch(error => {
       if(error.code == "auth/requires-recent-login"){
         setErrorIcon(<TailSpin stroke={"#000"}/>);
-        setNotificationMessage("You need to relogin to change email!");
         setErrorHappened(true);
+        setNotificationMessage("You need to relogin to change email!");
+        setIsNotificationShown(true);
         setTimeout(()=>{
-          setErrorHappened(false);
+          setIsNotificationShown(false);
           navigate("/login");
         }, 2000);
         return;
       } 
+      setIsNotificationShown(true);
       setNotificationMessage("Some errors happened!");
       setErrorHappened(true);
       setTimeout(()=>{
-        setErrorHappened(false);
+        setIsNotificationShown(false);
       }, 2000)
     });
   };
@@ -66,8 +67,7 @@ const DeleteAccountModal = ({ userToDelete }) => {
           </div>
         </label>
       <AnimatePresence>
-        {isNotificationShown && <SuccessNotification notification={ notificationMessage } icon={ notificationIcon }/>}
-        {errorHappened && <FailedNotification notification={ notificationMessage } icon={ errorIcon }/>}
+        {isNotificationShown && <Notification notification={ notificationMessage } errorHappened={errorHappened} icon={notificationIcon}/>}
       </AnimatePresence>
       </label>
     </>

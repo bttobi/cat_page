@@ -3,17 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { UserContext } from '../../App';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import FailedNotification from '../alerts/FailedNotification';
-import SuccessNotification from '../alerts/SuccessNotification';
+import Notification from '../alerts/Notification';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { ResetPasswordModal } from '../alerts/ResetPasswordModal';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [err, setErr] = useState("");
-  const [dispError, setDispError] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
+  const [errorHappened, setErrorHappened] = useState(false);
+  const [notificationMessage, setNotificationMessage] = useState("");
+  const [notificationIcon, setNotificationIcon] = useState(null);
   const emailRef = useRef(null);
   const passRef = useRef(null);
   const navigate = useNavigate();
@@ -24,7 +24,10 @@ const Login = () => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
       if(user!==null && user!==undefined){ 
-        setSuccess(true);
+        setShowNotification(true);
+        setNotificationMessage("Logged in successfully!");
+        setErrorHappened(false);
+        setNotificationIcon(<TailSpin stroke={"#000"}/>)
         setTimeout(()=>{navigate('/');}, 1000);
       }
     }
@@ -32,26 +35,27 @@ const Login = () => {
     catch (error) {
       switch (error.code) {
         case "auth/invalid-email":
-          setErr("Please provide a valid email!");
+          setNotificationMessage("Please provide a valid email!");
           break;
         
         case "auth/wrong-password":
-          setErr("Wrong password!");
+          setNotificationMessage("Wrong password!");
           break;
         
         case "auth/user-not-found":
-          setErr("User not found!");
+          setNotificationMessage("User not found!");
           break;
 
         default: 
-          setErr("Some errors happened");
+          setNotificationMessage("Some errors happened");
           break;
       }
 
-      setDispError(true);
+      setShowNotification(true);
+      setErrorHappened(true);
       emailRef.current.value = "";
       passRef.current.value = "";
-      setTimeout(()=>{setDispError(false)}, 2000);
+      setTimeout(()=>{setShowNotification(false)}, 2000);
     }
   };
 
@@ -59,15 +63,18 @@ const Login = () => {
     try {
       const user = await signInWithEmailAndPassword(auth, "test@account.com", "test123");
       if(user!==null && user!==undefined){ 
-        setSuccess(true);
+        setShowNotification(true);
+        setNotificationMessage("Logged in successfully!");
+        setNotificationIcon(<TailSpin stroke="#000" />);
         setTimeout(()=>{navigate('/random');}, 2000);
       }
     }
     
     catch (error) { 
-      setErr("Some errors happened");
-      setDispError(true);
-      setTimeout(()=>{setDispError(false)}, 2000);
+      setErrorHappened(true);
+      setNotificationMessage("Some errors happened");
+      setShowNotification(true);
+      setTimeout(()=>{setShowNotification(false)}, 2000);
     }
   };
 
@@ -90,8 +97,7 @@ const Login = () => {
       <div className="register-redirect text-center mt-10">Do not have an account?<Link to="/register"><p className="underline">Register here</p></Link></div>
       <div className="register-redirect text-center mt-10">Forgot password?<label htmlFor="reset-pass"><p className="underline cursor-pointer">Send reset email here</p></label></div>
       <AnimatePresence>
-        {dispError && <FailedNotification notification={err}/>}
-        {success && <SuccessNotification notification={ "Successfully logged in!" } icon={ <TailSpin stroke={"#000"}/> }/>}
+        {showNotification && <Notification notification={notificationMessage} icon={notificationIcon} errorHappened={errorHappened}/>}
       </AnimatePresence>
       <ResetPasswordModal />
     </motion.div>

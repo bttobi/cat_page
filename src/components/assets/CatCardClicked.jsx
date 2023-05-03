@@ -2,37 +2,36 @@ import setProfilePic from "../functions/setProfilePic";
 import { useState, useContext } from "react";
 import { UserContext } from '../../App';
 import { AnimatePresence } from "framer-motion";
-import FailedNotification from "../alerts/FailedNotification";
-import SuccessNotification from "../alerts/SuccessNotification";
+import Notification from "../alerts/Notification";
 
 const CatCardClicked = (props) => {
   const auth = useContext(UserContext);
   const [errorHappened, setErrorHappened] = useState(false);
-  const [isProfilePicSet, setIsProfilePicSet] = useState(false);
-  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
-  const [warningNotificationMessage, setWarningNotificationMessage] = useState("");
 
   const handleProfilePic = () => {
     if(auth.currentUser?.email === null || auth.currentUser?.email === undefined){
+      setShowNotification(true);
       setErrorHappened(true);
-      setWarningNotificationMessage("You must log in to set a profile picture!");
-      setTimeout(() => { setErrorHappened(false) }, 2000);
+      setNotificationMessage("You must log in to set a profile picture!");
+      setTimeout(() => { setShowNotification(false) }, 2000);
       return;
     }
 
     try {
       setProfilePic(auth, props.cat.url);
-      setIsProfilePicSet(true);
       setNotificationMessage("Set successfully as profile picture!");
-      setShowSuccessNotification(true);
-      setTimeout(() => { setShowSuccessNotification(false) }, 2000);
+      setErrorHappened(false);
+      setShowNotification(true);
+      setTimeout(() => { setShowNotification(false) }, 2000);
     }
     
     catch(error){
+      setShowNotification(true);
       setErrorHappened(true);
-      setWarningNotificationMessage("Some errors happened");
-      setTimeout(() => { setErrorHappened(false) }, 2000);
+      setNotificationMessage("Some errors happened while setting profile picture!");
+      setTimeout(() => { setShowNotification(false) }, 2000);
     }
   }
 
@@ -59,8 +58,7 @@ const CatCardClicked = (props) => {
       </div>
     </div>
     <AnimatePresence>
-      {errorHappened && <FailedNotification notification={ warningNotificationMessage } />}
-      {showSuccessNotification && <SuccessNotification notification={ notificationMessage } />}
+      {showNotification && <Notification notification={ notificationMessage } errorHappened={errorHappened}/>}
     </AnimatePresence>
     </>
   )

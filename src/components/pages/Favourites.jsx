@@ -6,7 +6,7 @@ import CatCard from '../assets/CatCard';
 import useFavourites from '../hooks/useFavourites';
 import LoadingIcons from 'react-loading-icons';
 import { onAuthStateChanged } from 'firebase/auth';
-import FailedNotification from '../alerts/FailedNotification';
+import Notification from '../alerts/Notification';
 
 const Favourites = () => {
   const auth = useContext(UserContext);
@@ -60,7 +60,7 @@ const Favourites = () => {
       <p>You need to log in to see the favourite cats!</p>
       <Link className="underline" to="/login">Log in here</Link>
     </div>}
-    {errorHappened && <FailedNotification notification={"Error has happened while fetching!"}/>}
+    {errorHappened && <Notification notification={"Error has happened while fetching!"} errorHappened={errorHappened}/>}
     </motion.div>
     </>
   )

@@ -4,24 +4,23 @@ import CatCardClicked from './CatCardClicked';
 import { motion, AnimatePresence } from 'framer-motion';
 import addToFav from '../functions/addToFav';
 import removeFromFav from '../functions/removeFromFav';
-import SuccessNotification from '../alerts/SuccessNotification';
-import FailedNotification from '../alerts/FailedNotification';
+import Notification from '../alerts/Notification';
 
 const CatCard = (props) => {
   const catDetails = useRef();
   const [isShown, setIsShown] = useState(false);
   const [errorHappened, setErrorHappened] = useState(false);
   const [isFavourite, setIsFavourite] = useState(props?.isFavourite | false);
-  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
-  const [warningNotificationMessage, setWarningNotificationMessage] = useState("");
   const auth = useContext(UserContext);
 
   const handleFavourites = async () => {
     if(auth.currentUser?.email === null || auth.currentUser?.email === undefined){
+      setShowNotification(true);
       setErrorHappened(true);
-      setWarningNotificationMessage("You must log in to add a cat to favourites!");
-      setTimeout(() => { setErrorHappened(false) }, 2000);
+      setNotificationMessage("You must log in to add a cat to favourites!");
+      setTimeout(() => { setShowNotification(false) }, 2000);
       return;
     }
     
@@ -30,20 +29,22 @@ const CatCard = (props) => {
         addToFav(props, auth); //passing all cat info
         setIsFavourite(true);
         setNotificationMessage("Added to favourites!");
-        setShowSuccessNotification(true);
-        setTimeout(() => { setShowSuccessNotification(false) }, 2000);
+        setShowNotification(true);
+        setErrorHappened(false);
+        setTimeout(() => { setShowNotification(false) }, 2000);
         return;
       }
       removeFromFav(props, auth); //passing all cat info
       setIsFavourite(false);
       setNotificationMessage("Removed from favourites!");
-      setShowSuccessNotification(true);
-      setTimeout(() => { setShowSuccessNotification(false) }, 2000);
+      setShowNotification(true);
+      setTimeout(() => { setShowNotification(false) }, 2000);
     }
     
     catch(error){
+      setShowNotification(true);
       setErrorHappened(true);
-      setWarningNotificationMessage("Some errors happened");
+      setNotificationMessage("Some errors happened");
       setTimeout(() => { setErrorHappened(false) }, 2000);
     }
   }
@@ -90,8 +91,7 @@ const CatCard = (props) => {
       </AnimatePresence>
       {/* DISPLAY NOTIFICATIONS */}
       <AnimatePresence>
-        {errorHappened && <FailedNotification notification={ warningNotificationMessage } />}
-        {showSuccessNotification && <SuccessNotification notification={ notificationMessage } />}
+        {showNotification && <Notification notification={ notificationMessage } errorHappened={errorHappened} />}
       </AnimatePresence>
     </>
   )
