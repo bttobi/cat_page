@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { UserContext } from '../../App';
 import { Link, useNavigate } from 'react-router-dom';
