@@ -58,7 +58,7 @@ Application should be hosted in your local network automatically.
 ![image](https://user-images.githubusercontent.com/76923032/233112851-5d41d93f-c88d-41a2-9083-a26c36ae4ec2.png)
 ![image](https://user-images.githubusercontent.com/76923032/233113195-a6414fc4-d160-415f-9cc2-eac666a5cd7c.png)
 ![image](https://user-images.githubusercontent.com/76923032/233113220-51869a0e-16ae-40b2-85de-210071f83b90.png)
-![image](https://user-images.githubusercontent.com/76923032/233113251-bfc9bb34-9a5c-4d8e-8646-3b0503beebfc.png)
+![image](https://user-images.githubusercontent.com/76923032/235992223-108021cd-19f6-4ce5-8e28-7a80f06bc6d6.png)
 
 #
 
