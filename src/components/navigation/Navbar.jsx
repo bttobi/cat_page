@@ -4,10 +4,18 @@ import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 import { onAuthStateChanged } from 'firebase/auth';
+import getProfilePic from '../functions/getProfilePic.jsx';
 
 const Navbar = () => {
   const [user, setUser] = useState({});
-  
+  const [profilePicUrl, setProfilePicUrl] = useState("NOT FOUND");
+  const [url, isFetched] = getProfilePic();
+
+  useEffect(()=>{
+    setProfilePicUrl(url);
+  },[url, isFetched])
+
+
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) =>{
       setUser(currentUser);
@@ -28,7 +36,17 @@ const Navbar = () => {
           <NavLink className="btn bg-primary text-secondary-white text-lg border-0 px-3 m-0 rounded-md transition-all duration-150 hover:bg-dark" to="/about">About</NavLink>
         </li>
         {user?.email ?  
-        <li className="flex justify-center items-center w-12"><NavLink className="btn bg-primary text-secondary-white text-lg p-1 mr-4 border-0 rounded-md transition-all duration-150 hover:bg-dark"  to="/profile"><img src="./img/cat_profile.png" width="40px" height="40px" alt="Cat profile picture"></img></NavLink></li> 
+        <li className="flex justify-center items-center w-12"><NavLink className="btn bg-primary text-secondary-white text-lg p-1 mr-4 border-0 rounded-md transition-all duration-150 hover:bg-dark"  to="/profile">
+          {profilePicUrl != "NOT FOUND" ? 
+            <div className="avatar px-1">
+              <div className="w-8 rounded-full ring ring-white ring-offset-base-100 ring-offset-1">
+                <img src={profilePicUrl} />
+              </div>
+            </div>: 
+          <img src="./img/cat_profile.png" width="40px" height="40px" alt="Cat profile picture"/>
+          }
+          </NavLink>
+        </li> 
         : <li className="flex justify-center items-center w-12" ><NavLink className="btn flex justify-center items-center align-center bg-primary text-secondary-white text-lg px-6 mr-4 border-0 rounded-md transition-all duration-150 hover:bg-dark" to="/login"><i className="gg-log-in"></i></NavLink></li>
         }
       </ul>
