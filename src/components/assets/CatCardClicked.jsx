@@ -3,12 +3,14 @@ import { useState, useContext } from "react";
 import { UserContext } from '../../App';
 import { AnimatePresence } from "framer-motion";
 import Notification from "../alerts/Notification";
+import { ProfilePictureContext } from '../../App';
 
 const CatCardClicked = (props) => {
   const auth = useContext(UserContext);
   const [errorHappened, setErrorHappened] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState("");
+  const [, setUserPicture] = useContext(ProfilePictureContext);
 
   const handleProfilePic = () => {
     if(auth.currentUser?.email === null || auth.currentUser?.email === undefined){
@@ -21,6 +23,7 @@ const CatCardClicked = (props) => {
 
     try {
       setProfilePic(auth, props.cat.url);
+      setUserPicture(props.cat.url);
       setNotificationMessage("Set successfully as profile picture!");
       setErrorHappened(false);
       setShowNotification(true);
