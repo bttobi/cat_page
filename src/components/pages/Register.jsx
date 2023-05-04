@@ -5,6 +5,8 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { UserContext } from '../../App';
 import Notification from '../alerts/Notification';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
+import { ProfilePictureContext } from '../../App';
+import getProfilePic from '../functions/getProfilePic.jsx';
 
 const Register = () => {
   const emailRef = useRef(null);
@@ -17,6 +19,8 @@ const Register = () => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [, setUserPicture] = useContext(ProfilePictureContext);
+  const [url, isFetched] = getProfilePic();
   const auth = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -35,6 +39,7 @@ const Register = () => {
       setShowNotification(true);
       setNotificationIcon(<TailSpin stroke="#000" />);
       setNotificationMessage("User registered successfully!");
+      setUserPicture(url);
       setTimeout(()=>{
         setShowNotification(false);
         navigate('/');

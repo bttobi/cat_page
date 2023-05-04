@@ -6,6 +6,8 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import Notification from '../alerts/Notification';
 import TailSpin from 'react-loading-icons/dist/esm/components/tail-spin';
 import { ResetPasswordModal } from '../alerts/ResetPasswordModal';
+import { ProfilePictureContext } from '../../App';
+import getProfilePic from '../functions/getProfilePic.jsx';
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,6 +20,8 @@ const Login = () => {
   const passRef = useRef(null);
   const navigate = useNavigate();
   const auth = useContext(UserContext);
+  const [, setUserPicture] = useContext(ProfilePictureContext);
+  const [url, isFetched] = getProfilePic();
   
 
   const login = async() => {
@@ -28,6 +32,7 @@ const Login = () => {
         setNotificationMessage("Logged in successfully!");
         setErrorHappened(false);
         setNotificationIcon(<TailSpin stroke={"#000"}/>)
+        setUserPicture(url);
         setTimeout(()=>{navigate('/');}, 1000);
       }
     }
@@ -66,6 +71,7 @@ const Login = () => {
         setShowNotification(true);
         setNotificationMessage("Logged in successfully!");
         setNotificationIcon(<TailSpin stroke="#000" />);
+        setUserPicture(url);
         setTimeout(()=>{navigate('/random');}, 2000);
       }
     }
