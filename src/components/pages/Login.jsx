@@ -47,7 +47,7 @@ const Login = () => {
           break;
 
         default: 
-          setNotificationMessage("Some errors happened");
+          setNotificationMessage("Some errors happened!");
           break;
       }
 
