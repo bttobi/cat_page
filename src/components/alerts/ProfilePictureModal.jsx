@@ -20,7 +20,6 @@ const ProfilePictureModal = ({profilePicture, userToChange}) => {
       setTimeout(()=>{setShowNotification(false); window.location.reload();}, 2000);
     }
     catch(error){
-      console.log(error);
       setShowNotification(true);
       setErrorHappened(true);
       setNotificationMessage("Errors happened while removing profile picture!");
