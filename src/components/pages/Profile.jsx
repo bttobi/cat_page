@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { UserContext } from '../../App';
 import { Link, useNavigate } from 'react-router-dom';
 import { signOut, sendPasswordResetEmail } from 'firebase/auth';
-import useProfilePic from '../hooks/useProfilePic';
+import useProfilePic from '../functions/getProfilePic';
 import Notification from '../alerts/Notification';
 import { onAuthStateChanged } from 'firebase/auth';
 import DeleteAccountModal from '../alerts/DeleteAccountModal';
@@ -97,7 +97,7 @@ const Profile = () => {
     <AnimatePresence>
       {isNotificationShown && <Notification notification={ notificationMessage } errorHappened={errorHappened} icon={notificationIcon}/>}
     </AnimatePresence>
-    <ProfilePictureModal profilePicture={profilePicUrl} userToChange={user}/>
+    <ProfilePictureModal userToChange={user}/>
     <DeleteAccountModal userToDelete={user}/>
     <ChangeEmailModal userToChange={user}/>
     </>
