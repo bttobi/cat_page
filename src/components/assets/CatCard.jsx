@@ -71,7 +71,7 @@ const CatCard = (props) => {
   return (
     <>
       <AnimatePresence>
-        <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.05)'}} animate={{transform: 'scale(1)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary rounded-lg shadow-lg shadow-black">
+        <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.05)'}} animate={{transform: 'scale(1)'}} exit={{transform: 'scale(0)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary rounded-lg shadow-lg shadow-black">
         <div className="favourite py-6 pl-6 pr-2 w-full h-8 flex flex-row justify-end items-center">
             <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
               <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">{props.cat?.breeds[0]?.name || "Cute Cat"}</p>
@@ -82,7 +82,7 @@ const CatCard = (props) => {
               <div className="w-min h-min m-0 rounded-lg" style= {{minWidth: '12rem', minHeight: '12rem', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}} alt="cat"></div>           
             </div>
         </motion.div>
-        </AnimatePresence>
+      </AnimatePresence>
       <AnimatePresence>
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className="fixed top-28 flex flex-col justify-center align-center items-center z-10 filter-blur-0" ref={catDetails}>
