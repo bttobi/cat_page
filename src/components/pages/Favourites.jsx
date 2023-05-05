@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { UserContext } from '../../App';
 import CatCard from '../assets/CatCard';
 import useFavourites from '../hooks/useFavourites';
@@ -11,6 +11,9 @@ import Notification from '../alerts/Notification';
 const Favourites = () => {
   const auth = useContext(UserContext);
   const [cats, isFetched, error] = useFavourites();
+  const [filteredCats, setFilteredCats] = useState([]);
+  const [onMount, setOnMount] = useState(true);
+  const searchRef = useRef();
   const [showClicked, setShowClicked] = useState(false);
   const [user, setUser] = useState({});
   const [errorHappened, setErrorHappened] = useState(false);
@@ -21,6 +24,12 @@ const Favourites = () => {
     });
   }
 
+  const filterCats = () => {
+    setFilteredCats(cats.filter((cat)=>
+      (cat?.breeds[0]?.name.toLowerCase() ?? "cute cat")
+      .includes(searchRef.current.value.toLowerCase())));
+  };
+
   const getShowClicked = (isClicked)=>{
     setShowClicked(isClicked);
   };
@@ -29,7 +38,12 @@ const Favourites = () => {
     window.scrollTo(0, 0);
   },[]);
 
-  useEffect(()=> { //check for errors while fetching
+  useEffect(()=> { 
+    if(isFetched && filteredCats.length == 0 && onMount){
+      setFilteredCats(cats);
+      setOnMount(false);
+    }
+    //check for errors while fetching
     if(error){
       setErrorHappened(true);
       setTimeout(()=>{
@@ -45,15 +59,17 @@ const Favourites = () => {
       <AnimatePresence>
         {showClicked && <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
       </AnimatePresence>
+      {filteredCats != [] && 
+        <input className="input" ref={searchRef} type="text" placeholder="Search for cats" onChange={filterCats}/>}
       <div className="cat-cards-wrapper w-full h-full flex flex-wrap items-start align-start content-start justify-center">
-      {(!isFetched) &&  cats.length != [] ?
+      {(!isFetched) && filteredCats.length != [] ?
             <div className="loading-wrapper z-10 m-16 flex flex-col items-center justify-center">
               <LoadingIcons.Hearts width="16rem" speed="3"/>
               <span className="loading-text text-base font-bold font-article text-white">Loading...</span>
             </div> : 
-              cats.length != 0 ? 
-              cats.map(el => <CatCard showClicked={getShowClicked} isFavourite={ true } cat={el} key={el.url}/>)
-              : <div className="not-loggedin-notification font-bold text-xl underline"><Link to="/random">No favourite cats found... Add some to favourites!</Link></div>} 
+              filteredCats.length != 0 ? 
+              filteredCats.map(el => <CatCard showClicked={getShowClicked} isFavourite={ true } cat={el} key={el.url}/>)
+              : <div className="not-loggedin-notification font-bold text-xl underline mt-4"><Link to="/random">No favourite cats found... Add some to favourites!</Link></div>} 
         </div>
         </>
     :<div className="not-loggedin-notification font-bold text-xl flex flex-col justify-center align-center items-center rounded-lg bg-dark p-4 shadow-lg shadow-black text-center mx-4">
