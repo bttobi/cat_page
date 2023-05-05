@@ -5,6 +5,7 @@ import { NavLink } from 'react-router-dom';
 import HamburgerMenu from './HamburgerMenu';
 import { onAuthStateChanged } from 'firebase/auth';
 import getProfilePic from '../functions/getProfilePic.jsx';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Navbar = () => {
   const [user, setUser] = useState({});
@@ -37,14 +38,16 @@ const Navbar = () => {
         </li>
         {user?.email ?  
         <li className="flex justify-center items-center w-12"><NavLink className="btn bg-primary text-secondary-white text-lg p-1 mr-4 border-0 rounded-md transition-all duration-150 hover:bg-dark"  to="/profile">
+          <AnimatePresence>
           {profilePicUrl != "NOT FOUND" ? 
-            <div className="avatar px-1">
+            <motion.div className="avatar px-1" initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}}>
               <div className="w-8 rounded-full ring ring-white ring-offset-base-100 ring-offset-1">
-                <img src={profilePicUrl} />
+                <motion.img key={profilePicUrl} src={profilePicUrl}  initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} />
               </div>
-            </div>: 
-          <img src="./img/cat_profile.png" width="40px" height="40px" alt="Cat profile picture"/>
+            </motion.div>: 
+          <motion.img initial={{opacity: 0}} animate={{opacity: 1}} exit={{opacity: 0}} src="./img/cat_profile.png" width="40px" height="40px" alt="Cat profile picture"/>
           }
+          </AnimatePresence>
           </NavLink>
         </li> 
         : <li className="flex justify-center items-center w-12" ><NavLink className="btn flex justify-center items-center align-center bg-primary text-secondary-white text-lg px-6 mr-4 border-0 rounded-md transition-all duration-150 hover:bg-dark" to="/login"><i className="gg-log-in"></i></NavLink></li>
