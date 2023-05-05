@@ -6,6 +6,7 @@ import HamburgerMenu from './HamburgerMenu';
 import { onAuthStateChanged } from 'firebase/auth';
 import getProfilePic from '../functions/getProfilePic.jsx';
 import { AnimatePresence, motion } from 'framer-motion';
+import { BiLogIn } from 'react-icons/bi';
 
 const Navbar = () => {
   const [user, setUser] = useState({});
@@ -50,7 +51,7 @@ const Navbar = () => {
           </AnimatePresence>
           </NavLink>
         </li> 
-        : <li className="flex justify-center items-center w-12" ><NavLink className="btn flex justify-center items-center align-center bg-primary text-secondary-white text-lg px-6 mr-4 border-0 rounded-md transition-all duration-150 hover:bg-dark" to="/login"><i className="gg-log-in"></i></NavLink></li>
+        : <li className="flex justify-center items-center w-12" ><NavLink className="btn flex justify-center items-center align-center bg-primary text-secondary-white text-lg px-2 mr-4 border-0 rounded-md transition-all duration-150 hover:bg-dark" to="/login"><BiLogIn size="2rem"/></NavLink></li>
         }
       </ul>
       <HamburgerMenu>
