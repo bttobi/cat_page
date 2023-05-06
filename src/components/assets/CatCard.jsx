@@ -91,6 +91,13 @@ const CatCard = (props) => {
     }
   }
 
+  const handleKeys = (e) => {
+    if(e.key === "Enter"){
+      editName(inputChangeNameRef?.current?.value);
+      setShowEditName(false);
+    }
+  }
+
   const showDetails = () => {
     setIsShown(true);
     props.showClicked(true);
@@ -124,7 +131,7 @@ const CatCard = (props) => {
             <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
               <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">
                 <AnimatePresence>
-                  {showEditName && isFavourite ? <motion.input ref={inputChangeNameRef} initial={{scaleX: 0}} animate={{scaleX: 1}} exit={{scaleX: 0}} className="input input-sm w-28" placeholder="Edit name" type="text"/> : 
+                  {showEditName && isFavourite ? <motion.input ref={inputChangeNameRef} onKeyDown={handleKeys} initial={{scaleX: 0}} animate={{scaleX: 1}} exit={{scaleX: 0}} className="input input-sm w-28" placeholder="Edit name" type="text"/> : 
                   <motion.span initial={{scaleX: 0}} animate={{scaleX: 1}}>{props.cat?.customName ? props.cat?.customName : (props.cat?.breeds[0]?.name ?? "Cute Cat")}</motion.span>}
                 </AnimatePresence>
               </p>
@@ -139,7 +146,7 @@ const CatCard = (props) => {
       <AnimatePresence>
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className="fixed top-28 flex flex-col justify-center align-center items-center z-10 filter-blur-0" ref={catDetails}>
-            <CatCardClicked cat={props.cat} isFavourite={isFavourite} showFunc={hideDetails} handleFavFunc={handleFavourites} handleEditNameFunc={editName}/>
+            <CatCardClicked cat={props.cat} isFavourite={isFavourite} showFunc={hideDetails} handleFavFunc={handleFavourites} handleEditNameFunc={editName} handleKeysFunc={handleKeys}/>
         </motion.div>}
       </AnimatePresence>
       {/* DISPLAY NOTIFICATIONS */}

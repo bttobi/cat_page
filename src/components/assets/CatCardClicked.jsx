@@ -47,7 +47,7 @@ const CatCardClicked = (props) => {
           <svg xmlns="http://www.w3.org/2000/svg" className="w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
         {showEditName ? 
-          <motion.input initial={{scaleX: 0}} animate={{scaleX: 1}} exit={{scaleX: 0}} ref={inputChangeNameRef} className="input input-lg" placeholder="Edit name"/> 
+          <motion.input initial={{scaleX: 0}} animate={{scaleX: 1}} exit={{scaleX: 0}} ref={inputChangeNameRef} onKeyDown={props.handleKeysFunc} className="input input-lg" placeholder="Edit name"/> 
           : <motion.div initial={{scaleX: 0}} animate={{scaleX: 1}} className="cat-name-details text-center border-secondary-white text-4xl font-bold" style={{fontSize: "clamp(2rem, 5vw, 4rem)"}}>{props.cat.customName ?? props.cat?.breeds[0]?.name ?? "Cute Cat"}</motion.div>}
         <div className="cat-description-wrapper mt-2 lg:mt-8">
         {(props.cat.breeds[0] != null || props.cat.breeds[0] != undefined) && 
