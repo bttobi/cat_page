@@ -26,7 +26,7 @@ const Favourites = () => {
 
   const filterCats = () => {
     setFilteredCats(cats.filter((cat)=>
-      (cat?.breeds[0]?.name.toLowerCase() ?? "cute cat")
+      ((cat?.customName?.toLowerCase() ?? cat?.breeds[0]?.name.toLowerCase()) ?? "cute cat")
       .includes(searchRef.current.value.toLowerCase())));
   };
 
