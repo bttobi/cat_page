@@ -19,9 +19,10 @@ const useFavourites = () => {
       const documentRef = doc(collectionRef, "favourites");
       const listOfCats = await getDoc(documentRef);
       
-      if(!listOfCats.exists() || listOfCats.data().favourites == [])
+      if(!listOfCats.exists() || listOfCats.data().favourites == []){
+        setCats([]);
         return;
-      
+      }
 
       const toAdd = [];
       listOfCats.data().favourites.forEach(favCat => toAdd.push(favCat));
@@ -31,6 +32,7 @@ const useFavourites = () => {
 
     catch(err){
       setError(true);
+      return;
     }
   }
 
@@ -40,7 +42,7 @@ const useFavourites = () => {
 
   useEffect(()=>{
     getFavCats();
-  },);
+  }, []);
 
   return [cats, isFetched, error];
 }
