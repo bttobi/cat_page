@@ -37,7 +37,9 @@ const useFavourites = () => {
   }
 
   if(!isFetched){ //fetch until loaded
-    getFavCats();
+    setTimeout(()=>{
+      getFavCats();
+    }, 2000)
   }
 
   useEffect(()=>{
