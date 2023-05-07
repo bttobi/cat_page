@@ -25,9 +25,15 @@ const Favourites = () => {
   }
 
   const filterCats = () => {
-    setFilteredCats(cats.filter((cat)=>
-      ((cat?.breeds[0]?.name.toLowerCase() ?? "cute cat") ?? cat?.customName?.toLowerCase())
-      .includes(searchRef.current.value.toLowerCase())));
+    setFilteredCats(cats.filter((cat)=>{
+      const breedName = cat?.breeds[0]?.name.toLowerCase();
+      const customName = cat?.customName?.toLowerCase();
+      return( 
+      (customName ?? breedName ?? "cute cat")
+      .includes(searchRef.current.value.toLowerCase())
+      || (breedName ?? "cute cat")
+      .includes(searchRef.current.value.toLowerCase()));
+    }));
   };
 
   const getShowClicked = (isClicked)=>{
