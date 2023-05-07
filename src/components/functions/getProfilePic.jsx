@@ -34,12 +34,8 @@ const getProfilePic = () => {
   if(!isFetched){ //fetch until loaded
     setTimeout(()=> {
       getProfilePicture();
-    }, 500)
+    }, 100)
   }
-
-  useEffect(()=>{
-    getProfilePicture();
-  }, []);
 
   return [userPicture, isFetched];
 }

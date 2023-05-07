@@ -19,9 +19,10 @@ const Navbar = () => {
 
 
   useEffect(() => {
-    onAuthStateChanged(auth, (currentUser) =>{
-      setUser(currentUser);
-    });
+    setTimeout(()=>{
+      onAuthStateChanged(auth, (currentUser) =>{
+        setUser(currentUser);
+    }), 100});
   }, [auth?.currentUser]);
 
   return (

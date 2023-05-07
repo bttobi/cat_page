@@ -1,9 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import db from "../../firebase";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { UserContext } from "../../App";
 
-const useFavourites = (refetch) => {
+const useFavourites = () => {
   const auth = useContext(UserContext);
   const [isFetched, setIsFetched] = useState(false);
   const [cats, setCats] = useState([]);
@@ -35,19 +35,11 @@ const useFavourites = (refetch) => {
 
   if (!isFetched) {
     //fetch until loaded
-    const time = error ? 5000 : 500;
+    const time = error ? 5000 : 0;
     setTimeout(() => {
       getFavCats();
     }, time);
   }
-
-  if(refetch){
-      getFavCats();
-  }
-
-  useEffect(() => {
-    getFavCats();
-  }, []);
 
   return [cats, isFetched, error];
 };

@@ -11,8 +11,7 @@ import Notification from '../alerts/Notification';
 const Favourites = () => {
   const auth = useContext(UserContext);
   const [filteredCats, setFilteredCats] = useState([]);
-  const [refetch, setRefetch] = useState(false);
-  const [cats, isFetched, error] = useFavourites(refetch);
+  const [cats, isFetched, error] = useFavourites();
   const [onMount, setOnMount] = useState(true);
   const searchRef = useRef();
   const [showClicked, setShowClicked] = useState(false);
@@ -20,13 +19,14 @@ const Favourites = () => {
   const [errorHappened, setErrorHappened] = useState(false);
   
   if(!isFetched){ //if not yet fetched check if user is logged in
-    onAuthStateChanged(auth, (currentUser) =>{
-      setUser(currentUser);
-    });
+    setTimeout(()=>{
+      onAuthStateChanged(auth, (currentUser) =>{
+        setUser(currentUser);
+      });
+    },100)
   }
 
   const filterCats = () => {
-    setRefetch(true); //need to refetch updated cats
     setFilteredCats(cats.filter((cat)=>{
       const breedName = cat?.breeds[0]?.name.toLowerCase();
       const customName = cat?.customName?.toLowerCase();
@@ -58,7 +58,7 @@ const Favourites = () => {
         setErrorHappened(false);
       }, 2000);
     } 
-  },)
+  },[cats])
 
   return (<>
     <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="favourites-wrapper w-full h-full m-none my-32 flex flex-col justify-center items-center font-article text-white">
