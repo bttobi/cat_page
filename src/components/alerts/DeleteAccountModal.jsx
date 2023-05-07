@@ -58,8 +58,8 @@ const DeleteAccountModal = ({ userToDelete }) => {
       <input type="checkbox" id="del-acc" className="modal-toggle" />
       <label htmlFor="del-acc" className="modal cursor-pointer font-article text-white">
         <label className="modal-box relative bg-dark flex flex-col justify-center align-center shadow-md shadow-black" htmlFor="">
-          <label htmlFor="del-acc" className="close-button btn btn-error btn-square bg-primary w-12 right-0 top-0 mt-2 mr-2 btn-outline fixed transition-all duration-150 hover:scale-110">
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          <label htmlFor="del-acc" className="close-button btn btn-sm btn-error btn-square bg-primary right-0 top-0 mt-2 mr-2 btn-outline fixed transition-all duration-150 hover:scale-110">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
           </label>
           <div className="wrapper flex flex-col justify-center align-center items-center">
             <p className="text-3xl font-bold mt-8 text-center">Are you sure to delete your account?</p>
