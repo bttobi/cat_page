@@ -136,7 +136,7 @@ const CatCard = (props) => {
                 </AnimatePresence>
               </p>
             </div>
-            <button className="fav-button absolute right-0 mr-2 align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={handleFavourites}>{isFavourite ? "🗑️" : "❤️"}</button>
+            <button className="fav-button absolute right-0 mr-2 align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={handleFavourites}>{isFavourite ? (showEditName ? <span onClick={()=>{setShowEditName(false)}}>❌</span> : "🗑️") : "❤️"}</button>
           </div>
           <div className="flex flex-col justify-center items-center cursor-pointer" onClick={showDetails}>
             <div className="w-min h-min m-0 rounded-lg" style= {{minWidth: '12rem', minHeight: '12rem', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}} alt="cat"></div>           
@@ -146,7 +146,7 @@ const CatCard = (props) => {
       <AnimatePresence>
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className="fixed top-28 flex flex-col justify-center align-center items-center z-10 filter-blur-0" ref={catDetails}>
-            <CatCardClicked cat={props.cat} isFavourite={isFavourite} showFunc={hideDetails} handleFavFunc={handleFavourites} handleEditNameFunc={editName} handleKeysFunc={handleKeys}/>
+            <CatCardClicked cat={props.cat} isFavourite={isFavourite} showFunc={hideDetails} handleFavFunc={handleFavourites} handleEditNameFunc={editName}/>
         </motion.div>}
       </AnimatePresence>
       {/* DISPLAY NOTIFICATIONS */}
