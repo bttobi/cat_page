@@ -26,7 +26,7 @@ const Favourites = () => {
 
   const filterCats = () => {
     setFilteredCats(cats.filter((cat)=>
-      ((cat?.customName?.toLowerCase() ?? cat?.breeds[0]?.name.toLowerCase()) ?? "cute cat")
+      ((cat?.breeds[0]?.name.toLowerCase() ?? "cute cat") ?? cat?.customName?.toLowerCase())
       .includes(searchRef.current.value.toLowerCase())));
   };
 
@@ -76,7 +76,7 @@ const Favourites = () => {
       <p>You need to log in to see the favourite cats!</p>
       <Link className="underline" to="/login">Log in here</Link>
     </div>}
-    {errorHappened && <Notification notification={"Error has happened while fetching!"} errorHappened={errorHappened}/>}
+    {errorHappened && <Notification notification={"Error has happened while fetching! Will try again in 5 seconds..."} errorHappened={errorHappened}/>}
     </motion.div>
     </>
   )
