@@ -10,8 +10,9 @@ import Notification from '../alerts/Notification';
 
 const Favourites = () => {
   const auth = useContext(UserContext);
-  const [cats, isFetched, error] = useFavourites();
   const [filteredCats, setFilteredCats] = useState([]);
+  const [refetch, setRefetch] = useState(false);
+  const [cats, isFetched, error] = useFavourites(refetch);
   const [onMount, setOnMount] = useState(true);
   const searchRef = useRef();
   const [showClicked, setShowClicked] = useState(false);
@@ -25,6 +26,7 @@ const Favourites = () => {
   }
 
   const filterCats = () => {
+    setRefetch(true); //need to refetch updated cats
     setFilteredCats(cats.filter((cat)=>{
       const breedName = cat?.breeds[0]?.name.toLowerCase();
       const customName = cat?.customName?.toLowerCase();

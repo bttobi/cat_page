@@ -3,7 +3,7 @@ import db from "../../firebase";
 import { collection, doc, getDoc } from "firebase/firestore";
 import { UserContext } from "../../App";
 
-const useFavourites = () => {
+const useFavourites = (refetch) => {
   const auth = useContext(UserContext);
   const [isFetched, setIsFetched] = useState(false);
   const [cats, setCats] = useState([]);
@@ -39,6 +39,10 @@ const useFavourites = () => {
     setTimeout(() => {
       getFavCats();
     }, time);
+  }
+
+  if(refetch){
+      getFavCats();
   }
 
   useEffect(() => {
