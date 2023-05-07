@@ -126,20 +126,20 @@ const CatCard = (props) => {
     <>
       <AnimatePresence>
         <motion.div initial={{transform: 'scale(0)'}} whileHover={{transform: 'scale(1.05)'}} animate={{transform: 'scale(1)'}} exit={{transform: 'scale(0)'}} className="cat-wrapper w-min h-min mx-4 mt-8 flex flex-col bg-primary rounded-lg shadow-lg shadow-black">
-          <div className="favourite py-6 pr-2 pl-2 w-full h-8 flex flex-row justify-center items-center align-center">
+          <div className="favourite py-6 pr-2 pl-2 w-full h-14 flex flex-row justify-center items-center align-center">
             <button className="fav-button absolute ml-2 left-0 align-start w-min h-min transition-all duration-200 hover:scale-125" onClick={()=>{setShowEditName(!showEditName)}}>{isFavourite ? (showEditName ? <span ref={editNameRef} onClick={()=>{editName(inputChangeNameRef?.current?.value)}}>✅</span> : "✏️") : ""}</button>
-            <div className="description-wrapper w-full h-20 flex justify-center border-secondary-white rounded-lg">
+            <div className="description-wrapper w-min h-20 flex justify-center border-secondary-white rounded-lg">
               <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">
                 <AnimatePresence>
                   {showEditName && isFavourite ? <motion.input ref={inputChangeNameRef} onKeyDown={handleKeys} initial={{scaleX: 0}} animate={{scaleX: 1}} exit={{scaleX: 0}} className="input input-sm w-28" placeholder="Edit name" type="text"/> : 
-                  <motion.span initial={{scaleX: 0}} animate={{scaleX: 1}}>{props.cat?.customName ? props.cat?.customName : (props.cat?.breeds[0]?.name ?? "Cute Cat")}</motion.span>}
+                  <motion.span initial={{scaleX: 0}} animate={{scaleX: 1}} className="text-lg">{props.cat?.customName ? props.cat?.customName : (props.cat?.breeds[0]?.name ?? "Cute Cat")}</motion.span>}
                 </AnimatePresence>
               </p>
             </div>
             <button className="fav-button absolute right-0 mr-2 align-end w-min h-min transition-all duration-200 hover:scale-125" onClick={handleFavourites}>{isFavourite ? (showEditName ? <span onClick={()=>{setShowEditName(false)}}>❌</span> : "🗑️") : "❤️"}</button>
           </div>
           <div className="flex flex-col justify-center items-center cursor-pointer" onClick={showDetails}>
-            <div className="w-min h-min m-0 rounded-lg" style= {{minWidth: '12rem', minHeight: '12rem', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}} alt="cat"></div>           
+            <div className="w-min h-min m-0 rounded-lg" style= {{minWidth: '12rem', minHeight: '14rem', backgroundImage: `url(${props.cat.url})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center'}} alt="cat"></div>           
           </div>
         </motion.div>
       </AnimatePresence>
