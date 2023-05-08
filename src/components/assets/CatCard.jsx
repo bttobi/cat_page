@@ -6,6 +6,7 @@ import addToFav from '../functions/addToFav';
 import removeFromFav from '../functions/removeFromFav';
 import Notification from '../alerts/Notification';
 import changeName from '../functions/changeName';
+import setDefaultName from '../functions/setDefaultName';
 
 const CatCard = (props) => {
   const catDetails = useRef();
@@ -19,7 +20,7 @@ const CatCard = (props) => {
   const [notificationMessage, setNotificationMessage] = useState("");
   const auth = useContext(UserContext);
 
-  const handleFavourites = async () => {
+  const handleFavourites = () => {
     if(auth.currentUser?.email === null || auth.currentUser?.email === undefined){
       setShowNotification(true);
       setErrorHappened(true);
@@ -53,7 +54,7 @@ const CatCard = (props) => {
     }
   }
 
-  const editName = async (customName) => {
+  const editName = (customName) => {
     try {
       if(customName.trim() == "") throw "white_char";
       else if(customName.length > 12) throw "too_long";
@@ -84,6 +85,27 @@ const CatCard = (props) => {
           break;
       }
       setNotificationMessage(dispError);
+      setShowNotification(true);
+      setTimeout(()=> {
+        setShowNotification(false);
+      }, 2000)
+    }
+  }
+
+  const removeName = () => {
+    try {
+      setDefaultName(props, auth);
+      delete props.cat.customName;
+      setErrorHappened(false);
+      setNotificationMessage("Success - removed custom name!");
+      setShowNotification(true);
+      setTimeout(()=> {
+        setShowNotification(false);
+      }, 2000)
+    }
+    catch(error){
+      setErrorHappened(true);
+      setNotificationMessage("Errors happened while removing custom name!");
       setShowNotification(true);
       setTimeout(()=> {
         setShowNotification(false);
@@ -132,7 +154,7 @@ const CatCard = (props) => {
               <p className="description w-full h-full flex flex-wrap justify-center items-center font-article font-bold text-center text-xl">
                 <AnimatePresence>
                   {showEditName && isFavourite ? <motion.input ref={inputChangeNameRef} onKeyDown={handleKeys} initial={{scaleX: 0}} animate={{scaleX: 1}} exit={{scaleX: 0}} className="input input-sm w-28" placeholder="Edit name" type="text"/> : 
-                  <motion.span initial={{scaleX: 0}} animate={{scaleX: 1}} className="text-lg">{props.cat?.customName ? props.cat?.customName : (props.cat?.breeds[0]?.name ?? "Cute Cat")}</motion.span>}
+                  <motion.span initial={{scaleX: 0}} animate={{scaleX: 1}} exit={{scaleX: 0}} className="text-lg">{props.cat?.customName ? props.cat?.customName : (props.cat?.breeds[0]?.name ?? "Cute Cat")}</motion.span>}
                 </AnimatePresence>
               </p>
             </div>
@@ -146,7 +168,7 @@ const CatCard = (props) => {
       <AnimatePresence>
       {isShown &&
         <motion.div initial={{y: '-10rem', opacity: 0}} animate={{y: '0', opacity: 1}} exit={{opacity: 0}} className="fixed top-28 flex flex-col justify-center align-center items-center z-10 filter-blur-0" ref={catDetails}>
-            <CatCardClicked cat={props.cat} isFavourite={isFavourite} showFunc={hideDetails} handleFavFunc={handleFavourites} handleEditNameFunc={editName}/>
+            <CatCardClicked cat={props.cat} isFavourite={isFavourite} showFunc={hideDetails} handleFavFunc={handleFavourites} handleEditNameFunc={editName} handleRemoveNameFunc={removeName}/>
         </motion.div>}
       </AnimatePresence>
       {/* DISPLAY NOTIFICATIONS */}
