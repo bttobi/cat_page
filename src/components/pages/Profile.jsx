@@ -65,11 +65,9 @@ const Profile = () => {
   };
   
   useEffect(() => {
-    setTimeout(()=> {
       onAuthStateChanged(auth, (currentUser) =>{
         setUser(currentUser);
       });
-    },100)
     window.scrollTo(0, 0);
   }, []);
 

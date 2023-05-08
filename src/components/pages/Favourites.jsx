@@ -19,11 +19,9 @@ const Favourites = () => {
   const [errorHappened, setErrorHappened] = useState(false);
   
   if(!isFetched){ //if not yet fetched check if user is logged in
-    setTimeout(()=>{
       onAuthStateChanged(auth, (currentUser) =>{
         setUser(currentUser);
       });
-    },100)
   }
 
   const filterCats = () => {
