@@ -52,7 +52,7 @@ const Random = () => {
     }
     onMount();
   },[])
-
+ 
 
   return (<>
     <motion.div id="home" initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="home-page w-full m-none my-16 flex flex-col justify-center items-center font-article text-white" style={{minHeight: "110vh"}}>
