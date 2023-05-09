@@ -10,7 +10,7 @@ const Random = () => {
   const [showClicked, setShowClicked] = useState(false);
 
   const fetchData = async () => {
-    const URL = `https://api.thecatapi.com/v1/images/search?limit=14&api_key=${import.meta.env.VITE_API_KEY}`;
+    const URL = `https://api.thecatapi.com/v1/images/search?limit=16&api_key=${import.meta.env.VITE_API_KEY}`;
       const response = await fetch(URL);
       return response.json();
   }
@@ -55,7 +55,7 @@ const Random = () => {
 
 
   return (<>
-    <motion.div id="home" initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="home-page w-full m-none my-16 flex flex-col justify-center items-center font-article text-white" style={{height: "110vh"}}>
+    <motion.div id="home" initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="home-page w-full m-none my-16 flex flex-col justify-center items-center font-article text-white" style={{minHeight: "110vh"}}>
       <AnimatePresence>
         {showClicked && <motion.div initial={{ top:10, opacity: 0 }} animate={{top: 0, opacity: 0.7}} exit={{opacity: 0}} className="backdrop w-full h-full fixed flex flex-col bg-black z-10 align-center justify-center items-center"></motion.div>}
       </AnimatePresence>
