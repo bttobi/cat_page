@@ -41,24 +41,24 @@ Application should be hosted in your local network automatically.
 #
 
 ### 🎨 Desktop preview - current stage (UI Overhaul coming)
-![image](https://user-images.githubusercontent.com/76923032/233100063-3b6975a4-5a38-41c6-adfb-01f2046fd9c1.png)
-![image](https://user-images.githubusercontent.com/76923032/233112565-7e6d8a07-8383-494e-9694-e5c27c3a2efb.png)
-![image](https://user-images.githubusercontent.com/76923032/233100170-0ec1329f-824a-4257-8264-821c950a1682.png)
-![image](https://user-images.githubusercontent.com/76923032/233110992-5b1258f1-6aa2-4ab2-b3e0-22952d8aeb9b.png)
-![image](https://user-images.githubusercontent.com/76923032/233111097-76ac286f-f32b-45d4-a9fd-2fcdc1ba8afe.png)
-![image](https://user-images.githubusercontent.com/76923032/235991968-01bd5507-13f2-4272-8222-2ed6c3607585.png)
-![image](https://user-images.githubusercontent.com/76923032/233112252-7d3775c0-cfa7-4289-982c-97995bb6a1d8.png)
-![image](https://user-images.githubusercontent.com/76923032/233112386-a53ae144-bfc7-4662-80c3-bf1f74942c43.png)
-
+![image](https://github.com/bttobi/cat_page/assets/76923032/e32d0a2d-1b8f-4fca-ad34-5d17a6b54cbb)
+![image](https://github.com/bttobi/cat_page/assets/76923032/4627ffe3-74fe-4902-aa73-680631745c25)
+![image](https://github.com/bttobi/cat_page/assets/76923032/ea4f3da7-4209-4988-9123-b688e7806545)
+![image](https://github.com/bttobi/cat_page/assets/76923032/46a34787-c4ca-4a46-9fd2-8a90016abeff)
+![image](https://github.com/bttobi/cat_page/assets/76923032/e9b1b364-139d-4f9c-8bca-d1024ce0cfe5)
+![image](https://github.com/bttobi/cat_page/assets/76923032/0a9a9947-f0d0-4e3d-8704-0b982ad39309)
+![image](https://github.com/bttobi/cat_page/assets/76923032/2dbbda33-513f-4972-90b7-fbd7647fb5bd)
+![image](https://github.com/bttobi/cat_page/assets/76923032/f95b17aa-e762-4801-810f-87aaa3a25a12)
 
 ### 🎨 Mobile preview - current stage (UI Overhaul coming)
-![image](https://user-images.githubusercontent.com/76923032/233112660-fe8d39b9-8921-4236-98b0-d7babaa9612b.png)
-![image](https://user-images.githubusercontent.com/76923032/233112688-71b32d01-a2d7-4263-ab23-a867cda2172f.png)
-![image](https://user-images.githubusercontent.com/76923032/233112807-9ea4d37e-455c-4fa6-a7db-3002ccefa281.png)
-![image](https://user-images.githubusercontent.com/76923032/233112851-5d41d93f-c88d-41a2-9083-a26c36ae4ec2.png)
-![image](https://user-images.githubusercontent.com/76923032/233113195-a6414fc4-d160-415f-9cc2-eac666a5cd7c.png)
-![image](https://user-images.githubusercontent.com/76923032/233113220-51869a0e-16ae-40b2-85de-210071f83b90.png)
-![image](https://user-images.githubusercontent.com/76923032/235992223-108021cd-19f6-4ce5-8e28-7a80f06bc6d6.png)
+![image](https://github.com/bttobi/cat_page/assets/76923032/bd319777-d5e6-4a11-bf7b-1e3c9aee295d)
+![image](https://github.com/bttobi/cat_page/assets/76923032/9779f20c-e3e9-4b02-9d64-994f938171c4)
+![image](https://github.com/bttobi/cat_page/assets/76923032/c4d5dd5f-8484-4528-8488-56187e8b68af)
+![image](https://github.com/bttobi/cat_page/assets/76923032/17f03f54-d4ae-4786-becd-2194484e03a8)
+![image](https://github.com/bttobi/cat_page/assets/76923032/01769551-a4a2-41a0-a746-e3ad55af68e7)
+![image](https://github.com/bttobi/cat_page/assets/76923032/1c257522-0048-41b6-a549-6ef5bce34b09)
+![image](https://github.com/bttobi/cat_page/assets/76923032/9c238676-97db-4ebb-8b93-3083f9c3e4e3)
+![image](https://github.com/bttobi/cat_page/assets/76923032/dc5430ce-5083-4c64-98cc-594ea2ee98d3)
 
 #
 
