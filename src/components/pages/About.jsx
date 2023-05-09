@@ -7,8 +7,8 @@ const About = () => {
   }, []);
 
   return (
-    <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="flex flex-col font-article text-center text-white w-96 mt-32 mb-16">
-      <article className="site-description flex flex-col flex-wrap gap-4 bg-dark rounded-lg mx-4 mb-16 p-8 lg:text-xl text-md shadow-lg shadow-black">
+    <motion.div initial={{scaleY: 0}} animate={{scaleY: 1}} exit={{scaleY: 0}} className="flex flex-col font-article text-center text-white h-full mt-32" style={{maxWidth: "24rem", minWidth: "10rem"}}>
+      <article className="site-description flex flex-col flex-wrap gap-4 bg-dark rounded-lg mx-2 mb-16 p-8 lg:text-xl text-md shadow-lg shadow-black">
         <p>Small React.js project built by Bartosz Tobiński who is a Front-End developer and an ICT student.</p>
         <p>Site made for cat lovers and people who want to discover different breeds. It is fetching the cats via usage of the Cat API.</p>
         <p>In order to use the site please create an account - it will unlock the option to add cats to favourites.</p>
